@@ -336,13 +336,13 @@ header h1 {
 .june-mode .grid-cta,
 .june-mode .see-all a      { font-family:"GTEestiDisplay","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.12em!important; background:#E1BA44!important; border-color:#B2880B!important; color:#141311!important; }
 
-/* ── Avalon mode ── */
+/* ── Avalon Beverly Hills mode ── */
 .email-wrap.avalon-mode    { background: #ffffff; border-color: #D0CCCC; }
 .avalon-mode .feat-sec     { border-color: #D0CCCC; }
 .avalon-mode .ev-grid      { background: #ffffff; }
 .avalon-mode .grid-ev      { background: #ffffff; border-color: #D0CCCC; }
-.avalon-mode .grid-img-box { background: #C8C4C4; }
-.avalon-mode .feat-img-ph  { background: #C8C4C4; }
+.avalon-mode .grid-img-box { background: #C4C9C8; }
+.avalon-mode .feat-img-ph  { background: #C4C9C8; }
 .avalon-mode .feat-lbl     { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.18em!important; line-height:1.3!important; }
 .avalon-mode .feat-title   { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:22px!important; font-weight:500!important; letter-spacing:.08em!important; line-height:1.2!important; }
 .avalon-mode .feat-desc    { font-family:"Neutra2Text","Helvetica Neue",Arial,sans-serif!important; font-size:13px!important; font-weight:400!important; font-style:normal!important; letter-spacing:0!important; }
@@ -351,6 +351,22 @@ header h1 {
 .avalon-mode .feat-cta,
 .avalon-mode .grid-cta,
 .avalon-mode .see-all a    { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.15em!important; border-color:#282828!important; color:#282828!important; }
+
+/* ── Avalon Palm Springs mode ── */
+.email-wrap.avalonps-mode    { background: #ffffff; border-color: #DDD0CC; }
+.avalonps-mode .feat-sec     { border-color: #DDD0CC; }
+.avalonps-mode .ev-grid      { background: #ffffff; }
+.avalonps-mode .grid-ev      { background: #ffffff; border-color: #DDD0CC; }
+.avalonps-mode .grid-img-box { background: #E7CDC4; }
+.avalonps-mode .feat-img-ph  { background: #E7CDC4; }
+.avalonps-mode .feat-lbl     { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.18em!important; line-height:1.3!important; }
+.avalonps-mode .feat-title   { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:22px!important; font-weight:500!important; letter-spacing:.08em!important; line-height:1.2!important; }
+.avalonps-mode .feat-desc    { font-family:"Neutra2Text","Helvetica Neue",Arial,sans-serif!important; font-size:13px!important; font-weight:400!important; font-style:normal!important; letter-spacing:0!important; }
+.avalonps-mode .grid-title   { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:15px!important; font-weight:500!important; letter-spacing:.1em!important; line-height:1.25!important; }
+.avalonps-mode .grid-meta    { font-family:"Neutra2Text","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:400!important; font-style:normal!important; letter-spacing:.15em!important; text-transform:uppercase!important; color:#545454!important; }
+.avalonps-mode .feat-cta,
+.avalonps-mode .grid-cta,
+.avalonps-mode .see-all a    { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.15em!important; border-color:#545454!important; color:#545454!important; }
 
 /* ── Ingleside mode ── */
 .email-wrap.ingleside-mode    { background: #F5F4EE; border-color: #DDDBD4; }
@@ -1359,7 +1375,9 @@ function buildWhatsNewHtml(forEmail, forRender) {
   if (!whatsNew.length) return "";
   var isShelborne = prop && prop.short === "Shelborne";
   var isJune    = prop && prop.short === "JuneWLA";
-  var isAvalon  = prop && (prop.short === "AvalonBH" || prop.short === "AvalonPS");
+  var isAvalonBH = prop && prop.short === "AvalonBH";
+  var isAvalonPS = prop && prop.short === "AvalonPS";
+  var isAvalon  = isAvalonBH || isAvalonPS;
   var isIngleside = prop && prop.short === "Ingleside";
   var isMYC     = prop && prop.short === "MYC";
   var isCulver  = prop && prop.short === "Culver";
@@ -1386,13 +1404,20 @@ function buildWhatsNewHtml(forEmail, forRender) {
     wnTitleFont = 'font-family:GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif;font-size:16px;font-weight:500;letter-spacing:.05em;color:' + ink + ';line-height:1.2;';
     wnCopyFont  = 'font-family:GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:400;color:#3D2E14;line-height:1.5;';
     wnCtaFont   = 'font-family:GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#141311;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;background:#E1BA44;border:1.5px solid #B2880B;';
-  } else if (isAvalon) {
-    phColor = '#C8C4C4'; borderColor = '#D0CCCC';
+  } else if (isAvalonBH) {
+    phColor = '#C4C9C8'; borderColor = '#D0CCCC';
     wnHeadFont = 'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '11px'; wnHeadLS = '.18em'; wnHeadLH = '1.3';
     wnMetaFont  = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#666;line-height:1.4;';
     wnTitleFont = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:15px;font-weight:500;letter-spacing:.08em;color:' + ink + ';line-height:1.25;';
     wnCopyFont  = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:400;color:#333;line-height:1.5;';
     wnCtaFont   = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#282828;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;border:1.5px solid #282828;';
+  } else if (isAvalonPS) {
+    phColor = '#E7CDC4'; borderColor = '#DDD0CC'; ink = '#282828';
+    wnHeadFont = 'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '11px'; wnHeadLS = '.18em'; wnHeadLH = '1.3';
+    wnMetaFont  = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#545454;line-height:1.4;';
+    wnTitleFont = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:15px;font-weight:500;letter-spacing:.08em;color:#282828;line-height:1.25;';
+    wnCopyFont  = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:400;color:#333;line-height:1.5;';
+    wnCtaFont   = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#545454;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;border:1.5px solid #545454;';
   } else if (isIngleside) {
     phColor = '#C5C9B2'; borderColor = '#DDDBD4'; ink = '#1B5B4C';
     wnHeadFont = 'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '11px'; wnHeadLS = '.18em'; wnHeadLH = '1.3';
@@ -1689,7 +1714,8 @@ function renderPreview() {
       if (prop.short === 'Shelborne') return ' shelborne-mode';
       if (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA') return ' proper-mode';
       if (prop.short === 'JuneWLA') return ' june-mode';
-      if (prop.short === 'AvalonBH' || prop.short === 'AvalonPS') return ' avalon-mode';
+      if (prop.short === 'AvalonBH') return ' avalon-mode';
+      if (prop.short === 'AvalonPS') return ' avalonps-mode';
       if (prop.short === 'Ingleside') return ' ingleside-mode';
       if (prop.short === 'MYC') return ' myc-mode';
       if (prop.short === 'Culver') return ' culver-mode';
@@ -1752,7 +1778,9 @@ function buildEmailHTML(forRender) {
   var isShelborne = prop && prop.short === 'Shelborne';
   var isProper = prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA');
   var isJune    = prop && prop.short === 'JuneWLA';
-  var isAvalon  = prop && (prop.short === 'AvalonBH' || prop.short === 'AvalonPS');
+  var isAvalonBH = prop && prop.short === 'AvalonBH';
+  var isAvalonPS = prop && prop.short === 'AvalonPS';
+  var isAvalon  = isAvalonBH || isAvalonPS;
   var isIngleside = prop && prop.short === 'Ingleside';
   var isMYC     = prop && prop.short === 'MYC';
   var isCulver  = prop && prop.short === 'Culver';
@@ -1774,12 +1802,19 @@ function buildEmailHTML(forRender) {
       bodyFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#3D2E14',
       ctaFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#B2880B', ctaColor:'#141311', ctaBg:'#E1BA44',
       gridTitleSize:'16px', gridTitleFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.06em', gridTitleLH:'1.2'};
-    if (isAvalon)     return {bg:'#ffffff', accentBg:'#282828', accentText:'#ffffff', borderColor:'#D0CCCC', phColor:'#C8C4C4',
+    if (isAvalonBH)   return {bg:'#ffffff', accentBg:'#282828', accentText:'#ffffff', borderColor:'#D0CCCC', phColor:'#C4C9C8',
       labelFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
       headFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', headSize:'22px', headWeight:'500', headLS:'.08em', headLH:'1.2',
       metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#666', metaLS:'.15em',
       bodyFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#333',
       ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#282828', ctaColor:'#282828', ctaBg:'transparent',
+      gridTitleSize:'15px', gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.1em', gridTitleLH:'1.25'};
+    if (isAvalonPS)   return {bg:'#ffffff', accentBg:'#545454', accentText:'#ffffff', borderColor:'#DDD0CC', phColor:'#E7CDC4',
+      labelFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+      headFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', headSize:'22px', headWeight:'500', headLS:'.08em', headLH:'1.2',
+      metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#545454', metaLS:'.15em',
+      bodyFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#333',
+      ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#545454', ctaColor:'#545454', ctaBg:'transparent',
       gridTitleSize:'15px', gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.1em', gridTitleLH:'1.25'};
     if (isIngleside)  return {bg:'#F5F4EE', accentBg:'#1B5B4C', accentText:'#ffffff', borderColor:'#DDDBD4', phColor:'#C5C9B2',
       labelFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
@@ -1928,7 +1963,8 @@ function buildEmailHTML(forRender) {
   + (isProper    ? buildProperFooter()    : '')
   + (isShelborne ? buildShelborneFooter() : '')
   + (isJune      ? buildJuneFooter()      : '')
-  + (isAvalon    ? buildAvalonFooter()    : '')
+  + (isAvalonBH  ? buildAvalonBHFooter()  : '')
+  + (isAvalonPS  ? buildAvalonPSFooter()  : '')
   + (isIngleside ? buildInglesideFooter() : '')
   + (isMYC       ? buildMYCFooter()       : '')
   + (isCulver    ? buildCulverFooter()    : '')
@@ -2087,7 +2123,7 @@ function buildJuneFooter() {
   + '</td></tr>';
 }
 
-function buildAvalonFooter() {
+function buildAvalonBHFooter() {
   var linkStyle = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;text-decoration:none;line-height:20px;';
   var bodyStyle = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;color:#ffffff;line-height:16px;';
   return ''
@@ -2095,17 +2131,13 @@ function buildAvalonFooter() {
   + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#35535E;">'
   + '<tbody>'
   + '<tr><td align="center" style="padding:48px 40px 0;">'
-  +   '<a href="https://www.avalon-hotel.com/" target="_blank" style="display:inline-block;text-decoration:none;">'
+  +   '<a href="https://www.avalon-hotel.com/beverly-hills/" target="_blank" style="display:inline-block;text-decoration:none;">'
   +     '<p style="margin:0;font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:20px;font-weight:500;letter-spacing:.18em;color:#ffffff;text-transform:uppercase;">Avalon Hotel</p>'
+  +     '<p style="margin:4px 0 0;font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,0.75);text-transform:uppercase;">Beverly Hills</p>'
   +   '</a>'
   + '</td></tr>'
-  + '<tr><td align="center" style="padding:24px 40px 0;">'
-  +   '<table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;"><tr>'
-  +     '<td style="padding:0 16px;"><a href="https://www.avalon-hotel.com/beverly-hills/" target="_blank" style="' + linkStyle + '">Beverly Hills</a></td>'
-  +     '<td style="padding:0 16px;"><a href="https://www.avalon-hotel.com/palm-springs/" target="_blank" style="' + linkStyle + '">Palm Springs</a></td>'
-  +   '</tr></table>'
-  + '</td></tr>'
-  + '<tr><td style="padding:20px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.4);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
+  + '<tr><td align="center" style="padding:8px 40px 0;"><p style="margin:0;font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.75);">9400 W Olympic Blvd, Beverly Hills, CA 90212</p></td></tr>'
+  + '<tr><td style="padding:24px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.4);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
   + '<tr><td align="center" style="padding:24px 40px 0;">'
   +   '<p style="margin:0 0 8px;' + bodyStyle + '"><a href="{% unsubscribe_link %}" style="color:#ffffff;text-decoration:underline;' + bodyStyle + '">Unsubscribe</a> from our marketing emails.</p>'
   +   '<p style="margin:0;' + bodyStyle + '"><a href="{% web_view_link %}" style="color:#ffffff;text-decoration:underline;">View in Browser</a> &nbsp;|&nbsp; <a href="https://www.avalon-hotel.com/privacy-policy/" style="color:#ffffff;text-decoration:underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.avalon-hotel.com/terms-of-use/" style="color:#ffffff;text-decoration:underline;">Terms &amp; Conditions</a></p>'
@@ -2113,6 +2145,32 @@ function buildAvalonFooter() {
   + '<tr><td align="center" style="padding:24px 40px 36px;">'
   +   '<a href="https://www.instagram.com/avalonhotelbeverlyhills/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/instagram_96.png" width="20" height="20" alt="Instagram" style="display:inline-block;width:20px;height:20px;" /></a>'
   +   '<a href="https://www.facebook.com/avalonhotelbeverlyhills/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/facebook_96.png" width="20" height="20" alt="Facebook" style="display:inline-block;width:20px;height:20px;" /></a>'
+  + '</td></tr>'
+  + '</tbody></table>'
+  + '</td></tr>';
+}
+
+function buildAvalonPSFooter() {
+  var bodyStyle = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;color:#ffffff;line-height:16px;';
+  return ''
+  + '<tr><td style="padding:0;background:#C87261;">'
+  + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#C87261;">'
+  + '<tbody>'
+  + '<tr><td align="center" style="padding:48px 40px 0;">'
+  +   '<a href="https://www.avalon-hotel.com/palm-springs/" target="_blank" style="display:inline-block;text-decoration:none;">'
+  +     '<p style="margin:0;font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:20px;font-weight:500;letter-spacing:.18em;color:#ffffff;text-transform:uppercase;">Avalon Hotel</p>'
+  +     '<p style="margin:4px 0 0;font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,0.85);text-transform:uppercase;">& Bungalows Palm Springs</p>'
+  +   '</a>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:8px 40px 0;"><p style="margin:0;font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.85);">415 South Belardo Road, Palm Springs, CA 92262</p></td></tr>'
+  + '<tr><td style="padding:24px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.4);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<p style="margin:0 0 8px;' + bodyStyle + '"><a href="{% unsubscribe_link %}" style="color:#ffffff;text-decoration:underline;' + bodyStyle + '">Unsubscribe</a> from our marketing emails.</p>'
+  +   '<p style="margin:0;' + bodyStyle + '"><a href="{% web_view_link %}" style="color:#ffffff;text-decoration:underline;">View in Browser</a> &nbsp;|&nbsp; <a href="https://www.avalon-hotel.com/privacy-policy/" style="color:#ffffff;text-decoration:underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.avalon-hotel.com/terms-of-use/" style="color:#ffffff;text-decoration:underline;">Terms &amp; Conditions</a></p>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 36px;">'
+  +   '<a href="https://www.instagram.com/avalonpalmsprings/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/instagram_96.png" width="20" height="20" alt="Instagram" style="display:inline-block;width:20px;height:20px;" /></a>'
+  +   '<a href="https://www.facebook.com/AvalonPalmSprings/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/facebook_96.png" width="20" height="20" alt="Facebook" style="display:inline-block;width:20px;height:20px;" /></a>'
   + '</td></tr>'
   + '</tbody></table>'
   + '</td></tr>';
@@ -2199,7 +2257,8 @@ function buildGridCell(ev, w, fullWidth, forRender, panelId) {
   /* Get property theme (same helper used in buildEmailHTML) */
   var isShelborne = prop && prop.short === 'Shelborne';
   var isJune    = prop && prop.short === 'JuneWLA';
-  var isAvalon  = prop && (prop.short === 'AvalonBH' || prop.short === 'AvalonPS');
+  var isAvalonBH = prop && prop.short === 'AvalonBH';
+  var isAvalonPS = prop && prop.short === 'AvalonPS';
   var isIngleside = prop && prop.short === 'Ingleside';
   var isMYC     = prop && prop.short === 'MYC';
   var isCulver  = prop && prop.short === 'Culver';
@@ -2207,7 +2266,8 @@ function buildGridCell(ev, w, fullWidth, forRender, panelId) {
   var T2;
   if (isShelborne)  T2 = {bg:'#F8F2E7',borderColor:'#b0bfaa',phColor:'#9aad94',gridTitleSize:'20px',gridTitleFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif',gridTitleLS:'.15em',gridTitleLH:'1.1',metaFont:'\'PlantinMTPro\',Georgia,serif',metaStyle:'italic',metaLS:'0',ctaFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif',ctaBorder:'#201E1E',ctaColor:'#201E1E',ctaBg:'transparent',ctaSize:'14px'};
   else if (isJune)  T2 = {bg:'#FFF7E9',borderColor:'#E1D5C0',phColor:'#F0DBCC',gridTitleSize:'16px',gridTitleFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.06em',gridTitleLH:'1.2',metaFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.08em',ctaFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#B2880B',ctaColor:'#141311',ctaBg:'#E1BA44',ctaSize:'11px'};
-  else if (isAvalon) T2 = {bg:'#ffffff',borderColor:'#D0CCCC',phColor:'#C8C4C4',gridTitleSize:'15px',gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.1em',gridTitleLH:'1.25',metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#282828',ctaColor:'#282828',ctaBg:'transparent',ctaSize:'11px'};
+  else if (isAvalonBH) T2 = {bg:'#ffffff',borderColor:'#D0CCCC',phColor:'#C4C9C8',gridTitleSize:'15px',gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.1em',gridTitleLH:'1.25',metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#282828',ctaColor:'#282828',ctaBg:'transparent',ctaSize:'11px'};
+  else if (isAvalonPS) T2 = {bg:'#ffffff',borderColor:'#DDD0CC',phColor:'#E7CDC4',gridTitleSize:'15px',gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.1em',gridTitleLH:'1.25',metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#545454',ctaColor:'#545454',ctaBg:'transparent',ctaSize:'11px'};
   else if (isIngleside) T2 = {bg:'#F5F4EE',borderColor:'#DDDBD4',phColor:'#C5C9B2',gridTitleSize:'16px',gridTitleFont:'LydianBT,\'Lydian BT\',Georgia,serif',gridTitleLS:'.03em',gridTitleLH:'1.25',metaFont:'FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#1B5B4C',ctaColor:'#1B5B4C',ctaBg:'transparent',ctaSize:'11px'};
   else if (isMYC)   T2 = {bg:'#ffffff',borderColor:'#D5CAC0',phColor:'#E2C5A9',gridTitleSize:'16px',gridTitleFont:'FSNeruda,\'FS Neruda\',Georgia,serif',gridTitleLS:'.02em',gridTitleLH:'1.25',metaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#0C1E2C',ctaColor:'#0C1E2C',ctaBg:'transparent',ctaSize:'11px'};
   else if (isCulver) T2 = {bg:'#F1F1F2',borderColor:'#D5D5D6',phColor:'#C8C8CA',gridTitleSize:'16px',gridTitleFont:'Bellefair,\'Bellefair\',Georgia,serif',gridTitleLS:'.02em',gridTitleLH:'1.25',metaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.12em',ctaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#222223',ctaColor:'#222223',ctaBg:'transparent',ctaSize:'10px'};
