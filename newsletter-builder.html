@@ -758,9 +758,12 @@ function normalizeImgUrl(url) {
 function proxyImg(url, forRender) {
   if (!url) return url;
   if (url.indexOf("data:") === 0) return url;
-  var proxy = forRender ? IMAGE_PROXY_RENDER : IMAGE_PROXY;
-  if (url.indexOf(IMAGE_PROXY) === 0 || url.indexOf(IMAGE_PROXY_RENDER) === 0) return url;
-  return proxy + encodeURIComponent(url);
+  /* For Klaviyo email push (forRender=false): use direct URL — Klaviyo fetches images
+     itself from the source CDN, no proxy needed and proxy returns 403 for some CDNs.
+     For local JPEG render (forRender=true): use local CORS-safe proxy. */
+  if (!forRender) return url;
+  if (url.indexOf(IMAGE_PROXY_RENDER) === 0) return url;
+  return IMAGE_PROXY_RENDER + encodeURIComponent(url);
 }
 
 function setView(mode) {
@@ -1635,6 +1638,9 @@ function buildEmailHTML(forRender) {
   + '<title>' + mo + ' Program \u2013 ' + propName + '</title>'
   + '<style>'
   + '@import url(https://static-forms.klaviyo.com/fonts/api/v1/QQver5/custom_fonts.css);'
+  + '@font-face{font-family:"EngraversGothic";font-weight:700;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/EngraversGothic-Bold.ttf) format("truetype");}'
+  + '@font-face{font-family:"PlantinMTPro";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRg.ttf) format("truetype");}'
+  + '@font-face{font-family:"PlantinMTPro";font-weight:400;font-style:italic;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRgIt.ttf) format("truetype");}'
   + 'body{margin:0;padding:0;background:#F4F2F0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}'
   + 'img{border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;}'
   + 'table{border-collapse:collapse;}'
