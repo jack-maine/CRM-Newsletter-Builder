@@ -1449,11 +1449,11 @@ function buildWhatsNewHtml(forEmail, forRender) {
 
   if (isShelborne) {
     phColor = '#9aad94';
-    wnHeadFont = 'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif'; wnHeadSize = '14px'; wnHeadLS = '.15em'; wnHeadLH = '1.1';
-    wnMetaFont  = 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:1.1;';
-    wnTitleFont = 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:20px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';line-height:1.1;';
-    wnCopyFont  = 'font-family:PlantinMTPro,Georgia,serif;font-size:13px;font-weight:400;font-style:italic;color:#6B6560;line-height:1.4;';
-    wnCtaFont   = 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 16px;border:1.5px solid ' + ink + ';';
+    wnHeadFont = 'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif'; wnHeadSize = '14px'; wnHeadLS = '.15em'; wnHeadLH = '1.1';
+    wnMetaFont  = 'font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:1.1;';
+    wnTitleFont = 'font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:20px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';line-height:1.1;';
+    wnCopyFont  = 'font-family:PlantinMTRegular,Georgia,serif;font-size:13px;font-weight:400;font-style:italic;color:#6B6560;line-height:1.4;';
+    wnCtaFont   = 'font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 16px;border:1.5px solid ' + ink + ';';
   } else if (isJune) {
     phColor = '#F0DBCC'; borderColor = '#E1D5C0';
     wnHeadFont = 'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '12px'; wnHeadLS = '.12em'; wnHeadLH = '1.3';
@@ -1614,7 +1614,7 @@ function getBannerHtml(forEmail) {
       return '<table width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;">'
         + '<tr><td style="padding:0;font-size:0;line-height:0;">' + heroImg + '</td></tr>'
         + '<tr><td style="background:' + barColor + ';padding:13px 28px;">'
-        + '<span style="font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#f0ede8;line-height:1.1;">' + titleText + '</span>'
+        + '<span style="font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#f0ede8;line-height:1.1;">' + titleText + '</span>'
         + '</td></tr>'
         + '</table>';
     } else {
@@ -1622,7 +1622,7 @@ function getBannerHtml(forEmail) {
         ? '<img src="' + prop.banner + '" alt="The Shelborne" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />'
         : '<div style="width:100%;height:100%;background:#b5c4b5;position:absolute;inset:0;"></div>')
         + '<div style="position:absolute;bottom:0;left:0;width:100%;background:' + barColor + ';padding:13px 28px;box-sizing:border-box;">'
-        + '<span style="font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#f0ede8;line-height:1.1;">' + titleText + '</span>'
+        + '<span style="font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#f0ede8;line-height:1.1;">' + titleText + '</span>'
         + '</div>';
     }
   }
@@ -1893,12 +1893,12 @@ function buildEmailHTML(forRender) {
   /* ── Property theme helper ── */
   function propTheme() {
     if (isShelborne)  return {bg:'#F8F2E7', accentBg:'#61756A', accentText:'#ffffff', borderColor:'#D8D5D0', phColor:'#9aad94',
-      labelFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'14px', labelLS:'.15em', labelLH:'1.1',
-      headFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', headSize:'20px', headWeight:'700', headLS:'.15em', headLH:'1.1',
-      metaFont:'\'PlantinMTPro\',Georgia,serif', metaStyle:'italic', metaSize:'14px', metaColor:'#201E1E', metaLS:'0',
+      labelFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'14px', labelLS:'.15em', labelLH:'1.1',
+      headFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', headSize:'20px', headWeight:'700', headLS:'.15em', headLH:'1.1',
+      metaFont:'\'PlantinMTRegular\',Georgia,serif', metaStyle:'italic', metaSize:'14px', metaColor:'#201E1E', metaLS:'0',
       bodyFont:'\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif', bodySize:'13px', bodyColor:'#201E1E',
-      ctaFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', ctaSize:'14px', ctaBorder:'#201E1E', ctaColor:'#201E1E', ctaBg:'transparent',
-      gridTitleSize:'20px', gridTitleFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', gridTitleLS:'.15em', gridTitleLH:'1.1'};
+      ctaFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', ctaSize:'14px', ctaBorder:'#201E1E', ctaColor:'#201E1E', ctaBg:'transparent',
+      gridTitleSize:'20px', gridTitleFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', gridTitleLS:'.15em', gridTitleLH:'1.1'};
     if (isJune)       return {bg:'#FFF7E9', accentBg:'#B2880B', accentText:'#ffffff', borderColor:'#E1D5C0', phColor:'#F0DBCC',
       labelFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.12em', labelLH:'1.3',
       headFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', headSize:'24px', headWeight:'500', headLS:'.05em', headLH:'1.15',
@@ -1989,9 +1989,9 @@ function buildEmailHTML(forRender) {
   + '<title>' + mo + ' Program \u2013 ' + propName + '</title>'
   + '<style>'
   + '@import url(https://static-forms.klaviyo.com/fonts/api/v1/QQver5/custom_fonts.css);'
-  + '@font-face{font-family:"EngraversGothic";font-weight:700;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/EngraversGothic-Bold.ttf) format("truetype");}'
-  + '@font-face{font-family:"PlantinMTPro";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRg.ttf) format("truetype");}'
-  + '@font-face{font-family:"PlantinMTPro";font-weight:400;font-style:italic;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRgIt.ttf) format("truetype");}'
+  + '@font-face{font-family:"EngraversGothicBold";font-weight:700;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/EngraversGothic-Bold.ttf) format("truetype");}'
+  + '@font-face{font-family:"PlantinMTRegular";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRg.ttf) format("truetype");}'
+  + '@font-face{font-family:"PlantinMTRegular";font-weight:400;font-style:italic;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRgIt.ttf) format("truetype");}'
   + '@font-face{font-family:"GTEestiDisplay";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Display-Medium-2.ttf) format("truetype");}'
   + '@font-face{font-family:"GTEestiText";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Text-Book.ttf) format("truetype");}'
   + '@font-face{font-family:"Neutra2Display";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Neutra2Display-Medium.otf) format("opentype");}'
@@ -2374,7 +2374,7 @@ function buildGridCell(ev, w, fullWidth, forRender, panelId) {
   var isCulver  = prop && prop.short === 'Culver';
 
   var T2;
-  if (isShelborne)  T2 = {bg:'#F8F2E7',borderColor:'#b0bfaa',phColor:'#9aad94',gridTitleSize:'20px',gridTitleFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif',gridTitleLS:'.15em',gridTitleLH:'1.1',metaFont:'\'PlantinMTPro\',Georgia,serif',metaStyle:'italic',metaLS:'0',ctaFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif',ctaBorder:'#201E1E',ctaColor:'#201E1E',ctaBg:'transparent',ctaSize:'14px'};
+  if (isShelborne)  T2 = {bg:'#F8F2E7',borderColor:'#b0bfaa',phColor:'#9aad94',gridTitleSize:'20px',gridTitleFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif',gridTitleLS:'.15em',gridTitleLH:'1.1',metaFont:'\'PlantinMTRegular\',Georgia,serif',metaStyle:'italic',metaLS:'0',ctaFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif',ctaBorder:'#201E1E',ctaColor:'#201E1E',ctaBg:'transparent',ctaSize:'14px'};
   else if (isJune)  T2 = {bg:'#FFF7E9',borderColor:'#E1D5C0',phColor:'#F0DBCC',gridTitleSize:'16px',gridTitleFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.06em',gridTitleLH:'1.2',metaFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.08em',ctaFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#B2880B',ctaColor:'#141311',ctaBg:'#E1BA44',ctaSize:'11px'};
   else if (isAvalonBH) T2 = {bg:'#ffffff',borderColor:'#D0CCCC',phColor:'#C4C9C8',gridTitleSize:'15px',gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.1em',gridTitleLH:'1.25',metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#282828',ctaColor:'#282828',ctaBg:'transparent',ctaSize:'11px'};
   else if (isAvalonPS) T2 = {bg:'#ffffff',borderColor:'#DDD0CC',phColor:'#E7CDC4',gridTitleSize:'15px',gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.1em',gridTitleLH:'1.25',metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#545454',ctaColor:'#545454',ctaBg:'transparent',ctaSize:'11px'};
