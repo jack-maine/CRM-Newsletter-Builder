@@ -1266,9 +1266,70 @@ function toggle(i) {
 function buildWhatsNewHtml(forEmail, forRender) {
   if (!whatsNew.length) return "";
   var isShelborne = prop && prop.short === "Shelborne";
+  var isJune    = prop && prop.short === "JuneWLA";
+  var isAvalon  = prop && (prop.short === "AvalonBH" || prop.short === "AvalonPS");
+  var isIngleside = prop && prop.short === "Ingleside";
+  var isMYC     = prop && prop.short === "MYC";
+  var isCulver  = prop && prop.short === "Culver";
 
-  var borderColor = isShelborne ? '#D8D5D0' : '#D8D5D0';
+  var borderColor = '#D8D5D0';
   var ink = '#201E1E';
+  var phColor = '#F4F2F0';
+
+  /* Property-aware font/color tokens for What's New */
+  var wnHeadFont, wnHeadSize, wnHeadLS, wnHeadLH;
+  var wnMetaFont, wnTitleFont, wnCopyFont, wnCtaFont;
+
+  if (isShelborne) {
+    phColor = '#9aad94';
+    wnHeadFont = 'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif'; wnHeadSize = '14px'; wnHeadLS = '.15em'; wnHeadLH = '1.1';
+    wnMetaFont  = 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:1.1;';
+    wnTitleFont = 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:20px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';line-height:1.1;';
+    wnCopyFont  = 'font-family:PlantinMTPro,Georgia,serif;font-size:13px;font-weight:400;font-style:italic;color:#6B6560;line-height:1.4;';
+    wnCtaFont   = 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 16px;border:1.5px solid ' + ink + ';';
+  } else if (isJune) {
+    phColor = '#F0DBCC'; borderColor = '#E1D5C0';
+    wnHeadFont = 'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '12px'; wnHeadLS = '.12em'; wnHeadLH = '1.3';
+    wnMetaFont  = 'font-family:GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:#5C4A2A;line-height:1.4;';
+    wnTitleFont = 'font-family:GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif;font-size:16px;font-weight:500;letter-spacing:.05em;color:' + ink + ';line-height:1.2;';
+    wnCopyFont  = 'font-family:GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:400;color:#3D2E14;line-height:1.5;';
+    wnCtaFont   = 'font-family:GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#141311;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;background:#E1BA44;border:1.5px solid #B2880B;';
+  } else if (isAvalon) {
+    phColor = '#C8C4C4'; borderColor = '#D0CCCC';
+    wnHeadFont = 'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '11px'; wnHeadLS = '.18em'; wnHeadLH = '1.3';
+    wnMetaFont  = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#666;line-height:1.4;';
+    wnTitleFont = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:15px;font-weight:500;letter-spacing:.08em;color:' + ink + ';line-height:1.25;';
+    wnCopyFont  = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:400;color:#333;line-height:1.5;';
+    wnCtaFont   = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#282828;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;border:1.5px solid #282828;';
+  } else if (isIngleside) {
+    phColor = '#C5C9B2'; borderColor = '#DDDBD4'; ink = '#1B5B4C';
+    wnHeadFont = 'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '11px'; wnHeadLS = '.18em'; wnHeadLH = '1.3';
+    wnMetaFont  = 'font-family:FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#1B5B4C;line-height:1.4;';
+    wnTitleFont = 'font-family:LydianBT,\'Lydian BT\',Georgia,serif;font-size:16px;font-weight:400;letter-spacing:.03em;color:#1B5B4C;line-height:1.25;';
+    wnCopyFont  = 'font-family:FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:400;color:#3A3A2E;line-height:1.5;';
+    wnCtaFont   = 'font-family:DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#1B5B4C;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;border:1.5px solid #1B5B4C;';
+  } else if (isMYC) {
+    phColor = '#E2C5A9'; borderColor = '#D5CAC0'; ink = '#0C1E2C';
+    wnHeadFont = 'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '11px'; wnHeadLS = '.18em'; wnHeadLH = '1.3';
+    wnMetaFont  = 'font-family:DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#0C1E2C;line-height:1.4;';
+    wnTitleFont = 'font-family:FSNeruda,\'FS Neruda\',Georgia,serif;font-size:16px;font-weight:400;letter-spacing:.02em;color:#0C1E2C;line-height:1.25;';
+    wnCopyFont  = 'font-family:FSNeruda,\'FS Neruda\',Georgia,serif;font-size:13px;font-weight:400;color:#2A2A2A;line-height:1.5;';
+    wnCtaFont   = 'font-family:DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#0C1E2C;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;border:1.5px solid #0C1E2C;';
+  } else if (isCulver) {
+    phColor = '#C8C8CA'; borderColor = '#D5D5D6'; ink = '#222223';
+    wnHeadFont = 'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '11px'; wnHeadLS = '.15em'; wnHeadLH = '1.3';
+    wnMetaFont  = 'font-family:CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:#555;line-height:1.4;';
+    wnTitleFont = 'font-family:Bellefair,\'Bellefair\',Georgia,serif;font-size:16px;font-weight:400;letter-spacing:.02em;color:#222223;line-height:1.25;';
+    wnCopyFont  = 'font-family:CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:400;color:#333;line-height:1.5;';
+    wnCtaFont   = 'font-family:CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#222223;text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 14px;border:1.5px solid #222223;';
+  } else {
+    /* Proper Hotels default */
+    wnHeadFont = 'BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif'; wnHeadSize = '12px'; wnHeadLS = '.15em'; wnHeadLH = '1.5';
+    wnMetaFont  = 'font-family:BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:1.5;';
+    wnTitleFont = 'font-family:BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';line-height:1.5;';
+    wnCopyFont  = 'font-family:BentonSansRE,\'Benton Sans\',Arial,sans-serif;font-size:12px;font-weight:400;color:#6B6560;line-height:1.5;letter-spacing:.15em;text-transform:uppercase;';
+    wnCtaFont   = 'font-family:BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';text-decoration:none;white-space:nowrap;display:inline-block;padding:9px 20px;border:1.5px solid ' + ink + ';';
+  }
 
   if (!forEmail) {
     /* ── Preview (CSS-based) — uses same CSS classes as Featured Event ── */
@@ -1280,7 +1341,7 @@ function buildWhatsNewHtml(forEmail, forRender) {
       var imgLeft = i % 2 === 0;
       html += '<div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid ' + borderColor + ';">';
       if (imgLeft) {
-        html += ev.img ? '<img src="' + ev.img + '" style="width:110px;min-height:70px;height:auto;object-fit:cover;flex-shrink:0;align-self:center;" />' : '<div style="width:110px;min-height:70px;background:#F4F2F0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;">img</div>';
+        html += ev.img ? '<img src="' + ev.img + '" style="width:110px;min-height:70px;height:auto;object-fit:cover;flex-shrink:0;align-self:center;" />' : '<div style="width:110px;min-height:70px;background:' + phColor + ';flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;">img</div>';
       } else {
         html += '<a href="' + ev.url + '" class="feat-cta" style="flex-shrink:0;">' + ev.cta.toUpperCase() + '</a>';
       }
@@ -1290,7 +1351,7 @@ function buildWhatsNewHtml(forEmail, forRender) {
       if (ev.copy) html += '<p class="feat-desc" style="margin:0;">' + ev.copy + '</p>';
       html += '</div>';
       if (!imgLeft) {
-        html += ev.img ? '<img src="' + ev.img + '" style="width:110px;min-height:70px;height:auto;object-fit:cover;flex-shrink:0;align-self:center;" />' : '<div style="width:110px;min-height:70px;background:#F4F2F0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;">img</div>';
+        html += ev.img ? '<img src="' + ev.img + '" style="width:110px;min-height:70px;height:auto;object-fit:cover;flex-shrink:0;align-self:center;" />' : '<div style="width:110px;min-height:70px;background:' + phColor + ';flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;">img</div>';
       } else {
         html += '<a href="' + ev.url + '" class="feat-cta" style="flex-shrink:0;">' + ev.cta.toUpperCase() + '</a>';
       }
@@ -1301,29 +1362,18 @@ function buildWhatsNewHtml(forEmail, forRender) {
   }
 
   /* ── Email HTML (table-based) ── */
-  /* Font stacks mirror the events section — adapts per property just like buildGridCell */
-  var headFont = isShelborne
-    ? 'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif'
-    : 'BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif';
-  var metaFont  = isShelborne
-    ? 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:1.1;'
-    : 'font-family:BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:1.5;';
-  var titleFont = isShelborne
-    ? 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:20px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';line-height:1.1;white-space:nowrap;'
-    : 'font-family:BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';line-height:1.5;white-space:nowrap;';
-  var copyFont  = isShelborne
-    ? 'font-family:PlantinMTPro,\'Arizona Mix\',Georgia,serif;font-size:13px;font-weight:400;font-style:italic;color:#6B6560;line-height:1.4;'
-    : 'font-family:BentonSansRE,\'Benton Sans\',Arial,sans-serif;font-size:12px;font-weight:400;color:#6B6560;line-height:1.5;letter-spacing:.15em;text-transform:uppercase;';
-  var ctaFont   = isShelborne
-    ? 'font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 16px;border:1.5px solid ' + ink + ';'
-    : 'font-family:BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';text-decoration:none;white-space:nowrap;display:inline-block;padding:9px 20px;border:1.5px solid ' + ink + ';';
+  var headFont = wnHeadFont;
+  var metaFont  = wnMetaFont;
+  var titleFont = wnTitleFont;
+  var copyFont  = wnCopyFont;
+  var ctaFont   = wnCtaFont;
 
   /* Divider line between See All and What's New — matches preview */
   var out = '<tr><td style="padding:0 40px;">'
-    + '<div style="height:1px;background:#D8D5D0;font-size:0;line-height:0;">&nbsp;</div>'
+    + '<div style="height:1px;background:' + borderColor + ';font-size:0;line-height:0;">&nbsp;</div>'
     + '</td></tr>'
     + '<tr><td style="padding:28px 40px 20px;">'
-    + '<p style="margin:0;font-family:' + headFont + ';font-size:' + (isShelborne ? '14px' : '12px') + ';font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:' + (isShelborne ? '1.1' : '1.5') + ';">What\'s New</p>'
+    + '<p style="margin:0;font-family:' + wnHeadFont + ';font-size:' + wnHeadSize + ';font-weight:700;letter-spacing:' + wnHeadLS + ';text-transform:uppercase;color:#6B6560;line-height:' + wnHeadLH + ';">What\'s New</p>'
     + '</td></tr>';
 
   whatsNew.forEach(function(ev, i) {
@@ -1336,7 +1386,7 @@ function buildWhatsNewHtml(forEmail, forRender) {
         + '<img src="' + imgSrc + '" width="110" style="display:block;width:110px;min-height:70px;height:auto;object-fit:cover;" alt="' + ev.title + '" /></a>'
         + '</td>'
       : '<td width="110" style="padding:0;vertical-align:middle;' + (imgLeft ? 'padding-right:16px;' : 'padding-left:16px;') + '">'
-        + '<div style="width:110px;min-height:70px;background:#F4F2F0;"></div>'
+        + '<div style="width:110px;min-height:70px;background:' + phColor + ';"></div>'
         + '</td>';
 
     var ctaCell = '<td width="90" style="text-align:' + (imgLeft ? 'right' : 'left') + ';vertical-align:middle;' + (imgLeft ? 'padding-left:12px;' : 'padding-right:12px;') + '">'
@@ -1350,7 +1400,7 @@ function buildWhatsNewHtml(forEmail, forRender) {
       + '</td>';
 
     out += '<tr><td style="padding:0 40px;">'
-      + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #D8D5D0;">'
+      + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ' + borderColor + ';">'
       + '<tr>'
       + (imgLeft ? imgCell + contentCell + ctaCell : ctaCell + contentCell + imgCell)
       + '</tr>'
@@ -1598,8 +1648,68 @@ function buildEmailHTML(forRender) {
   var propName = prop ? prop.name : "Proper Hotels";
   var n        = grid.length; // number of grid cards
   var isShelborne = prop && prop.short === 'Shelborne';
-  var isProper = prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF');
+  var isProper = prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA');
+  var isJune    = prop && prop.short === 'JuneWLA';
+  var isAvalon  = prop && (prop.short === 'AvalonBH' || prop.short === 'AvalonPS');
+  var isIngleside = prop && prop.short === 'Ingleside';
+  var isMYC     = prop && prop.short === 'MYC';
+  var isCulver  = prop && prop.short === 'Culver';
   var _forRender = !!forRender;
+
+  /* ── Property theme helper ── */
+  function propTheme() {
+    if (isShelborne)  return {bg:'#F8F2E7', accentBg:'#61756A', accentText:'#ffffff', borderColor:'#D8D5D0', phColor:'#9aad94',
+      labelFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'14px', labelLS:'.15em', labelLH:'1.1',
+      headFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', headSize:'20px', headWeight:'700', headLS:'.15em', headLH:'1.1',
+      metaFont:'\'PlantinMTPro\',Georgia,serif', metaStyle:'italic', metaSize:'14px', metaColor:'#201E1E', metaLS:'0',
+      bodyFont:'\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif', bodySize:'13px', bodyColor:'#201E1E',
+      ctaFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', ctaSize:'14px', ctaBorder:'#201E1E', ctaColor:'#201E1E', ctaBg:'transparent',
+      gridTitleSize:'20px', gridTitleFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif', gridTitleLS:'.15em', gridTitleLH:'1.1'};
+    if (isJune)       return {bg:'#FFF7E9', accentBg:'#B2880B', accentText:'#ffffff', borderColor:'#E1D5C0', phColor:'#F0DBCC',
+      labelFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.12em', labelLH:'1.3',
+      headFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', headSize:'24px', headWeight:'500', headLS:'.05em', headLH:'1.15',
+      metaFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'12px', metaColor:'#5C4A2A', metaLS:'.08em',
+      bodyFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#3D2E14',
+      ctaFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#B2880B', ctaColor:'#141311', ctaBg:'#E1BA44',
+      gridTitleSize:'16px', gridTitleFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.06em', gridTitleLH:'1.2'};
+    if (isAvalon)     return {bg:'#ffffff', accentBg:'#282828', accentText:'#ffffff', borderColor:'#D0CCCC', phColor:'#C8C4C4',
+      labelFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+      headFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', headSize:'22px', headWeight:'500', headLS:'.08em', headLH:'1.2',
+      metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#666', metaLS:'.15em',
+      bodyFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#333',
+      ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#282828', ctaColor:'#282828', ctaBg:'transparent',
+      gridTitleSize:'15px', gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.1em', gridTitleLH:'1.25'};
+    if (isIngleside)  return {bg:'#F5F4EE', accentBg:'#1B5B4C', accentText:'#ffffff', borderColor:'#DDDBD4', phColor:'#C5C9B2',
+      labelFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+      headFont:'LydianBT,\'Lydian BT\',Georgia,serif', headSize:'24px', headWeight:'400', headLS:'.04em', headLH:'1.2',
+      metaFont:'FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#1B5B4C', metaLS:'.15em',
+      bodyFont:'FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'12px', bodyColor:'#3A3A2E',
+      ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#1B5B4C', ctaColor:'#1B5B4C', ctaBg:'transparent',
+      gridTitleSize:'16px', gridTitleFont:'LydianBT,\'Lydian BT\',Georgia,serif', gridTitleLS:'.03em', gridTitleLH:'1.25'};
+    if (isMYC)        return {bg:'#ffffff', accentBg:'#0C1E2C', accentText:'#ffffff', borderColor:'#D5CAC0', phColor:'#E2C5A9',
+      labelFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+      headFont:'FSNeruda,\'FS Neruda\',Georgia,serif', headSize:'24px', headWeight:'400', headLS:'.02em', headLH:'1.2',
+      metaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#0C1E2C', metaLS:'.15em',
+      bodyFont:'FSNeruda,\'FS Neruda\',Georgia,serif', bodySize:'13px', bodyColor:'#2A2A2A',
+      ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#0C1E2C', ctaColor:'#0C1E2C', ctaBg:'transparent',
+      gridTitleSize:'16px', gridTitleFont:'FSNeruda,\'FS Neruda\',Georgia,serif', gridTitleLS:'.02em', gridTitleLH:'1.25'};
+    if (isCulver)     return {bg:'#F1F1F2', accentBg:'#222223', accentText:'#ffffff', borderColor:'#D5D5D6', phColor:'#C8C8CA',
+      labelFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+      headFont:'Bellefair,\'Bellefair\',Georgia,serif', headSize:'26px', headWeight:'400', headLS:'.03em', headLH:'1.2',
+      metaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#555', metaLS:'.12em',
+      bodyFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'12px', bodyColor:'#333',
+      ctaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'10px', ctaBorder:'#222223', ctaColor:'#222223', ctaBg:'transparent',
+      gridTitleSize:'16px', gridTitleFont:'Bellefair,\'Bellefair\',Georgia,serif', gridTitleLS:'.02em', gridTitleLH:'1.25'};
+    /* Default (Proper Hotels) */
+    return {bg:'#ffffff', accentBg:'#201E1E', accentText:'#ffffff', borderColor:'#D8D5D0', phColor:'#F4F2F0',
+      labelFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'12px', labelLS:'.15em', labelLH:'1.5',
+      headFont:'ABCArizonaMix,\'Arizona Mix\',Georgia,serif', headSize:'28px', headWeight:'300', headLS:'-.01em', headLH:'1.2',
+      metaFont:'BentonSansRE,\'Benton Sans\',Arial,sans-serif', metaStyle:'normal', metaSize:'12px', metaColor:'#6B6560', metaLS:'.15em',
+      bodyFont:'\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif', bodySize:'13px', bodyColor:'#6B6560',
+      ctaFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', ctaSize:'10px', ctaBorder:'#201E1E', ctaColor:'#201E1E', ctaBg:'transparent',
+      gridTitleSize:'12px', gridTitleFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', gridTitleLS:'.15em', gridTitleLH:'1.5'};
+  }
+  var T = propTheme();
 
 
   /* ── GRID ROWS ── dynamic layout ─────────────────────────
@@ -1623,7 +1733,7 @@ function buildEmailHTML(forRender) {
              + '<tr>' + buildGridCell(grid[2], 280, false, _forRender, "ev_2") + buildGridCell(grid[3], 280, false, _forRender, "ev_3") + '</tr>';
   }
 
-  var gridBg = isShelborne ? '#F8F2E7' : '#ffffff';
+  var gridBg = T.bg;
   var gridSection = n > 0
     ? '<tr><td style="padding:8px 0 0;">'
     +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:' + gridBg + ';border-collapse:separate!important;border-spacing:8px;">' + gridRows + '</table>'
@@ -1641,6 +1751,16 @@ function buildEmailHTML(forRender) {
   + '@font-face{font-family:"EngraversGothic";font-weight:700;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/EngraversGothic-Bold.ttf) format("truetype");}'
   + '@font-face{font-family:"PlantinMTPro";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRg.ttf) format("truetype");}'
   + '@font-face{font-family:"PlantinMTPro";font-weight:400;font-style:italic;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRgIt.ttf) format("truetype");}'
+  + '@font-face{font-family:"GTEestiDisplay";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Display-Medium-2.ttf) format("truetype");}'
+  + '@font-face{font-family:"GTEestiText";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Text-Book.ttf) format("truetype");}'
+  + '@font-face{font-family:"Neutra2Display";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Neutra2Display-Medium.otf) format("opentype");}'
+  + '@font-face{font-family:"Neutra2Text";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Neutra2Text-Book.otf) format("opentype");}'
+  + '@font-face{font-family:"LydianBT";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/LydianBT.ttf) format("truetype");}'
+  + '@font-face{font-family:"FuturaLTBook";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/FuturaLT-Book.ttf) format("truetype");}'
+  + '@font-face{font-family:"DressCode";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/DressCode-Medium.otf) format("opentype");}'
+  + '@font-face{font-family:"FSNeruda";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/FSNeruda-Regular.otf) format("opentype");}'
+  + '@font-face{font-family:"CenturyGothic";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/centurygothic.ttf) format("truetype");}'
+  + '@font-face{font-family:"Bellefair";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Bellefair-Regular.ttf) format("truetype");}'
   + 'body{margin:0;padding:0;background:#F4F2F0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}'
   + 'img{border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;}'
   + 'table{border-collapse:collapse;}'
@@ -1662,7 +1782,7 @@ function buildEmailHTML(forRender) {
   + '<body style="margin:0;padding:0;background:#F4F2F0;">'
   + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F4F2F0;">'
   +   '<tr><td align="center" style="padding:24px 0 0;">'
-  +     '<table class="outer" width="600" cellpadding="0" cellspacing="0" border="0" style="background:' + (isShelborne ? '#F8F2E7' : '#ffffff') + ';max-width:600px;width:100%;">'
+  +     '<table class="outer" width="600" cellpadding="0" cellspacing="0" border="0" style="background:' + T.bg + ';max-width:600px;width:100%;">'
 
   /* BANNER */
   +       '<tr><td style="padding:0;font-size:0;line-height:0;">'
@@ -1672,30 +1792,20 @@ function buildEmailHTML(forRender) {
   +       '</td></tr>'
 
   /* FEATURE EVENT */
-  +       '<tr><td class="inner" style="padding:36px 40px 32px;border-bottom:1px solid #D8D5D0;">'
+  +       '<tr><td class="inner" style="padding:36px 40px 32px;border-bottom:1px solid ' + T.borderColor + ';">'
   +         '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
   +           '<tr>'
   +             '<td class="feat-td" valign="top" style="padding-right:28px;">'
-  +               (isShelborne
-              ? '<p style="margin:0 0 12px;font-size:14px;font-weight:700;letter-spacing:.15em;line-height:1.1;text-transform:uppercase;color:#201E1E;font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;">Featured Event</p>'
-              : '<p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.15em;line-height:1.5;text-transform:uppercase;color:#6B6560;font-family:BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif;">Featured Event</p>')
-  +               (isShelborne
-              ? '<h2 style="margin:0 0 14px;font-size:20px;font-weight:700;color:#201E1E;line-height:1.1;letter-spacing:.15em;font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;text-transform:uppercase;">' + feat.title + '</h2>'
-              : '<h2 style="margin:0 0 14px;font-size:28px;font-weight:300;color:#201E1E;line-height:1.2;letter-spacing:-.01em;font-family:ABCArizonaMix,\'Arizona Mix\',Georgia,serif;text-transform:uppercase;">' + feat.title + '</h2>')
-  +               (isShelborne
-              ? '<p style="margin:0 0 16px;font-size:14px;font-style:italic;font-weight:400;letter-spacing:0;line-height:1.4;color:#201E1E;font-family:\'PlantinMTPro\',Georgia,serif;text-transform:none;">' + titleCase(feat.date || "") + (feat.cat ? " &middot; " + titleCase(feat.cat) : "") + '</p>'
-              : '<p style="margin:0 0 16px;font-size:12px;font-weight:400;letter-spacing:.15em;line-height:1.5;color:#6B6560;font-family:BentonSansRE,\'Benton Sans\',Arial,sans-serif;text-transform:uppercase;">' + titleCase(feat.date || "") + (feat.cat ? " &middot; " + titleCase(feat.cat) : "") + '</p>')
-  +               (isShelborne
-              ? '<p style="margin:0 0 24px;font-size:13px;line-height:1.8;color:#201E1E;font-family:\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif;font-weight:300;text-transform:none;">' + feat.desc + '</p>'
-              : '<p style="margin:0 0 22px;font-size:13px;line-height:1.8;color:#6B6560;font-family:\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif;font-weight:300;text-transform:none;">' + feat.desc + '</p>')
-  +               (isShelborne
-              ? '<a href="' + feat.url + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:transparent;color:#201E1E;border:1.5px solid #201E1E;font-size:14px;font-weight:700;line-height:1.1;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif;">Reserve</a>'
-              : '<a href="' + feat.url + '" class="cta-btn" style="display:inline-block;padding:12px 28px;background:transparent;color:#201E1E;border:1.5px solid #201E1E;font-size:10px;font-weight:700;line-height:1.5;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif;">Reserve</a>')
+  +               '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">Featured Event</p>'
+  +               '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#201E1E;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + feat.title + '</h2>'
+  +               '<p style="margin:0 0 16px;font-size:' + T.metaSize + ';font-style:' + T.metaStyle + ';font-weight:400;letter-spacing:' + T.metaLS + ';line-height:1.5;color:' + T.metaColor + ';font-family:' + T.metaFont + ';text-transform:' + (T.metaLS === '0' ? 'none' : 'uppercase') + ';">' + titleCase(feat.date || '') + (feat.cat ? ' &middot; ' + titleCase(feat.cat) : '') + '</p>'
+  +               '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:' + T.bodyColor + ';font-family:' + T.bodyFont + ';font-weight:300;text-transform:none;">' + feat.desc + '</p>'
+  +               '<a href="' + feat.url + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">Reserve</a>'
   +             '</td>'
   +             '<td class="feat-img-td" width="190" valign="top">'
   +               (feat.img
                   ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;text-decoration:none;"><img src="' + proxyImg(feat.img, _forRender) + '" width="190" style="display:block;width:190px;height:190px;object-fit:cover;" alt="' + getPanelAlt("feat", feat.title) + '" /></a>'
-                  : '<div style="width:190px;height:190px;background:' + (isShelborne ? '#9aad94' : '#F4F2F0') + ';"></div>')
+                  : '<div style="width:190px;height:190px;background:' + T.phColor + ';"></div>')
   +             '</td>'
   +           '</tr>'
   +         '</table>'
@@ -1705,15 +1815,21 @@ function buildEmailHTML(forRender) {
   + gridSection
 
   /* SEE ALL */
-  +       '<tr><td style="padding:28px 40px 40px;text-align:center;background:' + (isShelborne ? '#F8F2E7' : '#ffffff') + ';">'
-  +         '<a href="' + allUrl + '" class="see-all-btn" style="display:inline-block;padding:12px 40px;border:1.5px solid #201E1E;font-size:' + (isShelborne ? '14px' : '10px') + ';font-weight:700;line-height:' + (isShelborne ? '1.1' : '1.5') + ';letter-spacing:.15em;text-transform:uppercase;color:#201E1E;text-decoration:none;font-family:' + (isShelborne ? 'EngraversGothic' : 'BentonSansWide') + ',\'Benton Sans Wide\',Arial,sans-serif;">See All Events</a>'
+  +       '<tr><td style="padding:28px 40px 40px;text-align:center;background:' + T.bg + ';">'
+  +         '<a href="' + allUrl + '" class="see-all-btn" style="display:inline-block;padding:12px 40px;border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;color:' + T.ctaColor + ';text-decoration:none;font-family:' + T.ctaFont + ';">See All Events</a>'
   +       '</td></tr>'
 
   /* WHAT'S NEW */
   + buildWhatsNewHtml(true, _forRender)
 
-  /* PROPER FOOTER — last row inside the 600px content table so width matches */
-  + ((prop && prop.url && prop.url.indexOf('properhotel.com') !== -1) ? buildProperFooter() : '')
+  /* FOOTER — last rows inside 600px table so width matches */
+  + (isProper    ? buildProperFooter()    : '')
+  + (isShelborne ? buildShelborneFooter() : '')
+  + (isJune      ? buildJuneFooter()      : '')
+  + (isAvalon    ? buildAvalonFooter()    : '')
+  + (isIngleside ? buildInglesideFooter() : '')
+  + (isMYC       ? buildMYCFooter()       : '')
+  + (isCulver    ? buildCulverFooter()    : '')
 
   +     '</table>'
   +   '</td></tr>'
@@ -1838,11 +1954,164 @@ function buildShelborneFooter() {
 }
 
 
+function buildJuneFooter() {
+  var linkStyle = 'font-family:GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#ffffff;text-decoration:none;line-height:20px;';
+  var bodyStyle = 'font-family:GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;color:#ffffff;line-height:16px;';
+  return ''
+  + '<tr><td style="padding:0;background:#B2880B;">'
+  + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#B2880B;">'
+  + '<tbody>'
+  + '<tr><td align="center" style="padding:48px 40px 0;">'
+  +   '<a href="https://www.thehoteljune.com/" target="_blank" style="display:inline-block;text-decoration:none;">'
+  +     '<p style="margin:0;font-family:GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif;font-size:22px;font-weight:500;letter-spacing:.1em;color:#ffffff;text-transform:uppercase;">Hotel June</p>'
+  +   '</a>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;"><tr>'
+  +     '<td style="padding:0 16px;"><a href="https://www.thehoteljune.com/west-los-angeles/" target="_blank" style="' + linkStyle + '">West LA</a></td>'
+  +     '<td style="padding:0 16px;"><a href="https://www.thehoteljune.com/mid-city/" target="_blank" style="' + linkStyle + '">Mid-City</a></td>'
+  +   '</tr></table>'
+  + '</td></tr>'
+  + '<tr><td style="padding:20px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.4);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<p style="margin:0 0 8px;' + bodyStyle + '"><a href="{% unsubscribe_link %}" style="color:#ffffff;text-decoration:underline;' + bodyStyle + '">Unsubscribe</a> from our marketing emails.</p>'
+  +   '<p style="margin:0;' + bodyStyle + '"><a href="{% web_view_link %}" style="color:#ffffff;text-decoration:underline;">View in Browser</a> &nbsp;|&nbsp; <a href="https://www.thehoteljune.com/privacy-policy/" style="color:#ffffff;text-decoration:underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.thehoteljune.com/terms-of-use/" style="color:#ffffff;text-decoration:underline;">Terms &amp; Conditions</a></p>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 36px;">'
+  +   '<a href="https://www.instagram.com/hoteljunela/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/instagram_96.png" width="20" height="20" alt="Instagram" style="display:inline-block;width:20px;height:20px;" /></a>'
+  +   '<a href="https://www.facebook.com/HotelJune/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/facebook_96.png" width="20" height="20" alt="Facebook" style="display:inline-block;width:20px;height:20px;" /></a>'
+  + '</td></tr>'
+  + '</tbody></table>'
+  + '</td></tr>';
+}
+
+function buildAvalonFooter() {
+  var linkStyle = 'font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;text-decoration:none;line-height:20px;';
+  var bodyStyle = 'font-family:Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;color:#ffffff;line-height:16px;';
+  return ''
+  + '<tr><td style="padding:0;background:#35535E;">'
+  + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#35535E;">'
+  + '<tbody>'
+  + '<tr><td align="center" style="padding:48px 40px 0;">'
+  +   '<a href="https://www.avalon-hotel.com/" target="_blank" style="display:inline-block;text-decoration:none;">'
+  +     '<p style="margin:0;font-family:Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif;font-size:20px;font-weight:500;letter-spacing:.18em;color:#ffffff;text-transform:uppercase;">Avalon Hotel</p>'
+  +   '</a>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;"><tr>'
+  +     '<td style="padding:0 16px;"><a href="https://www.avalon-hotel.com/beverly-hills/" target="_blank" style="' + linkStyle + '">Beverly Hills</a></td>'
+  +     '<td style="padding:0 16px;"><a href="https://www.avalon-hotel.com/palm-springs/" target="_blank" style="' + linkStyle + '">Palm Springs</a></td>'
+  +   '</tr></table>'
+  + '</td></tr>'
+  + '<tr><td style="padding:20px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.4);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<p style="margin:0 0 8px;' + bodyStyle + '"><a href="{% unsubscribe_link %}" style="color:#ffffff;text-decoration:underline;' + bodyStyle + '">Unsubscribe</a> from our marketing emails.</p>'
+  +   '<p style="margin:0;' + bodyStyle + '"><a href="{% web_view_link %}" style="color:#ffffff;text-decoration:underline;">View in Browser</a> &nbsp;|&nbsp; <a href="https://www.avalon-hotel.com/privacy-policy/" style="color:#ffffff;text-decoration:underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.avalon-hotel.com/terms-of-use/" style="color:#ffffff;text-decoration:underline;">Terms &amp; Conditions</a></p>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 36px;">'
+  +   '<a href="https://www.instagram.com/avalonhotelbeverlyhills/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/instagram_96.png" width="20" height="20" alt="Instagram" style="display:inline-block;width:20px;height:20px;" /></a>'
+  +   '<a href="https://www.facebook.com/avalonhotelbeverlyhills/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/facebook_96.png" width="20" height="20" alt="Facebook" style="display:inline-block;width:20px;height:20px;" /></a>'
+  + '</td></tr>'
+  + '</tbody></table>'
+  + '</td></tr>';
+}
+
+function buildInglesideFooter() {
+  var linkStyle = 'font-family:DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;text-decoration:none;line-height:20px;';
+  var bodyStyle = 'font-family:FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;font-weight:400;color:#ffffff;line-height:16px;';
+  return ''
+  + '<tr><td style="padding:0;background:#1B5B4C;">'
+  + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#1B5B4C;">'
+  + '<tbody>'
+  + '<tr><td align="center" style="padding:48px 40px 0;">'
+  +   '<a href="https://inglesideestate.com/" target="_blank" style="display:inline-block;text-decoration:none;">'
+  +     '<p style="margin:0;font-family:LydianBT,\'Lydian BT\',Georgia,serif;font-size:22px;font-weight:400;letter-spacing:.04em;color:#ffffff;">Ingleside Inn</p>'
+  +   '</a>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:8px 40px 0;"><p style="margin:0;font-family:FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.75);letter-spacing:.12em;text-transform:uppercase;">Palm Springs, California</p></td></tr>'
+  + '<tr><td style="padding:24px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.4);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<p style="margin:0 0 8px;' + bodyStyle + '"><a href="{% unsubscribe_link %}" style="color:#ffffff;text-decoration:underline;' + bodyStyle + '">Unsubscribe</a> from our marketing emails.</p>'
+  +   '<p style="margin:0;' + bodyStyle + '"><a href="{% web_view_link %}" style="color:#ffffff;text-decoration:underline;">View in Browser</a> &nbsp;|&nbsp; <a href="https://inglesideestate.com/privacy-policy/" style="color:#ffffff;text-decoration:underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://inglesideestate.com/terms-of-use/" style="color:#ffffff;text-decoration:underline;">Terms &amp; Conditions</a></p>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 36px;">'
+  +   '<a href="https://www.instagram.com/inglesideestate/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/instagram_96.png" width="20" height="20" alt="Instagram" style="display:inline-block;width:20px;height:20px;" /></a>'
+  +   '<a href="https://www.facebook.com/inglesideestate/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/facebook_96.png" width="20" height="20" alt="Facebook" style="display:inline-block;width:20px;height:20px;" /></a>'
+  + '</td></tr>'
+  + '</tbody></table>'
+  + '</td></tr>';
+}
+
+function buildMYCFooter() {
+  var bodyStyle = 'font-family:DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:500;letter-spacing:.12em;color:#ffffff;line-height:18px;';
+  return ''
+  + '<tr><td style="padding:0;background:#0C1E2C;">'
+  + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0C1E2C;">'
+  + '<tbody>'
+  + '<tr><td align="center" style="padding:48px 40px 0;">'
+  +   '<a href="https://montaukyachtclub.com/" target="_blank" style="display:inline-block;text-decoration:none;">'
+  +     '<p style="margin:0;font-family:FSNeruda,\'FS Neruda\',Georgia,serif;font-size:22px;font-weight:400;letter-spacing:.03em;color:#ffffff;">Montauk Yacht Club</p>'
+  +   '</a>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:8px 40px 0;"><p style="margin:0;font-family:DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;color:rgba(255,255,255,0.65);letter-spacing:.15em;text-transform:uppercase;">Montauk, New York</p></td></tr>'
+  + '<tr><td style="padding:24px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.3);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<p style="margin:0 0 8px;' + bodyStyle + '"><a href="{% unsubscribe_link %}" style="color:#ffffff;text-decoration:underline;' + bodyStyle + '">Unsubscribe</a> from our marketing emails.</p>'
+  +   '<p style="margin:0;' + bodyStyle + '"><a href="{% web_view_link %}" style="color:#ffffff;text-decoration:underline;">View in Browser</a> &nbsp;|&nbsp; <a href="https://montaukyachtclub.com/privacy-policy/" style="color:#ffffff;text-decoration:underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://montaukyachtclub.com/terms-of-use/" style="color:#ffffff;text-decoration:underline;">Terms &amp; Conditions</a></p>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 36px;">'
+  +   '<a href="https://www.instagram.com/montaukyachtclub/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/instagram_96.png" width="20" height="20" alt="Instagram" style="display:inline-block;width:20px;height:20px;" /></a>'
+  +   '<a href="https://www.facebook.com/montaukyachtclub/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/facebook_96.png" width="20" height="20" alt="Facebook" style="display:inline-block;width:20px;height:20px;" /></a>'
+  + '</td></tr>'
+  + '</tbody></table>'
+  + '</td></tr>';
+}
+
+function buildCulverFooter() {
+  var linkStyle = 'font-family:CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#ffffff;text-decoration:none;line-height:20px;';
+  var bodyStyle = 'font-family:CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;font-weight:400;color:#ffffff;line-height:16px;';
+  return ''
+  + '<tr><td style="padding:0;background:#222223;">'
+  + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#222223;">'
+  + '<tbody>'
+  + '<tr><td align="center" style="padding:48px 40px 0;">'
+  +   '<a href="https://www.culverhotel.com/" target="_blank" style="display:inline-block;text-decoration:none;">'
+  +     '<p style="margin:0;font-family:Bellefair,\'Bellefair\',Georgia,serif;font-size:24px;font-weight:400;letter-spacing:.05em;color:#ffffff;">The Culver Hotel</p>'
+  +   '</a>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:8px 40px 0;"><p style="margin:0;font-family:CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif;font-size:10px;color:rgba(255,255,255,0.65);letter-spacing:.15em;text-transform:uppercase;">Culver City, California</p></td></tr>'
+  + '<tr><td style="padding:24px 40px 0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="height:1px;background:rgba(255,255,255,0.3);font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 0;">'
+  +   '<p style="margin:0 0 8px;' + bodyStyle + '"><a href="{% unsubscribe_link %}" style="color:#ffffff;text-decoration:underline;' + bodyStyle + '">Unsubscribe</a> from our marketing emails.</p>'
+  +   '<p style="margin:0;' + bodyStyle + '"><a href="{% web_view_link %}" style="color:#ffffff;text-decoration:underline;">View in Browser</a> &nbsp;|&nbsp; <a href="https://www.culverhotel.com/privacy-policy/" style="color:#ffffff;text-decoration:underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.culverhotel.com/terms-of-use/" style="color:#ffffff;text-decoration:underline;">Terms &amp; Conditions</a></p>'
+  + '</td></tr>'
+  + '<tr><td align="center" style="padding:24px 40px 36px;">'
+  +   '<a href="https://www.instagram.com/theculverhotel/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/instagram_96.png" width="20" height="20" alt="Instagram" style="display:inline-block;width:20px;height:20px;" /></a>'
+  +   '<a href="https://www.facebook.com/theculverhotel/" target="_blank" style="display:inline-block;margin:0 8px;"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtleinverse/facebook_96.png" width="20" height="20" alt="Facebook" style="display:inline-block;width:20px;height:20px;" /></a>'
+  + '</td></tr>'
+  + '</tbody></table>'
+  + '</td></tr>';
+}
+
 function buildGridCell(ev, w, fullWidth, forRender, panelId) {
+  /* Get property theme (same helper used in buildEmailHTML) */
   var isShelborne = prop && prop.short === 'Shelborne';
-  var tdStyle = fullWidth
-    ? 'padding:0;border:1px solid #D8D5D0;vertical-align:top;'
-    : 'padding:0;border:1px solid ' + ((prop && prop.short === 'Shelborne') ? '#b0bfaa' : '#D8D5D0') + ';vertical-align:top;';
+  var isJune    = prop && prop.short === 'JuneWLA';
+  var isAvalon  = prop && (prop.short === 'AvalonBH' || prop.short === 'AvalonPS');
+  var isIngleside = prop && prop.short === 'Ingleside';
+  var isMYC     = prop && prop.short === 'MYC';
+  var isCulver  = prop && prop.short === 'Culver';
+
+  var T2;
+  if (isShelborne)  T2 = {bg:'#F8F2E7',borderColor:'#b0bfaa',phColor:'#9aad94',gridTitleSize:'20px',gridTitleFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif',gridTitleLS:'.15em',gridTitleLH:'1.1',metaFont:'\'PlantinMTPro\',Georgia,serif',metaStyle:'italic',metaLS:'0',ctaFont:'EngraversGothic,\'Benton Sans Wide\',Arial,sans-serif',ctaBorder:'#201E1E',ctaColor:'#201E1E',ctaBg:'transparent',ctaSize:'14px'};
+  else if (isJune)  T2 = {bg:'#FFF7E9',borderColor:'#E1D5C0',phColor:'#F0DBCC',gridTitleSize:'16px',gridTitleFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.06em',gridTitleLH:'1.2',metaFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.08em',ctaFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#B2880B',ctaColor:'#141311',ctaBg:'#E1BA44',ctaSize:'11px'};
+  else if (isAvalon) T2 = {bg:'#ffffff',borderColor:'#D0CCCC',phColor:'#C8C4C4',gridTitleSize:'15px',gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',gridTitleLS:'.1em',gridTitleLH:'1.25',metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#282828',ctaColor:'#282828',ctaBg:'transparent',ctaSize:'11px'};
+  else if (isIngleside) T2 = {bg:'#F5F4EE',borderColor:'#DDDBD4',phColor:'#C5C9B2',gridTitleSize:'16px',gridTitleFont:'LydianBT,\'Lydian BT\',Georgia,serif',gridTitleLS:'.03em',gridTitleLH:'1.25',metaFont:'FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#1B5B4C',ctaColor:'#1B5B4C',ctaBg:'transparent',ctaSize:'11px'};
+  else if (isMYC)   T2 = {bg:'#ffffff',borderColor:'#D5CAC0',phColor:'#E2C5A9',gridTitleSize:'16px',gridTitleFont:'FSNeruda,\'FS Neruda\',Georgia,serif',gridTitleLS:'.02em',gridTitleLH:'1.25',metaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#0C1E2C',ctaColor:'#0C1E2C',ctaBg:'transparent',ctaSize:'11px'};
+  else if (isCulver) T2 = {bg:'#F1F1F2',borderColor:'#D5D5D6',phColor:'#C8C8CA',gridTitleSize:'16px',gridTitleFont:'Bellefair,\'Bellefair\',Georgia,serif',gridTitleLS:'.02em',gridTitleLH:'1.25',metaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif',metaStyle:'normal',metaLS:'.12em',ctaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif',ctaBorder:'#222223',ctaColor:'#222223',ctaBg:'transparent',ctaSize:'10px'};
+  else T2 = {bg:'#ffffff',borderColor:'#D8D5D0',phColor:'#F4F2F0',gridTitleSize:'12px',gridTitleFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif',gridTitleLS:'.15em',gridTitleLH:'1.5',metaFont:'BentonSansRE,\'Benton Sans\',Arial,sans-serif',metaStyle:'normal',metaLS:'.15em',ctaFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif',ctaBorder:'#201E1E',ctaColor:'#201E1E',ctaBg:'transparent',ctaSize:'10px'};
+
+  var tdStyle = 'padding:0;border:1px solid ' + T2.borderColor + ';vertical-align:top;';
   var tdWidth = fullWidth ? 560 : w;
   var colspan = fullWidth ? ' colspan="2"' : '';
   var imgH    = fullWidth ? '280px' : '200px';
@@ -1857,13 +2126,12 @@ function buildGridCell(ev, w, fullWidth, forRender, panelId) {
          +  '<img src="' + proxyImg(ev.img, forRender) + '" width="' + tdWidth + '" style="display:block;width:100%;height:' + imgH + ';object-fit:cover;" alt="' + evAlt + '" />'
          +  '</a>';
   } else {
-    var phColor = (prop && prop.short === 'Shelborne') ? '#9aad94' : '#F4F2F0';
-    cell += '<div style="width:100%;height:' + imgH + ';background:' + phColor + ';"></div>';
+    cell += '<div style="width:100%;height:' + imgH + ';background:' + T2.phColor + ';"></div>';
   }
   cell += '<div style="padding:18px 20px 22px;">';
-  cell += '<p style="margin:0 0 6px;font-size:' + (isShelborne ? '20px' : '12px') + ';font-weight:700;letter-spacing:.15em;line-height:' + (isShelborne ? '1.1' : '1.5') + ';color:#201E1E;font-family:' + (isShelborne ? 'EngraversGothic' : 'BentonSansWide') + ',\'Benton Sans Wide\',Arial,sans-serif;text-transform:uppercase;">' + ev.title + '</p>';
-  cell += '<p style="margin:0 0 14px;font-size:12px;font-style:' + (isShelborne ? 'italic' : 'normal') + ';font-weight:400;line-height:1.5;color:#6B6560;font-family:' + (isShelborne ? '\'PlantinMTPro\',Georgia,serif' : 'BentonSansRE,\'Benton Sans\',Arial,sans-serif') + ';letter-spacing:' + (isShelborne ? '0' : '.15em') + ';text-transform:' + (isShelborne ? 'none' : 'uppercase') + ';">' + titleCase(ev.date || '') + (ev.cat ? ' &middot; ' + titleCase(ev.cat) : '') + '</p>';
-  cell += '<a href="' + evLink + '" style="display:inline-block;padding:9px 20px;border:1.5px solid #201E1E;font-size:10px;font-weight:700;letter-spacing:.15em;line-height:1.5;text-transform:uppercase;color:#201E1E;text-decoration:none;font-family:' + (isShelborne ? 'EngraversGothic' : 'BentonSansWide') + ',\'Benton Sans Wide\',Arial,sans-serif;">Details</a>';
+  cell += '<p style="margin:0 0 6px;font-size:' + T2.gridTitleSize + ';font-weight:700;letter-spacing:' + T2.gridTitleLS + ';line-height:' + T2.gridTitleLH + ';color:#201E1E;font-family:' + T2.gridTitleFont + ';text-transform:uppercase;">' + ev.title + '</p>';
+  cell += '<p style="margin:0 0 14px;font-size:12px;font-style:' + T2.metaStyle + ';font-weight:400;line-height:1.5;color:#6B6560;font-family:' + T2.metaFont + ';letter-spacing:' + T2.metaLS + ';text-transform:' + (T2.metaLS === '0' ? 'none' : 'uppercase') + ';">' + titleCase(ev.date || '') + (ev.cat ? ' &middot; ' + titleCase(ev.cat) : '') + '</p>';
+  cell += '<a href="' + evLink + '" style="display:inline-block;padding:9px 20px;background:' + T2.ctaBg + ';border:1.5px solid ' + T2.ctaBorder + ';font-size:' + T2.ctaSize + ';font-weight:700;letter-spacing:.15em;line-height:1.3;text-transform:uppercase;color:' + T2.ctaColor + ';text-decoration:none;font-family:' + T2.ctaFont + ';">Details</a>';
   cell += '</div></td>';
   return cell;
 }
