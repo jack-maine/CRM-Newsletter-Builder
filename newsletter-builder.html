@@ -2049,10 +2049,10 @@ function buildEmailHTML(forRender) {
   +               '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:' + T.bodyColor + ';font-family:' + T.bodyFont + ';font-weight:300;text-transform:none;">' + feat.desc + '</p>'
   +               '<a href="' + feat.url + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">Reserve</a>'
   +             '</td>'
-  +             '<td class="feat-img-td" width="190" valign="top">'
+  +             '<td class="feat-img-td" width="190" valign="top" style="height:100%;">'
   +               (feat.img
-                  ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;text-decoration:none;"><img src="' + proxyImg(feat.img, _forRender) + '" width="190" style="display:block;width:190px;height:190px;object-fit:cover;" alt="' + getPanelAlt("feat", feat.title) + '" /></a>'
-                  : '<div style="width:190px;height:190px;background:' + T.phColor + ';"></div>')
+                  ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;text-decoration:none;height:100%;"><img src="' + proxyImg(feat.img, _forRender) + '" width="190" style="display:block;width:190px;height:100%;min-height:190px;object-fit:cover;" alt="' + getPanelAlt("feat", feat.title) + '" /></a>'
+                  : '<div style="width:190px;height:100%;min-height:190px;background:' + T.phColor + ';"></div>')
   +             '</td>'
   +           '</tr>'
   +         '</table>'
