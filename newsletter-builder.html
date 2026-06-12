@@ -207,6 +207,17 @@ header h1 {
   letter-spacing: .15em; text-transform: uppercase;
 }
 .ec-info { padding: 10px 14px; }
+/* ── Property fonts loaded from CDN for preview rendering ── */
+@font-face {font-family:"GTEestiDisplay";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Display-Medium-2.ttf) format("truetype");}
+@font-face {font-family:"GTEestiText";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Text-Book.ttf) format("truetype");}
+@font-face {font-family:"Neutra2Display";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Neutra2Display-Medium.otf) format("opentype");}
+@font-face {font-family:"Neutra2Text";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Neutra2Text-Book.otf) format("opentype");}
+@font-face {font-family:"LydianBT";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/LydianBT.ttf) format("truetype");}
+@font-face {font-family:"FuturaLTBook";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/FuturaLT-Book.ttf) format("truetype");}
+@font-face {font-family:"DressCode";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/DressCode-Medium.otf) format("opentype");}
+@font-face {font-family:"FSNeruda";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/FSNeruda-Regular.otf) format("opentype");}
+@font-face {font-family:"CenturyGothic";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/centurygothic.ttf) format("truetype");}
+@font-face {font-family:"Bellefair";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Bellefair-Regular.ttf) format("truetype");}
 .ec-meta { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--mid); margin-bottom: 4px; }
 .ec-title { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; line-height: 1.3; margin-bottom: 4px; }
 .ec-desc  { font-size: 10px; color: var(--mid); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -307,6 +318,87 @@ header h1 {
 .proper-mode .feat-cta,
 .proper-mode .grid-cta,
 .proper-mode .see-all a    { font-family:"BentonSansWide",var(--font-benton)!important; font-size:10px!important; font-weight:700!important; line-height:1.5!important; letter-spacing:.15em!important; text-transform:uppercase!important; }
+
+/* ── Hotel June mode ── */
+.email-wrap.june-mode      { background: #FFF7E9; border-color: #E1D5C0; }
+.june-mode .feat-sec       { border-color: #E1D5C0; }
+.june-mode .ev-grid        { background: #FFF7E9; }
+.june-mode .grid-ev        { background: #FFF7E9; border-color: #E1D5C0; }
+.june-mode .grid-img-box   { background: #F0DBCC; }
+.june-mode .feat-img-ph    { background: #F0DBCC; }
+.june-mode .see-all        { border-color: #E1D5C0; }
+.june-mode .feat-lbl       { font-family:"GTEestiDisplay","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.12em!important; line-height:1.3!important; }
+.june-mode .feat-title     { font-family:"GTEestiDisplay","Helvetica Neue",Arial,sans-serif!important; font-size:24px!important; font-weight:500!important; letter-spacing:.05em!important; line-height:1.15!important; }
+.june-mode .feat-desc      { font-family:"GTEestiText","Helvetica Neue",Arial,sans-serif!important; font-size:13px!important; font-weight:400!important; font-style:normal!important; letter-spacing:0!important; color:#3D2E14!important; }
+.june-mode .grid-title     { font-family:"GTEestiDisplay","Helvetica Neue",Arial,sans-serif!important; font-size:16px!important; font-weight:500!important; letter-spacing:.06em!important; line-height:1.2!important; }
+.june-mode .grid-meta      { font-family:"GTEestiText","Helvetica Neue",Arial,sans-serif!important; font-size:12px!important; font-weight:400!important; font-style:normal!important; letter-spacing:.08em!important; text-transform:uppercase!important; color:#5C4A2A!important; }
+.june-mode .feat-cta,
+.june-mode .grid-cta,
+.june-mode .see-all a      { font-family:"GTEestiDisplay","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.12em!important; background:#E1BA44!important; border-color:#B2880B!important; color:#141311!important; }
+
+/* ── Avalon mode ── */
+.email-wrap.avalon-mode    { background: #ffffff; border-color: #D0CCCC; }
+.avalon-mode .feat-sec     { border-color: #D0CCCC; }
+.avalon-mode .ev-grid      { background: #ffffff; }
+.avalon-mode .grid-ev      { background: #ffffff; border-color: #D0CCCC; }
+.avalon-mode .grid-img-box { background: #C8C4C4; }
+.avalon-mode .feat-img-ph  { background: #C8C4C4; }
+.avalon-mode .feat-lbl     { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.18em!important; line-height:1.3!important; }
+.avalon-mode .feat-title   { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:22px!important; font-weight:500!important; letter-spacing:.08em!important; line-height:1.2!important; }
+.avalon-mode .feat-desc    { font-family:"Neutra2Text","Helvetica Neue",Arial,sans-serif!important; font-size:13px!important; font-weight:400!important; font-style:normal!important; letter-spacing:0!important; }
+.avalon-mode .grid-title   { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:15px!important; font-weight:500!important; letter-spacing:.1em!important; line-height:1.25!important; }
+.avalon-mode .grid-meta    { font-family:"Neutra2Text","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:400!important; font-style:normal!important; letter-spacing:.15em!important; text-transform:uppercase!important; }
+.avalon-mode .feat-cta,
+.avalon-mode .grid-cta,
+.avalon-mode .see-all a    { font-family:"Neutra2Display","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.15em!important; border-color:#282828!important; color:#282828!important; }
+
+/* ── Ingleside mode ── */
+.email-wrap.ingleside-mode    { background: #F5F4EE; border-color: #DDDBD4; }
+.ingleside-mode .feat-sec     { border-color: #DDDBD4; }
+.ingleside-mode .ev-grid      { background: #F5F4EE; }
+.ingleside-mode .grid-ev      { background: #F5F4EE; border-color: #DDDBD4; }
+.ingleside-mode .grid-img-box { background: #C5C9B2; }
+.ingleside-mode .feat-img-ph  { background: #C5C9B2; }
+.ingleside-mode .feat-lbl     { font-family:"DressCode","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.18em!important; line-height:1.3!important; color:#1B5B4C!important; }
+.ingleside-mode .feat-title   { font-family:"LydianBT",Georgia,serif!important; font-size:24px!important; font-weight:400!important; letter-spacing:.04em!important; line-height:1.2!important; color:#1B5B4C!important; }
+.ingleside-mode .feat-desc    { font-family:"FuturaLTBook","Helvetica Neue",Arial,sans-serif!important; font-size:12px!important; font-weight:400!important; font-style:normal!important; letter-spacing:0!important; color:#3A3A2E!important; }
+.ingleside-mode .grid-title   { font-family:"LydianBT",Georgia,serif!important; font-size:16px!important; font-weight:400!important; letter-spacing:.03em!important; line-height:1.25!important; color:#1B5B4C!important; }
+.ingleside-mode .grid-meta    { font-family:"FuturaLTBook","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:400!important; font-style:normal!important; letter-spacing:.15em!important; text-transform:uppercase!important; color:#1B5B4C!important; }
+.ingleside-mode .feat-cta,
+.ingleside-mode .grid-cta,
+.ingleside-mode .see-all a    { font-family:"DressCode","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.15em!important; border-color:#1B5B4C!important; color:#1B5B4C!important; }
+
+/* ── MYC mode ── */
+.email-wrap.myc-mode      { background: #ffffff; border-color: #D5CAC0; }
+.myc-mode .feat-sec       { border-color: #D5CAC0; }
+.myc-mode .ev-grid        { background: #ffffff; }
+.myc-mode .grid-ev        { background: #ffffff; border-color: #D5CAC0; }
+.myc-mode .grid-img-box   { background: #E2C5A9; }
+.myc-mode .feat-img-ph    { background: #E2C5A9; }
+.myc-mode .feat-lbl       { font-family:"DressCode","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.18em!important; line-height:1.3!important; color:#0C1E2C!important; }
+.myc-mode .feat-title     { font-family:"FSNeruda",Georgia,serif!important; font-size:24px!important; font-weight:400!important; letter-spacing:.02em!important; line-height:1.2!important; color:#0C1E2C!important; }
+.myc-mode .feat-desc      { font-family:"FSNeruda",Georgia,serif!important; font-size:13px!important; font-weight:400!important; font-style:normal!important; letter-spacing:0!important; color:#2A2A2A!important; }
+.myc-mode .grid-title     { font-family:"FSNeruda",Georgia,serif!important; font-size:16px!important; font-weight:400!important; letter-spacing:.02em!important; line-height:1.25!important; color:#0C1E2C!important; }
+.myc-mode .grid-meta      { font-family:"DressCode","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; font-style:normal!important; letter-spacing:.15em!important; text-transform:uppercase!important; color:#0C1E2C!important; }
+.myc-mode .feat-cta,
+.myc-mode .grid-cta,
+.myc-mode .see-all a      { font-family:"DressCode","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:500!important; letter-spacing:.15em!important; border-color:#0C1E2C!important; color:#0C1E2C!important; }
+
+/* ── Culver mode ── */
+.email-wrap.culver-mode    { background: #F1F1F2; border-color: #D5D5D6; }
+.culver-mode .feat-sec     { border-color: #D5D5D6; }
+.culver-mode .ev-grid      { background: #F1F1F2; }
+.culver-mode .grid-ev      { background: #F1F1F2; border-color: #D5D5D6; }
+.culver-mode .grid-img-box { background: #C8C8CA; }
+.culver-mode .feat-img-ph  { background: #C8C8CA; }
+.culver-mode .feat-lbl     { font-family:"CenturyGothic","Century Gothic","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:400!important; letter-spacing:.15em!important; line-height:1.3!important; }
+.culver-mode .feat-title   { font-family:"Bellefair",Georgia,serif!important; font-size:26px!important; font-weight:400!important; letter-spacing:.03em!important; line-height:1.2!important; color:#222223!important; }
+.culver-mode .feat-desc    { font-family:"CenturyGothic","Century Gothic","Helvetica Neue",Arial,sans-serif!important; font-size:12px!important; font-weight:400!important; font-style:normal!important; letter-spacing:0!important; color:#333!important; }
+.culver-mode .grid-title   { font-family:"Bellefair",Georgia,serif!important; font-size:16px!important; font-weight:400!important; letter-spacing:.02em!important; line-height:1.25!important; color:#222223!important; }
+.culver-mode .grid-meta    { font-family:"CenturyGothic","Century Gothic","Helvetica Neue",Arial,sans-serif!important; font-size:11px!important; font-weight:400!important; font-style:normal!important; letter-spacing:.12em!important; text-transform:uppercase!important; color:#555!important; }
+.culver-mode .feat-cta,
+.culver-mode .grid-cta,
+.culver-mode .see-all a    { font-family:"CenturyGothic","Century Gothic","Helvetica Neue",Arial,sans-serif!important; font-size:10px!important; font-weight:400!important; letter-spacing:.15em!important; border-color:#222223!important; color:#222223!important; }
 
 
 .email-banner {
@@ -1592,7 +1684,17 @@ function renderPreview() {
   var shelborneLogoStrip = '';
 
   var emailInner =
-    '<div class="email-wrap' + (prop && prop.short === 'Shelborne' ? ' shelborne-mode' : (prop&&(prop.short==='Austin'||prop.short==='SMP'||prop.short==='SF')) ? ' proper-mode' : '') + '">' 
+    '<div class="email-wrap' + (function() {
+      if (!prop) return '';
+      if (prop.short === 'Shelborne') return ' shelborne-mode';
+      if (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA') return ' proper-mode';
+      if (prop.short === 'JuneWLA') return ' june-mode';
+      if (prop.short === 'AvalonBH' || prop.short === 'AvalonPS') return ' avalon-mode';
+      if (prop.short === 'Ingleside') return ' ingleside-mode';
+      if (prop.short === 'MYC') return ' myc-mode';
+      if (prop.short === 'Culver') return ' culver-mode';
+      return '';
+    })() + '">' 
   + shelborneLogoStrip
   +   '<div class="email-banner">' + getBannerHtml(false) + '</div>'
   +   '<div class="email-body">'
