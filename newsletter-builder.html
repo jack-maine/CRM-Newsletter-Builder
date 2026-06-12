@@ -1570,26 +1570,73 @@ function getBannerHtml(forEmail) {
     }
   }
 
+  /* ── Property accent bar config ────────────────────────────────────────── */
+  var accentBar = null; /* {color, textColor, font, fontSize, letterSpacing, text} */
+  if (prop) {
+    var sh = prop.short;
+    var barText = prop.name + '’s ' + mo + ' Happenings';
+    if (sh === 'JuneWLA')   accentBar = {color:'#B2880B', textColor:'#ffffff', font:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', fontSize:'12px', ls:'.12em', text: barText};
+    if (sh === 'AvalonBH')  accentBar = {color:'#282828', textColor:'#ffffff', font:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',    fontSize:'12px', ls:'.14em', text: barText};
+    if (sh === 'AvalonPS')  accentBar = {color:'#545454', textColor:'#ffffff', font:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif',    fontSize:'12px', ls:'.14em', text: barText};
+    if (sh === 'Ingleside') accentBar = {color:'#1B5B4C', textColor:'#ffffff', font:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',           fontSize:'12px', ls:'.18em', text: barText};
+    if (sh === 'MYC')       accentBar = {color:'#0C1E2C', textColor:'#ffffff', font:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif',           fontSize:'12px', ls:'.18em', text: barText};
+    if (sh === 'Culver')    accentBar = {color:'#222223', textColor:'#ffffff', font:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif',   fontSize:'11px', ls:'.15em', text: barText};
+    if (sh === 'Austin' || sh === 'DTLA' || sh === 'SF' || sh === 'SMP')
+                            accentBar = {color:'#201E1E', textColor:'#ffffff', font:'BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif', fontSize:'12px', ls:'.15em', text: barText};
+  }
+
+  function accentBarHtml(forEmail) {
+    if (!accentBar) return '';
+    var spanStyle = 'font-family:' + accentBar.font + ';font-size:' + accentBar.fontSize + ';font-weight:700;letter-spacing:' + accentBar.ls + ';text-transform:uppercase;color:' + accentBar.textColor + ';line-height:1.3;';
+    if (forEmail) {
+      return '<tr><td style="background:' + accentBar.color + ';padding:13px 28px;">'
+           + '<span style="' + spanStyle + '">' + accentBar.text + '</span>'
+           + '</td></tr>';
+    } else {
+      return '<div style="position:absolute;bottom:0;left:0;width:100%;background:' + accentBar.color + ';padding:13px 28px;box-sizing:border-box;">'
+           + '<span style="' + spanStyle + '">' + accentBar.text + '</span>'
+           + '</div>';
+    }
+  }
+
   /* ── All other properties ─────────────────────────────────────────────── */
   if (prop && prop.banner) {
     if (forEmail) {
-      return '<img src="' + prop.banner + '" width="600" height="400" style="display:block;width:100%;height:400px;object-fit:cover;" alt="' + prop.name + '" />'
-           + '<div style="padding:12px 20px;background:#000000;">'
-           + '<span style="font-family:BentonSansWide,\'Benton Sans Wide\',\'Helvetica Neue\',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#ffffff;line-height:1.5;">' + label + '</span>'
-           + '</div>';
+      return '<table width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;">'
+           + '<tr><td style="padding:0;font-size:0;line-height:0;"><img src="' + prop.banner + '" width="600" style="display:block;width:100%;height:400px;object-fit:cover;" alt="' + prop.name + '" /></td></tr>'
+           + accentBarHtml(true)
+           + '</table>';
     } else {
       return '<img src="' + prop.banner + '" alt="' + prop.name + '" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />'
-           + '<div class="banner-label" style="background:#000;padding:10px 20px;">' + label + '</div>';
+           + accentBarHtml(false);
     }
   } else {
     var now = new Date();
     var yr  = now.getFullYear();
+    /* Placeholder hero + color bar for properties without a banner image */
+    var phBg  = (prop && prop.short === 'JuneWLA') ? '#F0DBCC'
+              : (prop && prop.short === 'AvalonBH') ? '#C4C9C8'
+              : (prop && prop.short === 'AvalonPS') ? '#E7CDC4'
+              : (prop && prop.short === 'Ingleside') ? '#C5C9B2'
+              : (prop && prop.short === 'MYC')       ? '#E2C5A9'
+              : (prop && prop.short === 'Culver')    ? '#C8C8CA'
+              : '#F4F2F0';
     if (forEmail) {
+      if (accentBar) {
+        return '<table width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;">'
+             + '<tr><td style="height:360px;background:' + phBg + ';font-size:0;line-height:0;">&nbsp;</td></tr>'
+             + accentBarHtml(true)
+             + '</table>';
+      }
       return '<div style="height:400px;background:#F4F2F0;text-align:center;display:flex;align-items:center;justify-content:center;padding:40px;">'
            + '<div><p style="margin:0 0 6px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#6B6560;font-family:Arial,sans-serif;">' + mo.toUpperCase() + ' ' + yr + '</p>'
            + '<span style="font-size:40px;color:#201E1E;font-family:Georgia,serif;font-weight:300;font-style:italic;">The ' + mo + ' Edit</span></div>'
            + '</div>';
     } else {
+      if (accentBar) {
+        return '<div style="width:100%;height:100%;background:' + phBg + ';position:absolute;inset:0;"></div>'
+             + accentBarHtml(false);
+      }
       return '<div class="banner-text">'
            + '<span class="banner-month">' + mo.toUpperCase() + ' ' + yr + '</span>'
            + '<span class="banner-title">The ' + mo + ' Edit</span>'
