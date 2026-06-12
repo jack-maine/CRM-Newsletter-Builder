@@ -1284,6 +1284,29 @@ function removeWhatsNew(i) {
   document.getElementById("klBtn").disabled  = !has;
 }
 
+function editWhatsNew(i) {
+  var ev = whatsNew[i];
+  document.getElementById("cf_title").value = ev.title || "";
+  document.getElementById("cf_date").value  = ev.date  || "";
+  document.getElementById("cf_copy").value  = ev.copy  || "";
+  document.getElementById("cf_img").value   = ev.img   || "";
+  document.getElementById("cf_url").value   = ev.url   || "";
+  document.getElementById("cf_cta").value   = ev.cta   || "";
+  whatsNew.splice(i, 1);
+  renderWnList();
+  renderPreview();
+  var has = sel.length > 0 || whatsNew.length > 0;
+  document.getElementById("dlBtn").disabled  = !has;
+  document.getElementById("klBtn").disabled  = !has;
+  /* Open the form panel and scroll to it */
+  var form = document.getElementById("customForm");
+  if (form) { form.style.display = "flex"; }
+  var icon = document.getElementById("customToggleIcon");
+  if (icon) { icon.textContent = "–"; }
+  document.getElementById("cf_title").focus();
+  document.getElementById("cf_title").scrollIntoView({behavior:"smooth", block:"center"});
+}
+
 function renderWnList() {
   var el = document.getElementById("wnList");
   if (!whatsNew.length) { el.innerHTML = ""; return; }
@@ -1294,6 +1317,7 @@ function renderWnList() {
       +   '<div style="font-size:9px;color:var(--mid);font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (ev.date || '') + '</div>'
       +   '<div style="font-size:11px;font-weight:600;font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + ev.title + '</div>'
       + '</div>'
+      + '<button onclick="editWhatsNew(' + i + ')" style="background:none;border:none;cursor:pointer;color:#888;font-size:13px;flex-shrink:0;padding:2px 4px;" title="Edit">✎</button>'
       + '<button onclick="removeWhatsNew(' + i + ')" style="background:none;border:none;cursor:pointer;color:#aaa;font-size:14px;flex-shrink:0;" title="Remove">✕</button>'
       + '</div>';
   }).join("");
