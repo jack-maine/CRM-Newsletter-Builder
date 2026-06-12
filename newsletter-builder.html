@@ -1523,9 +1523,9 @@ function buildWhatsNewHtml(forEmail, forRender) {
       var ctaHtml = '<div class="wn-cta-wrap" style="flex-shrink:0;' + (imgLeft ? 'order:2;' : 'order:0;') + '">'
         + '<a href="' + ev.url + '" class="feat-cta">' + ev.cta.toUpperCase() + '</a></div>';
       /* Text */
-      var textHtml = '<div class="wn-text" style="flex:1;min-width:0;overflow:hidden;order:1;">';
+      var textHtml = '<div class="wn-text" style="flex:1;min-width:0;order:1;">';
       if (ev.date) textHtml += '<p class="ec-meta" style="margin:0 0 4px;">' + ev.date + '</p>';
-      textHtml += '<p class="grid-title" style="margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + ev.title + '</p>';
+      textHtml += '<p class="grid-title" style="margin:0 0 4px;">' + ev.title + '</p>';
       if (ev.copy) textHtml += '<p class="feat-desc" style="margin:0;">' + ev.copy + '</p>';
       textHtml += '</div>';
       html += imgHtml + textHtml + ctaHtml;
