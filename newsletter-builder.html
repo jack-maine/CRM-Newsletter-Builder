@@ -920,7 +920,9 @@ var selectedMonth = null; // null = show all
 
 function titleCase(str) {
   if (!str) return str;
-  return str.toLowerCase().replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+  return str.toLowerCase()
+    .replace(/\b\w/g, function(c) { return c.toUpperCase(); })
+    .replace(/\s+(Am|Pm)\b/g, '$1');
 }
 
 function monthName() {
