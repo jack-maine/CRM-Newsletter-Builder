@@ -2046,8 +2046,8 @@ function buildEmailHTML(forRender) {
 
   /* FEATURE EVENT */
   +       '<tr><td class="inner" style="padding:36px 40px 32px;border-bottom:1px solid ' + T.borderColor + ';">'
-  +         '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
-  +           '<tr>'
+  +         '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">'
+  +           '<tr style="height:100%;">'
   +             '<td class="feat-td" valign="top" style="padding-right:28px;">'
   +               '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">Featured Event</p>'
   +               '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#201E1E;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + feat.title + '</h2>'
@@ -2055,9 +2055,9 @@ function buildEmailHTML(forRender) {
   +               '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:' + T.bodyColor + ';font-family:' + T.bodyFont + ';font-weight:300;text-transform:none;">' + feat.desc + '</p>'
   +               '<a href="' + feat.url + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">Reserve</a>'
   +             '</td>'
-  +             '<td class="feat-img-td" width="190" valign="top" style="height:100%;">'
+  +             '<td class="feat-img-td" width="190" valign="top" style="height:100%;vertical-align:top;">'
   +               (feat.img
-                  ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;text-decoration:none;height:100%;"><img src="' + proxyImg(feat.img, _forRender) + '" width="190" style="display:block;width:190px;height:100%;min-height:190px;object-fit:cover;" alt="' + getPanelAlt("feat", feat.title) + '" /></a>'
+                  ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;text-decoration:none;line-height:0;font-size:0;"><img src="' + proxyImg(feat.img, _forRender) + '" width="190" height="100%" style="display:block;width:190px;height:100%;min-height:190px;object-fit:cover;" alt="' + getPanelAlt("feat", feat.title) + '" /></a>'
                   : '<div style="width:190px;height:100%;min-height:190px;background:' + T.phColor + ';"></div>')
   +             '</td>'
   +           '</tr>'
