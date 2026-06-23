@@ -1995,7 +1995,9 @@ function buildEmailHTML(forRender) {
   + '<title>' + mo + ' Program \u2013 ' + propName + '</title>'
   + '<style>'
   + '@import url(https://static-forms.klaviyo.com/fonts/api/v1/QQver5/custom_fonts.css);'
-  /* EngraversGothicBold and PlantinMTRegular are served via Klaviyo custom fonts @import above — no @font-face needed */
+  + '@font-face{font-family:"EngraversGothicBold";font-weight:700;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/EngraversGothic-Bold.ttf) format("truetype");}'
+  + '@font-face{font-family:"PlantinMTRegular";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRg.ttf) format("truetype");}'
+  + '@font-face{font-family:"PlantinMTRegular";font-weight:400;font-style:italic;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/PlantinMTProRgIt.ttf) format("truetype");}'
   + '@font-face{font-family:"GTEestiDisplay";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Display-Medium-2.ttf) format("truetype");}'
   + '@font-face{font-family:"GTEestiText";font-weight:400;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/GT-Eesti-Text-Book.ttf) format("truetype");}'
   + '@font-face{font-family:"Neutra2Display";font-weight:500;font-style:normal;src:url(https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/fonts/Neutra2Display-Medium.otf) format("opentype");}'
