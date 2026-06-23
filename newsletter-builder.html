@@ -927,7 +927,9 @@ function titleCase(str) {
 
 function monthName() {
   if (selectedMonth) return selectedMonth;
-  return new Date().toLocaleString("default", {month:"long"});
+  var _now = new Date();
+  var _mi = (_now.getDate() >= 20) ? (_now.getMonth() + 1) % 12 : _now.getMonth();
+  return MONTH_NAMES[_mi];
 }
 
 var MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -1155,8 +1157,10 @@ function loadEvents() {
 
         if (!mapped.length) throw new Error("no-events");
 
-        /* Filter to current month only (keep recurring/undated events too) */
-        var curMonth = MONTH_NAMES[new Date().getMonth()];
+        /* After the 20th, start pulling next month's events */
+        var _now = new Date();
+        var _mi = (_now.getDate() >= 20) ? (_now.getMonth() + 1) % 12 : _now.getMonth();
+        var curMonth = MONTH_NAMES[_mi];
         mapped = mapped.filter(function(ev) {
           var m = getEventMonth(ev);
           return m === null || m === curMonth;
