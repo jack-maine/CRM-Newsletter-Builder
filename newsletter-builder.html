@@ -1011,10 +1011,10 @@ function setMonthFilter(month) {
 }
 
 window.onload = function() {
-  PROPS.sm.banner = document.getElementById("smpBanner").src;
-  PROPS.austin.banner = document.getElementById("austinBanner").src;
-  PROPS.sf.banner = document.getElementById("sfBanner").src;
-  PROPS.shelborne.banner = document.getElementById("shelborneBanner").src;
+  PROPS.sm.banner       = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SMP1.png";
+  PROPS.austin.banner   = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/AUP1.png";
+  PROPS.sf.banner       = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SFP1s.png";
+  PROPS.shelborne.banner = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SMB1.png";
 
   document.getElementById("propSel").onchange = function() {
     prop = PROPS[this.value] || null;
