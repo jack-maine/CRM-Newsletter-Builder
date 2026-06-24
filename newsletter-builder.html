@@ -931,6 +931,12 @@ function titleCase(str) {
     .replace(/\s+(Am|Pm)\b/g, '$1');
 }
 
+/* Wrap date text in a span with explicit color to prevent Gmail mobile auto-linking */
+function safeDate(str, color) {
+  if (!str) return '';
+  return '<span style="color:' + (color || 'inherit') + ';text-decoration:none;">' + titleCase(str) + '</span>';
+}
+
 function monthName() {
   if (selectedMonth) return selectedMonth;
   var _now = new Date();
@@ -1583,7 +1589,7 @@ function buildWhatsNewHtml(forEmail, forRender) {
       + '</td>';
 
     var contentCell = '<td class="wn-td wn-content-td" style="vertical-align:middle;padding:20px 0;">'
-      + (ev.date ? '<p style="margin:0 0 4px;' + metaFont + '">' + ev.date + '</p>' : '')
+      + (ev.date ? '<p style="margin:0 0 4px;' + metaFont + '">' + safeDate(ev.date, '#6B6560') + '</p>' : '')
       + '<p style="margin:0 0 4px;' + titleFont + '">' + ev.title + '</p>'
       + (ev.copy ? '<p style="margin:0;' + copyFont + '">' + ev.copy + '</p>' : '')
       + '</td>';
@@ -2072,7 +2078,7 @@ function buildEmailHTML(forRender) {
   +             '<td class="feat-td" valign="top" style="padding-right:28px;">'
   +               '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">Featured Event</p>'
   +               '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#201E1E;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + feat.title + '</h2>'
-  +               '<p style="margin:0 0 16px;font-size:' + T.metaSize + ';font-style:' + T.metaStyle + ';font-weight:400;letter-spacing:' + T.metaLS + ';line-height:1.5;color:' + T.metaColor + ';font-family:' + T.metaFont + ';text-transform:' + (T.metaLS === '0' ? 'none' : 'uppercase') + ';">' + titleCase(feat.date || '') + (feat.cat ? ' &middot; ' + titleCase(feat.cat) : '') + '</p>'
+  +               '<p style="margin:0 0 16px;font-size:' + T.metaSize + ';font-style:' + T.metaStyle + ';font-weight:400;letter-spacing:' + T.metaLS + ';line-height:1.5;color:' + T.metaColor + ';font-family:' + T.metaFont + ';text-transform:' + (T.metaLS === '0' ? 'none' : 'uppercase') + ';">' + safeDate(feat.date || '', T.metaColor) + (feat.cat ? ' &middot; ' + safeDate(feat.cat, T.metaColor) : '') + '</p>'
   +               '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:' + T.bodyColor + ';font-family:' + T.bodyFont + ';font-weight:300;text-transform:none;">' + feat.desc + '</p>'
   +               '<a href="' + feat.url + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">Reserve</a>'
   +             '</td>'
@@ -2429,7 +2435,7 @@ function buildGridCell(ev, w, fullWidth, forRender, panelId) {
   }
   cell += '<div style="padding:18px 20px 22px;">';
   cell += '<p style="margin:0 0 6px;font-size:' + T2.gridTitleSize + ';font-weight:700;letter-spacing:' + T2.gridTitleLS + ';line-height:' + T2.gridTitleLH + ';color:#201E1E;font-family:' + T2.gridTitleFont + ';text-transform:uppercase;">' + ev.title + '</p>';
-  cell += '<p style="margin:0 0 14px;font-size:12px;font-style:' + T2.metaStyle + ';font-weight:400;line-height:1.5;color:#6B6560;font-family:' + T2.metaFont + ';letter-spacing:' + T2.metaLS + ';text-transform:' + (T2.metaLS === '0' ? 'none' : 'uppercase') + ';">' + titleCase(ev.date || '') + (ev.cat ? ' &middot; ' + titleCase(ev.cat) : '') + '</p>';
+  cell += '<p style="margin:0 0 14px;font-size:12px;font-style:' + T2.metaStyle + ';font-weight:400;line-height:1.5;color:#6B6560;font-family:' + T2.metaFont + ';letter-spacing:' + T2.metaLS + ';text-transform:' + (T2.metaLS === '0' ? 'none' : 'uppercase') + ';">' + safeDate(ev.date || '', '#6B6560') + (ev.cat ? ' &middot; ' + safeDate(ev.cat, '#6B6560') : '') + '</p>';
   cell += '<a href="' + evLink + '" style="display:inline-block;padding:9px 20px;background:' + T2.ctaBg + ';border:1.5px solid ' + T2.ctaBorder + ';font-size:' + T2.ctaSize + ';font-weight:700;letter-spacing:.15em;line-height:1.3;text-transform:uppercase;color:' + T2.ctaColor + ';text-decoration:none;font-family:' + T2.ctaFont + ';">Details</a>';
   cell += '</div></td>';
   return cell;
