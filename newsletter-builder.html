@@ -1843,7 +1843,7 @@ function renderPreview() {
   + shelborneLogoStrip
   +   '<div class="email-banner">' + getBannerHtml(false) + '</div>'
   +   (prop && prop.short === "Shelborne" && document.getElementById("shelborneIntro").value.trim()
-      ? '<div style="padding:28px 40px 0;font-family:PlantinMTPro,Georgia,serif;font-size:14px;font-style:normal;line-height:1.6;color:#6B6560;">' + document.getElementById("shelborneIntro").value.trim() + '</div><div style="height:1px;background:#D8D5D0;margin:20px 40px 0;"></div>'
+      ? '<div style="padding:28px 40px 0;font-family:PlantinMTPro,Georgia,serif;font-size:14px;font-style:normal;line-height:1.6;color:#6B6560;text-align:center;">' + document.getElementById("shelborneIntro").value.trim() + '</div><div style="height:1px;background:#D8D5D0;margin:20px 40px 0;"></div>'
       : '')
   +   '<div class="email-body">'
   +     '<div class="feat-sec">'
@@ -2060,7 +2060,7 @@ function buildEmailHTML(forRender) {
   /* SHELBORNE INTRO COPY */
   + (isShelborne && document.getElementById("shelborneIntro").value.trim()
     ? '<tr><td style="padding:28px 40px 0;">'
-      + '<p style="margin:0;font-family:\'PlantinMTRegular\',Georgia,serif;font-size:14px;font-style:normal;font-weight:400;line-height:1.6;color:#6B6560;">' + document.getElementById("shelborneIntro").value.trim() + '</p>'
+      + '<p style="margin:0;font-family:\'PlantinMTRegular\',Georgia,serif;font-size:14px;font-style:normal;font-weight:400;line-height:1.6;color:#6B6560;text-align:center;">' + document.getElementById("shelborneIntro").value.trim() + '</p>'
       + '</td></tr>'
       + '<tr><td style="padding:0 40px;"><div style="height:1px;background:#D8D5D0;font-size:0;line-height:0;">&nbsp;</div></td></tr>'
     : '')
