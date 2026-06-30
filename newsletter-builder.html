@@ -1027,6 +1027,7 @@ window.onload = function() {
   PROPS.austin.banner   = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/AUP1.png";
   PROPS.sf.banner       = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SFP1s.png";
   PROPS.shelborne.banner = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SMB1.png";
+  PROPS.dtla.banner     = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/DTLAP1.jpg";
 
   document.getElementById("propSel").onchange = function() {
     prop = PROPS[this.value] || null;
@@ -1846,7 +1847,7 @@ function renderPreview() {
       return '';
     })() + '">' 
   + shelborneLogoStrip
-  +   '<div class="email-banner">' + getBannerHtml(false) + '</div>'
+  +   '<div class="email-banner"><a href="' + (prop ? (prop.homeUrl || prop.url) : '#') + '" target="_blank" style="display:block;text-decoration:none;">' + getBannerHtml(false) + '</a></div>'
   +   (document.getElementById("introCopy").value.trim()
       ? '<div class="feat-desc" style="padding:28px 40px 0;text-align:center;">' + document.getElementById("introCopy").value.trim() + '</div><div style="height:1px;background:var(--border);margin:20px 40px 0;"></div>'
       : '')
