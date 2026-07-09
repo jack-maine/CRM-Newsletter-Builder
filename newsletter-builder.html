@@ -937,7 +937,7 @@ function breakDates(str) {
   return str
     .replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/gi, '$1​')
     .replace(/\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b/gi, '$1​')
-    .replace(/\b(\d{1,2})(:\d{2})/g, '$1​$2')
+    .replace(/(am|pm)\b/gi, '$1​')
     .replace(/\b(\d{1,2})(st|nd|rd|th)\b/gi, '$1​$2');
 }
 
@@ -1034,7 +1034,7 @@ function setMonthFilter(month) {
 
 window.onload = function() {
   PROPS.sm.banner       = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SMP1.png";
-  PROPS.austin.banner   = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/AUP1.png";
+  PROPS.austin.banner   = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/AUP_NL_hero.png";
   PROPS.sf.banner       = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SFP1s.png";
   PROPS.shelborne.banner = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/SMB1.png";
   PROPS.dtla.banner     = "https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/banners/DTLAP1.png";
@@ -2050,9 +2050,9 @@ function buildEmailHTML(forRender) {
   + '.inner{padding:20px 16px!important;}'
   + '.feat-td{display:block!important;width:100%!important;padding-right:0!important;}'
   + '.feat-img-td{display:block!important;width:100%!important;padding-top:20px!important;}'
-  + '.feat-img-td img{width:100%!important;height:auto!important;max-height:260px;object-fit:cover;}'
+  + '.feat-img-td img{width:100%!important;height:auto!important;min-height:0!important;max-height:260px;object-fit:cover;}'
   + '.grid-td{display:block!important;width:100%!important;}'
-  + '.grid-td img{width:100%!important;height:auto!important;}'
+  + '.grid-td img{width:100%!important;height:auto!important;min-height:0!important;max-height:260px;object-fit:cover;}'
   + '.banner-img{height:auto!important;}'
   + '.cta-btn{display:block!important;text-align:center!important;padding:14px 20px!important;}'
   + '.see-all-btn{padding:14px 32px!important;}'
@@ -2094,10 +2094,8 @@ function buildEmailHTML(forRender) {
   +               '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:' + T.bodyColor + ';font-family:' + T.bodyFont + ';font-weight:300;text-transform:none;">' + feat.desc + '</p>'
   +               '<a href="' + getPanelLink("feat", feat.url) + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">Reserve</a>'
   +             '</td>'
-  +             '<td class="feat-img-td" width="190" valign="top" style="height:100%;vertical-align:top;">'
-  +               (feat.img
-                  ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;text-decoration:none;line-height:0;font-size:0;height:100%;"><img src="' + proxyImg(feat.img, _forRender) + '" width="190" style="display:block;width:190px;height:100%;min-height:300px;object-fit:cover;" alt="' + getPanelAlt("feat", feat.title) + '" /></a>'
-                  : '<div style="width:190px;height:100%;min-height:300px;background:' + T.phColor + ';"></div>')
+  +             '<td class="feat-img-td" width="190" valign="top" style="width:190px;min-width:190px;background-color:' + T.phColor + ';' + (feat.img ? 'background-image:url(' + proxyImg(feat.img, _forRender) + ');background-size:cover;background-position:center;' : '') + '">'
+  +               (feat.img ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;width:190px;height:100%;min-height:220px;text-decoration:none;" aria-label="' + getPanelAlt("feat", feat.title) + '">&nbsp;</a>' : '')
   +             '</td>'
   +           '</tr>'
   +         '</table>'
