@@ -25,18 +25,25 @@
 /* === BRAND TOKENS === */
 :root {
   --black:      #000000;
-  --ink:        #201E1E;
-  --warm-white: #F4F2F0;
-  --white:      #FFFFFF;
-  --border:     #D8D5D0;
-  --mid:        #6B6560;
+  --ink:        #1c1917;
+  --bg:         #ede8e0;
+  --card:       #fafaf8;
+  --warm-white: #ede8e0;
+  --white:      #fafaf8;
+  --border:     #e0d8cc;
+  --ln:         #e0d8cc;
+  --mid:        #8a8480;
+  --mut:        #8a8480;
+  --tan:        #c9a96e;
+  --tan-d:      #9b7d44;
+  --tan-soft:   #f0ebe2;
 }
 
 /* === BASE === */
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
-  background: var(--warm-white);
+  background: var(--bg);
   color: var(--ink);
   height: 100vh;
   overflow: hidden;
@@ -74,10 +81,10 @@ header h1 {
   flex-direction: column;
   overflow: hidden;
 }
-.alt-row { display:flex; flex-direction:column; gap:6px; padding:10px 12px; background:#fafaf9; border:1px solid var(--border); border-radius:2px; }
+.alt-row { display:flex; flex-direction:column; gap:6px; padding:10px 12px; background:var(--card); border:1px solid var(--ln); border-radius:0; }
 .alt-row-label { font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink); font-family:'Montserrat',sans-serif; font-weight:600; }
 .alt-row input { width:100%; box-sizing:border-box; padding:6px 9px; border:1px solid var(--border); font-family:'Montserrat',sans-serif; font-size:10px; color:var(--ink); background:#fff; outline:none; }
-.alt-row input:focus { border-color:var(--black); }
+.alt-row input:focus { border-color:var(--tan); }
 .alt-row .field-lbl { font-size:8px; letter-spacing:.12em; text-transform:uppercase; color:#aaa; font-family:'Montserrat',sans-serif; margin-bottom:2px; }
 
 .panel-hdr {
@@ -108,7 +115,7 @@ header h1 {
   cursor: pointer;
   outline: none;
 }
-.prop-select:focus { border-color: var(--black); }
+.prop-select:focus { border-color: var(--tan); }
 .prop-wrap::after {
   content: '▾';
   position: absolute;
@@ -137,11 +144,11 @@ header h1 {
   transition: background .2s, color .2s;
 }
 .load-btn.active {
-  background: var(--black);
+  background: var(--ink);
   color: var(--white);
   cursor: pointer;
 }
-.load-btn.active:hover { background: var(--ink); }
+.load-btn.active:hover { background: var(--tan-d); }
 
 .sel-info {
   padding: 0 24px 10px;
@@ -181,14 +188,14 @@ header h1 {
   background: var(--white);
   position: relative;
 }
-.ec.sel  { border-color: var(--black); }
+.ec.sel  { border-color: var(--tan); background: var(--tan-soft); }
 .ec.maxed .ec-main { opacity: .3; pointer-events: none; }
 .ec-main { cursor: pointer; }
 .badge {
   position: absolute;
   top: 8px; right: 8px;
   width: 20px; height: 20px;
-  background: var(--black);
+  background: var(--tan);
   color: var(--white);
   border-radius: 50%;
   display: flex;
@@ -201,7 +208,7 @@ header h1 {
 .ec-img  { width: 100%; height: 110px; object-fit: cover; display: block; }
 .ec-noimg {
   width: 100%; height: 60px;
-  background: var(--warm-white);
+  background: var(--bg);
   display: flex; align-items: center; justify-content: center;
   font-size: 9px; color: var(--border);
   letter-spacing: .15em; text-transform: uppercase;
@@ -222,7 +229,7 @@ header h1 {
 .ec-title { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; line-height: 1.3; margin-bottom: 4px; }
 .ec-desc  { font-size: 10px; color: var(--mid); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-.img-row { padding: 8px 14px 12px; border-top: 1px solid var(--warm-white); background: #fafaf9; }
+.img-row { padding: 8px 14px 12px; border-top: 1px solid var(--ln); background: var(--tan-soft); }
 .img-label { font-size: 8px; letter-spacing: .18em; text-transform: uppercase; color: var(--border); margin-bottom: 5px; display: block; }
 .img-input {
   width: 100%; padding: 6px 10px;
@@ -232,11 +239,11 @@ header h1 {
   color: var(--ink); outline: none;
   background: var(--white);
 }
-.img-input:focus { border-color: var(--black); }
+.img-input:focus { border-color: var(--tan); }
 .img-input::placeholder { color: var(--border); }
 
 /* === RIGHT PANEL === */
-.right { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--warm-white); }
+.right { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
 .right-body { flex: 1; display: flex; overflow: hidden; }
 .preview-col { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .altlink-col { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; overflow: hidden; border-left: 1px solid var(--border); background: var(--white); }
@@ -265,8 +272,8 @@ header h1 {
 
 .btn-p {
   padding: 8px 18px;
-  background: var(--black); color: var(--white);
-  border: 1px solid var(--black);
+  background: var(--ink); color: var(--white);
+  border: 1px solid var(--ink);
   font-family: 'Montserrat', sans-serif;
   font-size: 8px; font-weight: 400;
   letter-spacing: .2em; text-transform: uppercase;
@@ -544,8 +551,8 @@ header h1 {
   color: var(--mid);
   transition: all .15s;
 }
-.month-tab:hover { border-color: var(--black); color: var(--black); }
-.month-tab.active { background: var(--black); color: var(--white); border-color: var(--black); }
+.month-tab:hover { border-color: var(--tan); color: var(--ink); }
+.month-tab.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
 
 /* === VIEW TOGGLE === */
 .view-toggle {
@@ -561,7 +568,7 @@ header h1 {
   color: var(--mid); transition: all .15s;
   display: flex; align-items: center; gap: 5px;
 }
-.vt-btn.active { background: var(--black); color: var(--white); }
+.vt-btn.active { background: var(--ink); color: var(--white); }
 .vt-btn svg { display: block; }
 
 /* mobile preview frame */
@@ -609,6 +616,16 @@ header h1 {
 }
 .preview-scroll.mobile-view .feat-sec {
   flex-direction: column;
+  text-align: center;
+}
+.preview-scroll.mobile-view .feat-cta {
+  display: inline-block;
+}
+.preview-scroll.mobile-view .grid-ev-info {
+  text-align: center;
+}
+.preview-scroll.mobile-view .grid-cta {
+  display: inline-block;
 }
 .preview-scroll.mobile-view .feat-img {
   width: 100%;
@@ -641,7 +658,7 @@ header h1 {
 .preview-scroll.mobile-view .wn-img-wrap {
   width: 100% !important;
   min-height: 180px !important;
-  order: -1;
+  order: 1;
   flex-shrink: 0 !important;
 }
 .preview-scroll.mobile-view .wn-img-wrap img {
@@ -664,6 +681,9 @@ header h1 {
   order: 1;
   padding-bottom: 4px;
   flex-shrink: 0;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 /* === MODAL === */
@@ -671,7 +691,7 @@ header h1 {
 .modal.open { display: flex; }
 .modal-box {
   background: var(--white); width: 480px; padding: 36px;
-  border-top: 3px solid var(--black);
+  border-top: 3px solid var(--ink);
 }
 .modal-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; margin-bottom: 8px; }
 .modal-box p  { font-size: 11px; color: var(--mid); line-height: 1.7; margin-bottom: 24px; }
@@ -682,7 +702,7 @@ header h1 {
   font-size: 12px; font-weight: 300;
   margin-bottom: 14px; outline: none; color: var(--ink);
 }
-.modal-input:focus { border-color: var(--black); }
+.modal-input:focus { border-color: var(--tan); }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
 </style>
@@ -749,6 +769,23 @@ header h1 {
       <textarea id="introCopy" placeholder="Optional intro copy beneath the banner…" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;resize:vertical;min-height:72px;line-height:1.5;" oninput="renderPreview()"></textarea>
     </div>
 
+    <!-- Spotlight Section -->
+    <div id="spotlightWrap" style="display:none;border-top:1px solid var(--border);flex-shrink:0;">
+      <button onclick="toggleSpotlight()" id="spotlightToggle" style="width:100%;padding:10px 20px;background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-align:left;display:flex;align-items:center;gap:8px;">
+        <span id="spotlightToggleIcon" style="font-size:14px;line-height:1;">+</span> Add Spotlight
+      </button>
+      <div id="slList" style="padding:0 16px 4px;display:flex;flex-direction:column;gap:6px;"></div>
+      <div id="spotlightForm" style="display:none;padding:0 16px 12px;flex-direction:column;gap:6px;">
+        <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-family:'Montserrat',sans-serif;margin-bottom:2px;">New Spotlight Item</div>
+        <input id="sl_headline" type="text" placeholder="Headline (e.g. Best Hotel in Austin) *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <textarea id="sl_copy" placeholder="Optional supporting copy…" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;resize:vertical;min-height:54px;line-height:1.5;"></textarea>
+        <input id="sl_img" type="text" placeholder="Optional image URL" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <input id="sl_url" type="text" placeholder="Optional link URL" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <input id="sl_cta" type="text" placeholder="Optional CTA label (e.g. Read More)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <button onclick="addSpotlightItem()" style="padding:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to Spotlight</button>
+      </div>
+    </div>
+
     <!-- What's New Section -->
     <div style="border-top:1px solid var(--border);flex-shrink:0;">
       <button onclick="toggleCustomForm()" id="customToggle" style="width:100%;padding:10px 20px;background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-align:left;display:flex;align-items:center;gap:8px;">
@@ -763,9 +800,14 @@ header h1 {
         <input id="cf_date"  type="text" placeholder="Date · Category (e.g. JUN 12 · WELLNESS)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
         <input id="cf_copy"  type="text" placeholder="One line of copy" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
         <input id="cf_img"   type="text" required placeholder="Image URL *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <select id="cf_imgpos" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;background:#fff;color:var(--ink);">
+          <option value="center">Image crop: Center (default)</option>
+          <option value="top">Image crop: Top</option>
+          <option value="bottom">Image crop: Bottom</option>
+        </select>
         <input id="cf_url"   type="text" required placeholder="Link URL * (https://…)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
         <input id="cf_cta"   type="text" placeholder="CTA label (e.g. BOOK, DETAILS, SAVE SEAT)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <button onclick="addWhatsNewEvent()" style="padding:8px;background:var(--black);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to What's New</button>
+        <button onclick="addWhatsNewEvent()" style="padding:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to What's New</button>
       </div>
     </div>
   </div>
@@ -887,7 +929,67 @@ var SHELBORNE_EVENTS = [
   {"title":"The Art of Pour: Cocktail Masterclass","date":"MON JUN 29 | 6–7PM","cat":"Culinary","img":"https://shelborne.com/wp-content/uploads/2026/01/Copy-of-ShelborneWebsite-HeaderImageSizeTemplate-10.png","desc":"Learn professional bartending techniques from our expert team. Two complimentary cocktails included. Space is limited — RSVP required.","url":"https://shelborne.com/happenings/"}
 ];
 
-var evs = [], sel = [], whatsNew = [], prop = null, viewMode = 'desktop';
+var evs = [], sel = [], whatsNew = [], spotlights = [], prop = null, viewMode = 'desktop';
+
+function propTheme() {
+  var s = prop ? prop.short : null;
+  if (s === 'Shelborne') return {bg:'#F8F2E7', accentBg:'#61756A', accentText:'#ffffff', borderColor:'#D8D5D0', phColor:'#9aad94',
+    labelFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'14px', labelLS:'.15em', labelLH:'1.1',
+    headFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', headSize:'20px', headWeight:'700', headLS:'.15em', headLH:'1.1',
+    metaFont:'\'PlantinMTRegular\',Georgia,serif', metaStyle:'italic', metaSize:'14px', metaColor:'#201E1E', metaLS:'0',
+    bodyFont:'\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif', bodySize:'13px', bodyColor:'#201E1E',
+    ctaFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', ctaSize:'14px', ctaBorder:'#201E1E', ctaColor:'#201E1E', ctaBg:'transparent',
+    gridTitleSize:'20px', gridTitleFont:'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif', gridTitleLS:'.15em', gridTitleLH:'1.1'};
+  if (s === 'JuneWLA')   return {bg:'#FFF7E9', accentBg:'#B2880B', accentText:'#ffffff', borderColor:'#E1D5C0', phColor:'#F0DBCC',
+    labelFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.12em', labelLH:'1.3',
+    headFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', headSize:'24px', headWeight:'500', headLS:'.05em', headLH:'1.15',
+    metaFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'12px', metaColor:'#5C4A2A', metaLS:'.08em',
+    bodyFont:'GTEestiText,\'GT Eesti Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#3D2E14',
+    ctaFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#B2880B', ctaColor:'#141311', ctaBg:'#E1BA44',
+    gridTitleSize:'16px', gridTitleFont:'GTEestiDisplay,\'GT Eesti Display\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.06em', gridTitleLH:'1.2'};
+  if (s === 'AvalonBH')  return {bg:'#ffffff', accentBg:'#282828', accentText:'#ffffff', borderColor:'#D0CCCC', phColor:'#C4C9C8',
+    labelFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+    headFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', headSize:'22px', headWeight:'500', headLS:'.08em', headLH:'1.2',
+    metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#666', metaLS:'.15em',
+    bodyFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#333',
+    ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#282828', ctaColor:'#282828', ctaBg:'transparent',
+    gridTitleSize:'15px', gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.1em', gridTitleLH:'1.25'};
+  if (s === 'AvalonPS')  return {bg:'#ffffff', accentBg:'#545454', accentText:'#ffffff', borderColor:'#DDD0CC', phColor:'#E7CDC4',
+    labelFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+    headFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', headSize:'22px', headWeight:'500', headLS:'.08em', headLH:'1.2',
+    metaFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#545454', metaLS:'.15em',
+    bodyFont:'Neutra2Text,\'Neutraface 2 Text\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'13px', bodyColor:'#333',
+    ctaFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#545454', ctaColor:'#545454', ctaBg:'transparent',
+    gridTitleSize:'15px', gridTitleFont:'Neutra2Display,\'Neutraface 2\',\'Helvetica Neue\',Arial,sans-serif', gridTitleLS:'.1em', gridTitleLH:'1.25'};
+  if (s === 'Ingleside') return {bg:'#F5F4EE', accentBg:'#1B5B4C', accentText:'#ffffff', borderColor:'#DDDBD4', phColor:'#C5C9B2',
+    labelFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+    headFont:'LydianBT,\'Lydian BT\',Georgia,serif', headSize:'24px', headWeight:'400', headLS:'.04em', headLH:'1.2',
+    metaFont:'FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#1B5B4C', metaLS:'.15em',
+    bodyFont:'FuturaLTBook,\'Futura\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'12px', bodyColor:'#3A3A2E',
+    ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#1B5B4C', ctaColor:'#1B5B4C', ctaBg:'transparent',
+    gridTitleSize:'16px', gridTitleFont:'LydianBT,\'Lydian BT\',Georgia,serif', gridTitleLS:'.03em', gridTitleLH:'1.25'};
+  if (s === 'MYC')       return {bg:'#ffffff', accentBg:'#0C1E2C', accentText:'#ffffff', borderColor:'#D5CAC0', phColor:'#E2C5A9',
+    labelFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+    headFont:'FSNeruda,\'FS Neruda\',Georgia,serif', headSize:'24px', headWeight:'400', headLS:'.02em', headLH:'1.2',
+    metaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#0C1E2C', metaLS:'.15em',
+    bodyFont:'FSNeruda,\'FS Neruda\',Georgia,serif', bodySize:'13px', bodyColor:'#2A2A2A',
+    ctaFont:'DressCode,\'Dress Code\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'11px', ctaBorder:'#0C1E2C', ctaColor:'#0C1E2C', ctaBg:'transparent',
+    gridTitleSize:'16px', gridTitleFont:'FSNeruda,\'FS Neruda\',Georgia,serif', gridTitleLS:'.02em', gridTitleLH:'1.25'};
+  if (s === 'Culver')    return {bg:'#F1F1F2', accentBg:'#222223', accentText:'#ffffff', borderColor:'#D5D5D6', phColor:'#C8C8CA',
+    labelFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', labelSize:'11px', labelLS:'.18em', labelLH:'1.3',
+    headFont:'Bellefair,\'Bellefair\',Georgia,serif', headSize:'26px', headWeight:'400', headLS:'.03em', headLH:'1.2',
+    metaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', metaStyle:'normal', metaSize:'11px', metaColor:'#555', metaLS:'.12em',
+    bodyFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', bodySize:'12px', bodyColor:'#333',
+    ctaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'10px', ctaBorder:'#222223', ctaColor:'#222223', ctaBg:'transparent',
+    gridTitleSize:'16px', gridTitleFont:'Bellefair,\'Bellefair\',Georgia,serif', gridTitleLS:'.02em', gridTitleLH:'1.25'};
+  return {bg:'#ffffff', accentBg:'#201E1E', accentText:'#ffffff', borderColor:'#D8D5D0', phColor:'#F4F2F0',
+    labelFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'12px', labelLS:'.15em', labelLH:'1.5',
+    headFont:'ABCArizonaMix,\'Arizona Mix\',Georgia,serif', headSize:'28px', headWeight:'300', headLS:'-.01em', headLH:'1.2',
+    metaFont:'BentonSansRE,\'Benton Sans\',Arial,sans-serif', metaStyle:'normal', metaSize:'12px', metaColor:'#6B6560', metaLS:'.15em',
+    bodyFont:'\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif', bodySize:'13px', bodyColor:'#6B6560',
+    ctaFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', ctaSize:'10px', ctaBorder:'#201E1E', ctaColor:'#201E1E', ctaBg:'transparent',
+    gridTitleSize:'12px', gridTitleFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', gridTitleLS:'.15em', gridTitleLH:'1.5'};
+}
 
 /* ── Image proxy ─────────────────────────────────────────────────────────── */
 var IMAGE_PROXY        = "https://properhotel.srdigisolutions.com/image-proxy.php?url=";
@@ -1045,12 +1147,19 @@ window.onload = function() {
     var btn = document.getElementById("loadBtn");
     btn.className = "load-btn active";
     btn.textContent = "Load Events from " + prop.name;
-    evs = []; sel = []; whatsNew = []; selectedMonth = null;
+    evs = []; sel = []; whatsNew = []; spotlights = []; selectedMonth = null;
     document.getElementById("monthFilter").style.display = "none";
     document.getElementById("selCount").textContent = "0";
     document.getElementById("errMsg").style.display = "none";
     document.getElementById("introCopyWrap").style.display = "block";
     document.getElementById("introCopy").value = "";
+    document.getElementById("spotlightWrap").style.display = "block";
+    document.getElementById("sl_headline").value = "";
+    document.getElementById("sl_copy").value = "";
+    document.getElementById("sl_img").value = "";
+    document.getElementById("sl_url").value = "";
+    document.getElementById("sl_cta").value = "";
+    renderSlList();
     document.getElementById("dlBtn").disabled  = true;
     document.getElementById("jpgBtn").disabled = true;
     document.getElementById("klBtn").disabled  = true;
@@ -1101,7 +1210,7 @@ function loadEvents() {
 
         var mapped = [];
         cards.forEach(function(card) {
-          var title = "", dateStr = "", img = "", desc = "", cat = "", evUrl = prop.url;
+          var title = "", dateStr = "", img = "", desc = "", cat = "", evUrl = prop.url, evCta = "";
 
           if (siteType === "colbox") {
             var titleEl = card.querySelector(".colbox__title span, .colbox__title");
@@ -1122,6 +1231,7 @@ function loadEvents() {
             cat = "";
             var linkEl = card.querySelector(".colbox__btnbox a");
             evUrl = linkEl ? linkEl.getAttribute("href") : prop.url;
+            evCta = linkEl ? linkEl.textContent.trim() : "";
 
           } else if (siteType === "eventdt") {
             var h2 = card.querySelector(".EventDtScCn h2");
@@ -1173,11 +1283,12 @@ function loadEvents() {
             desc = descEl4 ? descEl4.textContent.trim().slice(0, 200) : "";
             var linkEl4 = card.querySelector(".sb-happenings__card-contact-btn");
             evUrl = linkEl4 ? (linkEl4.getAttribute("href") || prop.url) : prop.url;
+            evCta = linkEl4 ? linkEl4.textContent.trim() : "";
           }
 
           if (img && img.charAt(0) === "/") img = base + img;
           if (evUrl && evUrl.charAt(0) === "/") evUrl = base + evUrl;
-          if (title) mapped.push({ title: title, date: dateStr, cat: cat, img: img, desc: desc, url: evUrl || prop.url });
+          if (title) mapped.push({ title: title, date: dateStr, cat: cat, img: img, desc: desc, url: evUrl || prop.url, cta: evCta });
         });
 
         if (!mapped.length) throw new Error("no-events");
@@ -1269,6 +1380,75 @@ function getSamples() {
   ];
 }
 
+function toggleSpotlight() {
+  var form = document.getElementById("spotlightForm");
+  var icon = document.getElementById("spotlightToggleIcon");
+  var open = form.style.display === "flex";
+  form.style.display = open ? "none" : "flex";
+  icon.textContent   = open ? "+" : "–";
+}
+
+function addSpotlightItem() {
+  var headline = document.getElementById("sl_headline").value.trim();
+  if (!headline) { document.getElementById("sl_headline").focus(); document.getElementById("sl_headline").style.borderColor = "#c0392b"; alert("Please enter a headline."); return; }
+  document.getElementById("sl_headline").style.borderColor = "";
+  spotlights.push({
+    headline: headline,
+    copy:     document.getElementById("sl_copy").value.trim(),
+    img:      normalizeImgUrl(document.getElementById("sl_img").value.trim()),
+    url:      document.getElementById("sl_url").value.trim(),
+    cta:      document.getElementById("sl_cta").value.trim()
+  });
+  ["sl_headline","sl_copy","sl_img","sl_url","sl_cta"].forEach(function(id) { document.getElementById(id).value = ""; });
+  renderSlList();
+  renderPreview();
+  var has = sel.length > 0 || whatsNew.length > 0 || spotlights.length > 0;
+  document.getElementById("dlBtn").disabled = !has;
+  document.getElementById("klBtn").disabled = !has;
+}
+
+function removeSpotlight(i) {
+  spotlights.splice(i, 1);
+  renderSlList();
+  renderPreview();
+  var has = sel.length > 0 || whatsNew.length > 0 || spotlights.length > 0;
+  document.getElementById("dlBtn").disabled = !has;
+  document.getElementById("klBtn").disabled = !has;
+}
+
+function editSpotlight(i) {
+  var item = spotlights[i];
+  document.getElementById("sl_headline").value = item.headline || "";
+  document.getElementById("sl_copy").value     = item.copy     || "";
+  document.getElementById("sl_img").value      = item.img      || "";
+  document.getElementById("sl_url").value      = item.url      || "";
+  document.getElementById("sl_cta").value      = item.cta      || "";
+  spotlights.splice(i, 1);
+  renderSlList();
+  renderPreview();
+  var form = document.getElementById("spotlightForm");
+  form.style.display = "flex";
+  document.getElementById("spotlightToggleIcon").textContent = "–";
+  document.getElementById("sl_headline").focus();
+  document.getElementById("sl_headline").scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+function renderSlList() {
+  var el = document.getElementById("slList");
+  if (!spotlights.length) { el.innerHTML = ""; return; }
+  el.innerHTML = spotlights.map(function(item, i) {
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);">'
+      + (item.img ? '<img src="' + item.img + '" style="width:36px;height:28px;object-fit:cover;flex-shrink:0;" />' : '<div style="width:36px;height:28px;background:#eee;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;color:#aaa;">img</div>')
+      + '<div style="flex:1;min-width:0;">'
+      +   '<div style="font-size:11px;font-weight:600;font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.headline + '</div>'
+      +   (item.copy ? '<div style="font-size:9px;color:var(--mid);font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.copy + '</div>' : '')
+      + '</div>'
+      + '<button onclick="editSpotlight(' + i + ')" style="background:none;border:none;cursor:pointer;color:#888;font-size:13px;flex-shrink:0;padding:2px 4px;" title="Edit">✎</button>'
+      + '<button onclick="removeSpotlight(' + i + ')" style="background:none;border:none;cursor:pointer;color:#aaa;font-size:14px;flex-shrink:0;" title="Remove">✕</button>'
+      + '</div>';
+  }).join("");
+}
+
 function toggleCustomForm() {
   var form = document.getElementById("customForm");
   var icon = document.getElementById("customToggleIcon");
@@ -1287,13 +1467,15 @@ function addWhatsNewEvent() {
   document.getElementById("cf_img").style.borderColor = "";
   document.getElementById("cf_url").style.borderColor = "";
   whatsNew.push({
-    title: title,
-    date:  document.getElementById("cf_date").value.trim(),
-    copy:  document.getElementById("cf_copy").value.trim(),
-    img:   img,
-    url:   document.getElementById("cf_url").value.trim() || (prop ? prop.url : "#"),
-    cta:   document.getElementById("cf_cta").value.trim() || "Details"
+    title:  title,
+    date:   document.getElementById("cf_date").value.trim(),
+    copy:   document.getElementById("cf_copy").value.trim(),
+    img:    img,
+    imgpos: document.getElementById("cf_imgpos").value || "center",
+    url:    document.getElementById("cf_url").value.trim() || (prop ? prop.url : "#"),
+    cta:    document.getElementById("cf_cta").value.trim() || "Details"
   });
+  document.getElementById("cf_imgpos").value = "center";
   ["cf_title","cf_date","cf_copy","cf_img","cf_url","cf_cta"].forEach(function(id) {
     document.getElementById(id).value = "";
   });
@@ -1317,12 +1499,13 @@ function removeWhatsNew(i) {
 
 function editWhatsNew(i) {
   var ev = whatsNew[i];
-  document.getElementById("cf_title").value = ev.title || "";
-  document.getElementById("cf_date").value  = ev.date  || "";
-  document.getElementById("cf_copy").value  = ev.copy  || "";
-  document.getElementById("cf_img").value   = ev.img   || "";
-  document.getElementById("cf_url").value   = ev.url   || "";
-  document.getElementById("cf_cta").value   = ev.cta   || "";
+  document.getElementById("cf_title").value  = ev.title  || "";
+  document.getElementById("cf_date").value   = ev.date   || "";
+  document.getElementById("cf_copy").value   = ev.copy   || "";
+  document.getElementById("cf_img").value    = ev.img    || "";
+  document.getElementById("cf_imgpos").value = ev.imgpos || "center";
+  document.getElementById("cf_url").value    = ev.url    || "";
+  document.getElementById("cf_cta").value    = ev.cta    || "";
   whatsNew.splice(i, 1);
   renderWnList();
   renderPreview();
@@ -1546,9 +1729,10 @@ function buildWhatsNewHtml(forEmail, forRender) {
       var imgLeft = i % 2 === 0;
       html += '<div class="wn-row" style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid ' + borderColor + ';">';
       /* Image — always order:-1 on mobile so it rises to top */
+      var imgPos = ev.imgpos || 'center';
       var imgHtml = ev.img
         ? '<div class="wn-img-wrap" style="flex-shrink:0;align-self:center;' + (imgLeft ? '' : 'order:2;') + '">'
-          + '<img src="' + ev.img + '" style="width:110px;min-height:70px;height:auto;object-fit:cover;display:block;" /></div>'
+          + '<img src="' + ev.img + '" style="width:110px;min-height:70px;height:auto;object-fit:cover;object-position:' + imgPos + ';display:block;" /></div>'
         : '<div class="wn-img-wrap" style="width:110px;min-height:70px;background:' + phColor + ';flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;' + (imgLeft ? '' : 'order:2;') + '">img</div>';
       /* CTA */
       var ctaHtml = '<div class="wn-cta-wrap" style="flex-shrink:0;' + (imgLeft ? 'order:2;' : 'order:0;') + '">'
@@ -1588,7 +1772,7 @@ function buildWhatsNewHtml(forEmail, forRender) {
     var imgCell = ev.img
       ? '<td class="wn-td wn-img-td" width="110" style="padding:0;vertical-align:middle;' + (imgLeft ? 'padding-right:16px;' : 'padding-left:16px;') + '">'
         + '<a href="' + ev.url + '" style="display:block;font-size:0;line-height:0;text-decoration:none;">'
-        + '<img src="' + imgSrc + '" width="110" style="display:block;width:110px;min-height:70px;height:auto;object-fit:cover;" alt="' + ev.title + '" /></a>'
+        + '<img src="' + imgSrc + '" width="110" style="display:block;width:110px;min-height:70px;height:auto;object-fit:cover;object-position:' + (ev.imgpos || 'center') + ';" alt="' + ev.title + '" /></a>'
         + '</td>'
       : '<td class="wn-td wn-img-td" width="110" style="padding:0;vertical-align:middle;' + (imgLeft ? 'padding-right:16px;' : 'padding-left:16px;') + '">'
         + '<div style="width:110px;min-height:70px;background:' + phColor + ';"></div>'
@@ -1627,6 +1811,11 @@ function getPanelLink(id, fallback) {
 function getPanelAlt(id, fallback) {
   var stored = sliceMetaStore[id];
   return (stored && stored.alt) ? stored.alt : (fallback || "");
+}
+
+function getPanelCta(id, fallback) {
+  var stored = sliceMetaStore[id];
+  return (stored && stored.cta) ? stored.cta : (fallback || "");
 }
 
 function getBannerHtml(forEmail, bannerLink) {
@@ -1785,12 +1974,21 @@ function renderAltLinkPanel() {
 
   rows.innerHTML = sections.map(function(s) {
     var meta = getSliceMeta(s.id, s.defaultAlt, s.defaultLink);
+    var ctaOptions = ['', 'RSVP', 'Reserve', 'Details', 'Book Now', 'Learn More', 'Get Tickets'];
+    var currentCta = (meta.cta || '');
+    var ctaSelect = s.id !== 'seeall' && s.id !== 'banner'
+      ? '<div><div class="field-lbl">CTA Label</div>'
+        + '<select onchange="updateSliceMeta(\'' + s.id + '\',\'cta\',this.value)" style="width:100%;box-sizing:border-box;padding:6px 9px;border:1px solid var(--border);font-family:\'Montserrat\',sans-serif;font-size:10px;color:var(--ink);background:#fff;outline:none;">'
+        + ctaOptions.map(function(o) { return '<option value="' + o + '"' + (currentCta === o ? ' selected' : '') + '>' + (o || '— default —') + '</option>'; }).join('')
+        + '</select></div>'
+      : '';
     return '<div class="alt-row">'
       + '<div class="alt-row-label">' + s.label + '</div>'
       + '<div><div class="field-lbl">Alt Text</div>'
       + '<input type="text" value="' + meta.alt.replace(/"/g, '&quot;') + '" oninput="updateSliceMeta(\'' + s.id + '\',\'alt\',this.value)" placeholder="Alt text…" /></div>'
       + '<div><div class="field-lbl">Link URL</div>'
       + '<input type="text" value="' + meta.link.replace(/"/g, '&quot;') + '" oninput="updateSliceMeta(\'' + s.id + '\',\'link\',this.value)" placeholder="https://…" /></div>'
+      + ctaSelect
       + '</div>';
   }).join("");
 }
@@ -1799,6 +1997,7 @@ function updateSliceMeta(id, field, value) {
   if (!sliceMetaStore[id]) sliceMetaStore[id] = {};
   sliceMetaStore[id][field] = value;
   sliceMetaStore[id]["_" + field + "Edited"] = true;
+  renderPreview();
 }
 
 function renderPreview() {
@@ -1863,7 +2062,7 @@ function renderPreview() {
   + shelborneLogoStrip
   +   '<div class="email-banner"><a href="' + (prop ? (prop.homeUrl || prop.url) : '#') + '" target="_blank" style="display:block;text-decoration:none;">' + getBannerHtml(false) + '</a></div>'
   +   (document.getElementById("introCopy").value.trim()
-      ? '<div class="feat-desc" style="padding:28px 40px 0;text-align:center;">' + document.getElementById("introCopy").value.trim() + '</div><div style="height:1px;background:var(--border);margin:20px 40px 0;"></div>'
+      ? '<div class="feat-desc" style="padding:28px 40px;background:#EDE8DE;text-align:center;color:#000000;">' + document.getElementById("introCopy").value.trim() + '</div>'
       : '')
   +   '<div class="email-body">'
   +     '<div class="feat-sec">'
@@ -1872,12 +2071,30 @@ function renderPreview() {
   +         '<div class="feat-title">' + feat.title + '</div>'
   +         ((feat.date || feat.cat) ? '<div class="grid-meta" style="margin-bottom:10px;">' + titleCase(feat.date || "") + (feat.cat ? " &middot; " + titleCase(feat.cat) : "") + '</div>' : '')
   +         '<div class="feat-desc">' + feat.desc + '</div>'
-  +         '<a href="' + feat.url + '" class="feat-cta">Reserve</a>'
+  +         '<a href="' + feat.url + '" class="feat-cta">' + getPanelCta("feat", feat.cta || 'Reserve') + '</a>'
   +       '</div>'
   +       '<div class="feat-img">' + (feat.img ? '<img src="' + feat.img + '" />' : '<div class="feat-img-ph">img</div>') + '</div>'
   +     '</div>'
   +     (gridHtml ? '<div class="ev-grid">' + gridHtml + '</div>' : '')
   +     '<div class="see-all"><a href="' + (prop ? prop.url : "#") + '">See All Events</a></div>'
+  +     (function() {
+          if (!spotlights.length) return '';
+          var T2 = propTheme();
+          return spotlights.map(function(item) {
+            var headline = item.headline, copy = item.copy, url = item.url, cta = item.cta;
+            return '<div style="border-top:1px solid var(--border);padding:32px 0 28px;">'
+              + '<div style="display:flex;gap:28px;align-items:stretch;">'
+              + '<div style="flex:1;min-width:0;">'
+              + '<span class="feat-lbl" style="color:#000000;">In The Press</span>'
+              + '<div style="font-family:' + T2.headFont + ';font-size:' + T2.headSize + ';font-weight:' + T2.headWeight + ';line-height:' + T2.headLH + ';letter-spacing:' + T2.headLS + ';text-transform:uppercase;color:#000000;margin:0 0 14px;">' + headline + '</div>'
+              + (copy ? '<p style="margin:0 0 24px;font-size:13px;line-height:1.8;color:#000000;">' + copy + '</p>' : '')
+              + (url && cta ? '<a href="' + url + '" target="_blank" class="feat-cta">' + cta + '</a>' : '')
+              + '</div>'
+              + (item.img ? '<div style="width:190px;min-width:190px;flex-shrink:0;background:url(' + item.img + ') center/cover;min-height:220px;"></div>' : '')
+              + '</div>'
+              + '</div>';
+          }).join('');
+        })()
   +     buildWhatsNewHtml(false, false)
   +   '</div>'
   + '</div>';
@@ -2001,20 +2218,20 @@ function buildEmailHTML(forRender) {
   var gridRows = "";
 
   if (n === 1) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 560, true,  _forRender, "ev_0") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 520, true,  _forRender, "ev_0") + '</tr>';
   } else if (n === 2) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 280, false, _forRender, "ev_0") + buildGridCell(grid[1], 280, false, _forRender, "ev_1") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 256, false, _forRender, "ev_0") + buildGridCell(grid[1], 256, false, _forRender, "ev_1") + '</tr>';
   } else if (n === 3) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 560, true,  _forRender, "ev_0") + '</tr>'
-             + '<tr>' + buildGridCell(grid[1], 280, false, _forRender, "ev_1") + buildGridCell(grid[2], 280, false, _forRender, "ev_2") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 520, true,  _forRender, "ev_0") + '</tr>'
+             + '<tr>' + buildGridCell(grid[1], 256, false, _forRender, "ev_1") + buildGridCell(grid[2], 256, false, _forRender, "ev_2") + '</tr>';
   } else if (n === 4) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 280, false, _forRender, "ev_0") + buildGridCell(grid[1], 280, false, _forRender, "ev_1") + '</tr>'
-             + '<tr>' + buildGridCell(grid[2], 280, false, _forRender, "ev_2") + buildGridCell(grid[3], 280, false, _forRender, "ev_3") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 256, false, _forRender, "ev_0") + buildGridCell(grid[1], 256, false, _forRender, "ev_1") + '</tr>'
+             + '<tr>' + buildGridCell(grid[2], 256, false, _forRender, "ev_2") + buildGridCell(grid[3], 256, false, _forRender, "ev_3") + '</tr>';
   }
 
   var gridBg = T.bg;
   var gridSection = n > 0
-    ? '<tr><td style="padding:8px 0 0;">'
+    ? '<tr><td style="padding:8px 32px 0;">'
     +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:' + gridBg + ';border-collapse:separate!important;border-spacing:8px;">' + gridRows + '</table>'
     + '</td></tr>'
     : '';
@@ -2054,14 +2271,15 @@ function buildEmailHTML(forRender) {
   + '.grid-td{display:block!important;width:100%!important;}'
   + '.grid-td img{width:100%!important;height:auto!important;min-height:0!important;max-height:260px;object-fit:cover;}'
   + '.banner-img{height:auto!important;}'
-  + '.cta-btn{display:block!important;text-align:center!important;padding:14px 20px!important;}'
+  + '.feat-td{text-align:center!important;}'
+  + '.cta-btn{display:inline-block!important;text-align:center!important;padding:14px 20px!important;}'
   + '.see-all-btn{padding:14px 32px!important;}'
   + '.wn-td{display:block!important;width:100%!important;box-sizing:border-box!important;}'
   + '.wn-img-td{padding:0!important;}'
   + '.wn-img-td img{width:100%!important;height:200px!important;object-fit:cover!important;}'
   + '.wn-img-td div{width:100%!important;height:200px!important;}'
   + '.wn-content-td{padding:14px 0 8px!important;}'
-  + '.wn-cta-td{text-align:left!important;padding:0 0 16px!important;}'
+  + '.wn-cta-td{text-align:center!important;padding:0 0 16px!important;}'
   + '}'
   + '</style>'
   + '</head>'
@@ -2077,10 +2295,9 @@ function buildEmailHTML(forRender) {
 
   /* SHELBORNE INTRO COPY */
   + (document.getElementById("introCopy").value.trim()
-    ? '<tr><td style="padding:28px 40px 20px;">'
-      + '<p style="margin:0;font-family:' + T.bodyFont + ';font-size:' + T.bodySize + ';font-style:normal;font-weight:400;line-height:1.6;color:' + T.bodyColor + ';text-align:center;">' + document.getElementById("introCopy").value.trim() + '</p>'
+    ? '<tr><td style="padding:28px 40px 20px;background:#EDE8DE;">'
+      + '<p style="margin:0;font-family:' + T.bodyFont + ';font-size:' + T.bodySize + ';font-style:normal;font-weight:400;line-height:1.6;color:#000000;text-align:center;">' + document.getElementById("introCopy").value.trim() + '</p>'
       + '</td></tr>'
-      + '<tr><td style="padding:0 40px;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
     : '')
 
   /* FEATURE EVENT */
@@ -2092,7 +2309,7 @@ function buildEmailHTML(forRender) {
   +               '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#201E1E;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;" x-apple-data-detectors="false">' + breakDates(feat.title) + '</h2>'
   +               '<p style="margin:0 0 16px;font-size:' + T.metaSize + ';font-style:' + T.metaStyle + ';font-weight:400;letter-spacing:' + T.metaLS + ';line-height:1.5;color:' + T.metaColor + ';font-family:' + T.metaFont + ';text-transform:' + (T.metaLS === '0' ? 'none' : 'uppercase') + ';" x-apple-data-detectors="false">' + safeDate(feat.date || '', T.metaColor) + (feat.cat ? ' &middot; ' + safeDate(feat.cat, T.metaColor) : '') + '</p>'
   +               '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:' + T.bodyColor + ';font-family:' + T.bodyFont + ';font-weight:300;text-transform:none;">' + feat.desc + '</p>'
-  +               '<a href="' + getPanelLink("feat", feat.url) + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">Reserve</a>'
+  +               '<a href="' + getPanelLink("feat", feat.url) + '" class="cta-btn" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">' + getPanelCta("feat", feat.cta || 'Reserve') + '</a>'
   +             '</td>'
   +             '<td class="feat-img-td" width="190" valign="top" style="width:190px;min-width:190px;background-color:' + T.phColor + ';' + (feat.img ? 'background-image:url(' + proxyImg(feat.img, _forRender) + ');background-size:cover;background-position:center;' : '') + '">'
   +               (feat.img ? '<a href="' + getPanelLink("feat", feat.url) + '" style="display:block;width:190px;height:100%;min-height:220px;text-decoration:none;" aria-label="' + getPanelAlt("feat", feat.title) + '">&nbsp;</a>' : '')
@@ -2108,6 +2325,28 @@ function buildEmailHTML(forRender) {
   +       '<tr><td style="padding:28px 40px 40px;text-align:center;background:' + T.bg + ';">'
   +         '<a href="' + allUrl + '" class="see-all-btn" style="display:inline-block;padding:12px 40px;border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;line-height:1.3;letter-spacing:.15em;text-transform:uppercase;color:' + T.ctaColor + ';text-decoration:none;font-family:' + T.ctaFont + ';">See All Events</a>'
   +       '</td></tr>'
+
+  /* SPOTLIGHT */
+  + (function() {
+      if (!spotlights.length) return '';
+      return spotlights.map(function(item) {
+        var headline = item.headline, copy = item.copy, url = item.url, cta = item.cta;
+        return '<tr><td style="padding:0 40px;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
+          + '<tr><td style="padding:36px 40px 40px;">'
+          +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">'
+          +     '<tr style="height:100%;">'
+          +       '<td class="feat-td" valign="top" style="padding-right:' + (item.img ? '28px' : '0') + ';">'
+          +         '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#000000;font-family:' + T.labelFont + ';">In The Press</p>'
+          +         '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#000000;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + headline + '</h2>'
+          +         (copy ? '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:#000000;font-family:' + T.bodyFont + ';font-weight:300;">' + copy + '</p>' : '')
+          +         (url && cta ? '<a href="' + url + '" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">' + cta + '</a>' : '')
+          +       '</td>'
+          +       (item.img ? '<td width="190" valign="top" style="width:190px;min-width:190px;background-color:' + T.phColor + ';background-image:url(' + item.img + ');background-size:cover;background-position:center;"><a href="' + (url || '#') + '" style="display:block;width:190px;height:100%;min-height:220px;text-decoration:none;">&nbsp;</a></td>' : '')
+          +     '</tr>'
+          +   '</table>'
+          + '</td></tr>';
+      }).join('');
+    })()
 
   /* WHAT'S NEW */
   + buildWhatsNewHtml(true, _forRender)
@@ -2443,7 +2682,7 @@ function buildGridCell(ev, w, fullWidth, forRender, panelId) {
   cell += '<div style="padding:18px 20px 22px;">';
   cell += '<p style="margin:0 0 6px;font-size:' + T2.gridTitleSize + ';font-weight:700;letter-spacing:' + T2.gridTitleLS + ';line-height:' + T2.gridTitleLH + ';color:#201E1E;font-family:' + T2.gridTitleFont + ';text-transform:uppercase;" x-apple-data-detectors="false">' + breakDates(ev.title) + '</p>';
   cell += '<p style="margin:0 0 14px;font-size:12px;font-style:' + T2.metaStyle + ';font-weight:400;line-height:1.5;color:#6B6560;font-family:' + T2.metaFont + ';letter-spacing:' + T2.metaLS + ';text-transform:' + (T2.metaLS === '0' ? 'none' : 'uppercase') + ';" x-apple-data-detectors="false">' + safeDate(ev.date || '', '#6B6560') + (ev.cat ? ' &middot; ' + safeDate(ev.cat, '#6B6560') : '') + '</p>';
-  cell += '<a href="' + evLink + '" style="display:inline-block;padding:9px 20px;background:' + T2.ctaBg + ';border:1.5px solid ' + T2.ctaBorder + ';font-size:' + T2.ctaSize + ';font-weight:700;letter-spacing:.15em;line-height:1.3;text-transform:uppercase;color:' + T2.ctaColor + ';text-decoration:none;font-family:' + T2.ctaFont + ';">Details</a>';
+  cell += '<a href="' + evLink + '" style="display:inline-block;padding:9px 20px;background:' + T2.ctaBg + ';border:1.5px solid ' + T2.ctaBorder + ';font-size:' + T2.ctaSize + ';font-weight:700;letter-spacing:.15em;line-height:1.3;text-transform:uppercase;color:' + T2.ctaColor + ';text-decoration:none;font-family:' + T2.ctaFont + ';">' + (getPanelCta(panelId, ev.cta || 'Details')) + '</a>';
   cell += '</div></td>';
   return cell;
 }
