@@ -2094,6 +2094,11 @@ function renderPreview() {
         })()
   +     buildWhatsNewHtml(false, false)
   +   '</div>'
+  +   ((prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA' || prop.short === 'Shelborne'))
+      ? '<a href="https://www.properhotel.com/" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;">'
+        + '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/proper-insider-slice.png" style="display:block;width:100%;height:auto;" alt="Proper Insider" />'
+        + '</a>'
+      : '')
   + '</div>';
 
   if (viewMode === 'mobile') {
