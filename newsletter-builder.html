@@ -2349,8 +2349,8 @@ function buildEmailHTML(forRender) {
   /* WHAT'S NEW */
   + buildWhatsNewHtml(true, _forRender)
 
-  /* PROPER INSIDER image — Proper Hotels only */
-  + (isProper
+  /* PROPER INSIDER image — Proper Hotels + Shelborne */
+  + ((isProper || isShelborne)
     ? '<tr><td style="padding:0;font-size:0;line-height:0;">'
       + '<a href="https://www.properhotel.com/" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;">'
       + '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/proper-insider-slice.png" width="600" alt="Proper Insider" style="display:block;width:100%;height:auto;" />'
