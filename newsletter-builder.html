@@ -658,7 +658,7 @@ header h1 {
 .preview-scroll.mobile-view .wn-img-wrap {
   width: 100% !important;
   min-height: 180px !important;
-  order: 1;
+  order: 1 !important;
   flex-shrink: 0 !important;
 }
 .preview-scroll.mobile-view .wn-img-wrap img {
@@ -668,7 +668,7 @@ header h1 {
 }
 .preview-scroll.mobile-view .wn-text {
   padding: 14px 0 10px !important;
-  order: 0;
+  order: 0 !important;
   min-width: 0;
   overflow: visible !important;
 }
@@ -678,7 +678,8 @@ header h1 {
   text-overflow: clip !important;
 }
 .preview-scroll.mobile-view .wn-cta-wrap {
-  order: 1;
+  order: 2 !important;
+  padding-top: 20px !important;
   padding-bottom: 4px;
   flex-shrink: 0;
   text-align: center !important;
@@ -1788,10 +1789,11 @@ function buildWhatsNewHtml(forEmail, forRender) {
       + (ev.copy ? '<p style="margin:0;' + copyFont + '">' + ev.copy + '</p>' : '')
       + '</td>';
 
-    out += '<tr><td style="padding:0 40px;">'
-      + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ' + borderColor + ';">'
+    out += '<tr><td style="padding:0 40px;font-size:0;line-height:0;"><div style="height:1px;background:' + borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
+      + '<tr><td style="padding:0 40px;">'
+      + '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
       + '<tr>'
-      + (imgLeft ? imgCell + contentCell + ctaCell : ctaCell + contentCell + imgCell)
+      + (imgLeft ? imgCell + contentCell + ctaCell : imgCell + contentCell + ctaCell)
       + '</tr>'
       + '</table>'
       + '</td></tr>';
@@ -2013,35 +2015,30 @@ function renderPreview() {
   /* ── grid slots ── */
   var gridHtml = "";
   if (grid.length === 0) {
-    // no grid
     gridHtml = "";
   } else if (grid.length === 1) {
-    // single full-width card
     var ev = grid[0];
     gridHtml = '<div class="grid-ev grid-ev-full">'
       + '<div class="grid-img-box">' + (ev.img ? '<img src="' + ev.img + '" />' : "img") + '</div>'
       + '<div class="grid-ev-info">'
       + '<div class="grid-title">' + ev.title + '</div>'
       + '<div class="grid-meta">' + titleCase(ev.date || "") + (ev.cat ? " &middot; " + titleCase(ev.cat) : "") + '</div>'
-      + '<a href="' + ev.url + '" class="grid-cta">Details</a>'
+      + '<a href="' + ev.url + '" class="grid-cta">' + getPanelCta("ev_0", ev.cta || "Details") + '</a>'
       + '</div></div>';
   } else if (grid.length === 2) {
-    // two cards side by side
-    gridHtml = buildPreviewRow(grid[0], grid[1]);
+    gridHtml = buildPreviewRow(grid[0], grid[1], 0);
   } else if (grid.length === 3) {
-    // one full-width + two side by side
     var ev = grid[0];
     gridHtml = '<div class="grid-ev grid-ev-full">'
       + '<div class="grid-img-box">' + (ev.img ? '<img src="' + ev.img + '" />' : "img") + '</div>'
       + '<div class="grid-ev-info">'
       + '<div class="grid-title">' + ev.title + '</div>'
       + '<div class="grid-meta">' + titleCase(ev.date || "") + (ev.cat ? " &middot; " + titleCase(ev.cat) : "") + '</div>'
-      + '<a href="' + ev.url + '" class="grid-cta">Details</a>'
+      + '<a href="' + ev.url + '" class="grid-cta">' + getPanelCta("ev_0", ev.cta || "Details") + '</a>'
       + '</div></div>';
-    gridHtml += buildPreviewRow(grid[1], grid[2]);
+    gridHtml += buildPreviewRow(grid[1], grid[2], 1);
   } else {
-    // 4 events: 2×2 grid
-    gridHtml = buildPreviewRow(grid[0], grid[1]) + buildPreviewRow(grid[2], grid[3]);
+    gridHtml = buildPreviewRow(grid[0], grid[1], 0) + buildPreviewRow(grid[2], grid[3], 2);
   }
 
   var shelborneLogoStrip = '';
@@ -2085,7 +2082,7 @@ function renderPreview() {
             return '<div style="border-top:1px solid var(--border);padding:32px 0 28px;">'
               + '<div style="display:flex;gap:28px;align-items:stretch;">'
               + '<div style="flex:1;min-width:0;">'
-              + '<span class="feat-lbl" style="color:#000000;">In The Press</span>'
+              + '<span class="feat-lbl">In The Press</span>'
               + '<div style="font-family:' + T2.headFont + ';font-size:' + T2.headSize + ';font-weight:' + T2.headWeight + ';line-height:' + T2.headLH + ';letter-spacing:' + T2.headLS + ';text-transform:uppercase;color:#000000;margin:0 0 14px;">' + headline + '</div>'
               + (copy ? '<p style="margin:0 0 24px;font-size:13px;line-height:1.8;color:#000000;">' + copy + '</p>' : '')
               + (url && cta ? '<a href="' + url + '" target="_blank" class="feat-cta">' + cta + '</a>' : '')
@@ -2112,16 +2109,17 @@ function renderPreview() {
   renderAltLinkPanel();
 }
 
-function buildPreviewRow(a, b) {
+function buildPreviewRow(a, b, startIdx) {
   var row = "";
-  [a, b].forEach(function(ev) {
+  [a, b].forEach(function(ev, i) {
     if (!ev) return;
+    var panelId = "ev_" + (startIdx + i);
     row += '<div class="grid-ev">'
       + '<div class="grid-img-box">' + (ev.img ? '<img src="' + ev.img + '" />' : "img") + '</div>'
       + '<div class="grid-ev-info">'
       + '<div class="grid-title">' + ev.title + '</div>'
       + '<div class="grid-meta">' + titleCase(ev.date || "") + (ev.cat ? " &middot; " + titleCase(ev.cat) : "") + '</div>'
-      + '<a href="' + ev.url + '" class="grid-cta">Details</a>'
+      + '<a href="' + ev.url + '" class="grid-cta">' + getPanelCta(panelId, ev.cta || "Details") + '</a>'
       + '</div></div>';
   });
   return row;
@@ -2218,20 +2216,20 @@ function buildEmailHTML(forRender) {
   var gridRows = "";
 
   if (n === 1) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 520, true,  _forRender, "ev_0") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 504, true,  _forRender, "ev_0") + '</tr>';
   } else if (n === 2) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 256, false, _forRender, "ev_0") + buildGridCell(grid[1], 256, false, _forRender, "ev_1") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 248, false, _forRender, "ev_0") + buildGridCell(grid[1], 248, false, _forRender, "ev_1") + '</tr>';
   } else if (n === 3) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 520, true,  _forRender, "ev_0") + '</tr>'
-             + '<tr>' + buildGridCell(grid[1], 256, false, _forRender, "ev_1") + buildGridCell(grid[2], 256, false, _forRender, "ev_2") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 504, true,  _forRender, "ev_0") + '</tr>'
+             + '<tr>' + buildGridCell(grid[1], 248, false, _forRender, "ev_1") + buildGridCell(grid[2], 248, false, _forRender, "ev_2") + '</tr>';
   } else if (n === 4) {
-    gridRows = '<tr>' + buildGridCell(grid[0], 256, false, _forRender, "ev_0") + buildGridCell(grid[1], 256, false, _forRender, "ev_1") + '</tr>'
-             + '<tr>' + buildGridCell(grid[2], 256, false, _forRender, "ev_2") + buildGridCell(grid[3], 256, false, _forRender, "ev_3") + '</tr>';
+    gridRows = '<tr>' + buildGridCell(grid[0], 248, false, _forRender, "ev_0") + buildGridCell(grid[1], 248, false, _forRender, "ev_1") + '</tr>'
+             + '<tr>' + buildGridCell(grid[2], 248, false, _forRender, "ev_2") + buildGridCell(grid[3], 248, false, _forRender, "ev_3") + '</tr>';
   }
 
   var gridBg = T.bg;
   var gridSection = n > 0
-    ? '<tr><td style="padding:8px 32px 0;">'
+    ? '<tr><td style="padding:8px 40px 0;">'
     +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:' + gridBg + ';border-collapse:separate!important;border-spacing:8px;">' + gridRows + '</table>'
     + '</td></tr>'
     : '';
@@ -2265,8 +2263,8 @@ function buildEmailHTML(forRender) {
   + '@media only screen and (max-width:620px){'
   + '.outer{width:100%!important;}'
   + '.inner{padding:20px 16px!important;}'
-  + '.feat-td{display:block!important;width:100%!important;padding-right:0!important;}'
-  + '.feat-img-td{display:block!important;width:100%!important;padding-top:20px!important;}'
+  + '.feat-td{display:block!important;width:100%!important;padding-right:0!important;padding-bottom:20px!important;}'
+  + '.feat-img-td{display:block!important;width:100%!important;}'
   + '.feat-img-td img{width:100%!important;height:auto!important;min-height:0!important;max-height:260px;object-fit:cover;}'
   + '.grid-td{display:block!important;width:100%!important;}'
   + '.grid-td img{width:100%!important;height:auto!important;min-height:0!important;max-height:260px;object-fit:cover;}'
@@ -2336,7 +2334,7 @@ function buildEmailHTML(forRender) {
           +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">'
           +     '<tr style="height:100%;">'
           +       '<td class="feat-td" valign="top" style="padding-right:' + (item.img ? '28px' : '0') + ';">'
-          +         '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#000000;font-family:' + T.labelFont + ';">In The Press</p>'
+          +         '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">In The Press</p>'
           +         '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#000000;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + headline + '</h2>'
           +         (copy ? '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:#000000;font-family:' + T.bodyFont + ';font-weight:300;">' + copy + '</p>' : '')
           +         (url && cta ? '<a href="' + url + '" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">' + cta + '</a>' : '')
