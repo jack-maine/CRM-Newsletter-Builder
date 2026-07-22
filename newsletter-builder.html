@@ -2082,7 +2082,7 @@ function renderPreview() {
             return '<div style="border-top:1px solid var(--border);padding:32px 0 28px;">'
               + '<div style="display:flex;gap:28px;align-items:stretch;">'
               + '<div style="flex:1;min-width:0;">'
-              + '<span class="feat-lbl">In The Press</span>'
+              + '<span class="feat-lbl">' + (prop && prop.short === 'Shelborne' ? 'Shelborne Spotlight' : 'In The Press') + '</span>'
               + '<div style="font-family:' + T2.headFont + ';font-size:' + T2.headSize + ';font-weight:' + T2.headWeight + ';line-height:' + T2.headLH + ';letter-spacing:' + T2.headLS + ';text-transform:uppercase;color:#000000;margin:0 0 14px;">' + headline + '</div>'
               + (copy ? '<p style="margin:0 0 24px;font-size:13px;line-height:1.8;color:#000000;">' + copy + '</p>' : '')
               + (url && cta ? '<a href="' + url + '" target="_blank" class="feat-cta">' + cta + '</a>' : '')
@@ -2339,7 +2339,7 @@ function buildEmailHTML(forRender) {
           +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">'
           +     '<tr style="height:100%;">'
           +       '<td class="feat-td" valign="top" style="padding-right:' + (item.img ? '28px' : '0') + ';">'
-          +         '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">In The Press</p>'
+          +         '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">' + (isShelborne ? 'Shelborne Spotlight' : 'In The Press') + '</p>'
           +         '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#000000;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + headline + '</h2>'
           +         (copy ? '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:#000000;font-family:' + T.bodyFont + ';font-weight:300;">' + copy + '</p>' : '')
           +         (url && cta ? '<a href="' + url + '" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">' + cta + '</a>' : '')
