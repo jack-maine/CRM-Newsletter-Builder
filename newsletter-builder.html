@@ -2084,7 +2084,7 @@ function renderPreview() {
               + '<div style="flex:1;min-width:0;">'
               + '<span class="feat-lbl">' + (prop && prop.short === 'Shelborne' ? 'Shelborne Spotlight' : 'In The Press') + '</span>'
               + '<div style="font-family:' + T2.headFont + ';font-size:' + T2.headSize + ';font-weight:' + T2.headWeight + ';line-height:' + T2.headLH + ';letter-spacing:' + T2.headLS + ';text-transform:uppercase;color:#000000;margin:0 0 14px;">' + headline + '</div>'
-              + (copy ? '<p style="margin:0 0 24px;font-size:13px;line-height:1.8;color:#000000;">' + copy + '</p>' : '')
+              + (copy ? '<p style="margin:0 0 24px;font-size:' + T2.bodySize + ';line-height:1.8;color:#000000;font-family:' + T2.bodyFont + ';font-weight:300;">' + copy + '</p>' : '')
               + (url && cta ? '<a href="' + url + '" target="_blank" class="feat-cta">' + cta + '</a>' : '')
               + '</div>'
               + (item.img ? '<div style="width:190px;min-width:190px;flex-shrink:0;background:url(' + item.img + ') center/cover;min-height:220px;"></div>' : '')
