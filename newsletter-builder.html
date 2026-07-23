@@ -639,6 +639,25 @@ header h1 {
 .preview-scroll.mobile-view .ev-grid {
   grid-template-columns: 1fr;
 }
+.preview-scroll.mobile-view .spotlight-row {
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+.preview-scroll.mobile-view .spotlight-img {
+  order: 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 220px !important;
+  min-height: 0 !important;
+  margin-bottom: 16px;
+}
+.preview-scroll.mobile-view .spotlight-text {
+  order: 1 !important;
+  text-align: center !important;
+}
+.preview-scroll.mobile-view .spotlight-text .feat-cta {
+  display: inline-block !important;
+}
 .preview-scroll.mobile-view .grid-ev-full {
   grid-column: 1;
 }
@@ -2081,14 +2100,14 @@ function renderPreview() {
           return spotlights.map(function(item) {
             var headline = item.headline, copy = item.copy, url = item.url, cta = item.cta;
             return '<div style="border-top:1px solid var(--border);padding:32px 0 28px;">'
-              + '<div style="display:flex;gap:28px;align-items:stretch;">'
-              + '<div style="flex:1;min-width:0;">'
+              + '<div class="spotlight-row" style="display:flex;gap:28px;align-items:stretch;">'
+              + '<div class="spotlight-text" style="flex:1;min-width:0;order:1;">'
               + '<span class="feat-lbl">' + (prop && prop.short === 'Shelborne' ? 'Shelborne Spotlight' : 'In The Press') + '</span>'
               + '<div style="font-family:' + T2.headFont + ';font-size:' + T2.headSize + ';font-weight:' + T2.headWeight + ';line-height:' + T2.headLH + ';letter-spacing:' + T2.headLS + ';text-transform:uppercase;color:#000000;margin:0 0 14px;">' + headline + '</div>'
               + (copy ? '<p style="margin:0 0 24px;font-size:14px;line-height:1.8;color:#000000;font-family:\'PlantinMTPro\',Georgia,serif;font-weight:400;">' + copy + '</p>' : '')
               + (url && cta ? '<a href="' + url + '" target="_blank" class="feat-cta">' + cta + '</a>' : '')
               + '</div>'
-              + (item.img ? '<div style="width:190px;min-width:190px;flex-shrink:0;background:url(' + item.img + ') center/cover;min-height:220px;"></div>' : '')
+              + (item.img ? '<div class="spotlight-img" style="width:190px;min-width:190px;flex-shrink:0;background:url(' + item.img + ') center/cover;min-height:220px;order:2;"></div>' : '')
               + '</div>'
               + '</div>';
           }).join('');
@@ -2340,13 +2359,13 @@ function buildEmailHTML(forRender) {
           + '<tr><td style="padding:36px 40px 40px;">'
           +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">'
           +     '<tr style="height:100%;">'
-          +       '<td class="feat-td" valign="top" style="padding-right:' + (item.img ? '28px' : '0') + ';">'
+          +       (item.img ? '<td class="feat-img-td" width="190" valign="top" style="width:190px;min-width:190px;background-color:' + T.phColor + ';background-image:url(' + item.img + ');background-size:cover;background-position:center;"><a href="' + (url || '#') + '" style="display:block;width:190px;height:100%;min-height:220px;text-decoration:none;">&nbsp;</a></td>' : '')
+          +       '<td class="feat-td" valign="top" style="padding-left:' + (item.img ? '28px' : '0') + ';">'
           +         '<p style="margin:0 0 12px;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">' + (isShelborne ? 'Shelborne Spotlight' : 'In The Press') + '</p>'
           +         '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#000000;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + headline + '</h2>'
           +         (copy ? '<p style="margin:0 0 24px;font-size:' + T.bodySize + ';line-height:1.8;color:#000000;font-family:' + T.bodyFont + ';font-weight:300;">' + copy + '</p>' : '')
-          +         (url && cta ? '<a href="' + url + '" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">' + cta + '</a>' : '')
+          +         (url && cta ? '<a class="cta-btn" href="' + url + '" style="display:inline-block;padding:12px 32px;background:' + T.ctaBg + ';color:' + T.ctaColor + ';border:1.5px solid ' + T.ctaBorder + ';font-size:' + T.ctaSize + ';font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-family:' + T.ctaFont + ';">' + cta + '</a>' : '')
           +       '</td>'
-          +       (item.img ? '<td width="190" valign="top" style="width:190px;min-width:190px;background-color:' + T.phColor + ';background-image:url(' + item.img + ');background-size:cover;background-position:center;"><a href="' + (url || '#') + '" style="display:block;width:190px;height:100%;min-height:220px;text-decoration:none;">&nbsp;</a></td>' : '')
           +     '</tr>'
           +   '</table>'
           + '</td></tr>';
