@@ -1686,7 +1686,7 @@ function buildWhatsNewHtml(forEmail, forRender) {
     wnHeadFont = 'EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif'; wnHeadSize = '18px'; wnHeadLS = '.15em'; wnHeadLH = '1.1';
     wnMetaFont  = 'font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6B6560;line-height:1.1;';
     wnTitleFont = 'font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:20px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';line-height:1.1;';
-    wnCopyFont  = 'font-family:PlantinMTRegular,Georgia,serif;font-size:13px;font-weight:400;font-style:italic;color:#6B6560;line-height:1.4;';
+    wnCopyFont  = 'font-family:\'PlantinMTPro\',Georgia,serif;font-size:14px;font-weight:400;font-style:normal;color:#000000;line-height:1.8;';
     wnCtaFont   = 'font-family:EngraversGothicBold,\'Benton Sans Wide\',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:' + ink + ';text-decoration:none;white-space:nowrap;display:inline-block;padding:8px 16px;border:1.5px solid ' + ink + ';';
   } else if (isJune) {
     phColor = '#F0DBCC'; borderColor = '#E1D5C0';
@@ -1802,14 +1802,14 @@ function buildWhatsNewHtml(forEmail, forRender) {
       + '<a href="' + ev.url + '" style="' + ctaFont + '">' + ev.cta.toUpperCase() + '</a>'
       + '</td>';
 
-    var contentCell = '<td class="wn-td wn-content-td" style="vertical-align:middle;padding:20px 0;">'
+    var contentCell = '<td class="wn-td wn-content-td" style="vertical-align:middle;padding:0;">'
       + (ev.date ? '<p style="margin:0 0 4px;' + metaFont + '">' + safeDate(ev.date, '#6B6560') + '</p>' : '')
       + '<p style="margin:0 0 4px;' + titleFont + '">' + ev.title + '</p>'
       + (ev.copy ? '<p style="margin:0;' + copyFont + '">' + ev.copy + '</p>' : '')
       + '</td>';
 
     out += '<tr><td style="padding:0 40px;font-size:0;line-height:0;"><div style="height:1px;background:' + borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
-      + '<tr><td style="padding:0 40px;">'
+      + '<tr><td style="padding:20px 40px 28px;">'
       + '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
       + '<tr>'
       + (imgLeft ? imgCell + contentCell + ctaCell : imgCell + contentCell + ctaCell)
