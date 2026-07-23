@@ -1790,28 +1790,29 @@ function buildWhatsNewHtml(forEmail, forRender) {
     /* Use direct URL for email — Klaviyo fetches images itself, proxy returns 403 for CDN URLs */
     var imgSrc  = forRender ? proxyImg(ev.img, true) : ev.img;
     var imgCell = ev.img
-      ? '<td class="wn-td wn-img-td" width="110" style="padding:0;vertical-align:middle;' + (imgLeft ? 'padding-right:16px;' : 'padding-left:16px;') + '">'
+      ? '<td class="wn-td wn-img-td" width="110" style="direction:ltr;padding:0;padding-right:16px;vertical-align:middle;">'
         + '<a href="' + ev.url + '" style="display:block;font-size:0;line-height:0;text-decoration:none;">'
         + '<img src="' + imgSrc + '" width="110" style="display:block;width:110px;min-height:70px;height:auto;object-fit:cover;object-position:' + (ev.imgpos || 'center') + ';" alt="' + ev.title + '" /></a>'
         + '</td>'
-      : '<td class="wn-td wn-img-td" width="110" style="padding:0;vertical-align:middle;' + (imgLeft ? 'padding-right:16px;' : 'padding-left:16px;') + '">'
+      : '<td class="wn-td wn-img-td" width="110" style="direction:ltr;padding:0;padding-right:16px;vertical-align:middle;">'
         + '<div style="width:110px;min-height:70px;background:' + phColor + ';"></div>'
         + '</td>';
 
-    var ctaCell = '<td class="wn-td wn-cta-td" width="90" style="text-align:' + (imgLeft ? 'right' : 'left') + ';vertical-align:middle;' + (imgLeft ? 'padding-left:12px;' : 'padding-right:12px;') + '">'
+    var ctaCell = '<td class="wn-td wn-cta-td" width="90" style="direction:ltr;text-align:right;vertical-align:middle;padding-left:12px;">'
       + '<a href="' + ev.url + '" style="' + ctaFont + '">' + ev.cta.toUpperCase() + '</a>'
       + '</td>';
 
-    var contentCell = '<td class="wn-td wn-content-td" style="vertical-align:middle;padding:0;">'
+    var contentCell = '<td class="wn-td wn-content-td" style="direction:ltr;vertical-align:middle;padding:0;">'
       + (ev.date ? '<p style="margin:0 0 4px;' + metaFont + '">' + safeDate(ev.date, '#6B6560') + '</p>' : '')
       + '<p style="margin:0 0 4px;' + titleFont + '">' + ev.title + '</p>'
       + (ev.copy ? '<p style="margin:0;' + copyFont + '">' + ev.copy + '</p>' : '')
       + '</td>';
 
+    var rowDir = imgLeft ? '' : ' style="direction:rtl;"';
     out += '<tr><td style="padding:0 40px;font-size:0;line-height:0;"><div style="height:1px;background:' + borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
       + '<tr><td style="padding:20px 40px 28px;">'
       + '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
-      + '<tr>'
+      + '<tr' + rowDir + '>'
       + imgCell + contentCell + ctaCell
       + '</tr>'
       + '</table>'
