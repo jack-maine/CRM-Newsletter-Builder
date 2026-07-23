@@ -307,7 +307,7 @@ header h1 {
 .email-wrap.shelborne-mode { background: #F8F2E7; border-color: #D8D5D0; }
 .shelborne-mode .feat-sec { border-color: #D8D5D0; }
 .shelborne-mode .feat-lbl   { color: #201E1E; }
-.shelborne-mode .feat-desc  { font-family:"Arizona Mix","Cormorant Garamond",Georgia,serif!important; font-size:13px!important; font-weight:300!important; font-style:normal!important; letter-spacing:0!important; color:#201E1E!important; }
+.shelborne-mode .feat-desc  { color: #201E1E; }
 .shelborne-mode .feat-cta   { color: #201E1E; border-color: #201E1E; }
 .shelborne-mode .ev-grid { background: #F8F2E7; }
 .shelborne-mode .grid-ev { background: #F8F2E7; border-color: #D8D5D0; }
@@ -2059,7 +2059,7 @@ function renderPreview() {
   + shelborneLogoStrip
   +   '<div class="email-banner"><a href="' + (prop ? (prop.homeUrl || prop.url) : '#') + '" target="_blank" style="display:block;text-decoration:none;">' + getBannerHtml(false) + '</a></div>'
   +   (document.getElementById("introCopy").value.trim()
-      ? '<div class="feat-desc" style="padding:28px 40px;background:' + propTheme().bg + ';text-align:center;color:#000000;font-family:' + propTheme().bodyFont + ';font-size:' + propTheme().bodySize + ';line-height:1.6;border-bottom:1px solid ' + propTheme().borderColor + ';">' + document.getElementById("introCopy").value.trim() + '</div>'
+      ? '<div class="feat-desc" style="padding:28px 40px;background:' + propTheme().bg + ';text-align:center;color:#000000;line-height:1.6;border-bottom:1px solid ' + propTheme().borderColor + ';">' + document.getElementById("introCopy").value.trim() + '</div>'
       : '')
   +   '<div class="email-body">'
   +     '<div class="feat-sec">'
@@ -2084,7 +2084,7 @@ function renderPreview() {
               + '<div style="flex:1;min-width:0;">'
               + '<span class="feat-lbl">' + (prop && prop.short === 'Shelborne' ? 'Shelborne Spotlight' : 'In The Press') + '</span>'
               + '<div style="font-family:' + T2.headFont + ';font-size:' + T2.headSize + ';font-weight:' + T2.headWeight + ';line-height:' + T2.headLH + ';letter-spacing:' + T2.headLS + ';text-transform:uppercase;color:#000000;margin:0 0 14px;">' + headline + '</div>'
-              + (copy ? '<p style="margin:0 0 24px;font-size:' + T2.bodySize + ';line-height:1.8;color:#000000;font-family:' + T2.bodyFont + ';font-weight:300;">' + copy + '</p>' : '')
+              + (copy ? '<p style="margin:0 0 24px;font-size:14px;line-height:1.8;color:#000000;font-family:\'PlantinMTPro\',Georgia,serif;font-weight:400;">' + copy + '</p>' : '')
               + (url && cta ? '<a href="' + url + '" target="_blank" class="feat-cta">' + cta + '</a>' : '')
               + '</div>'
               + (item.img ? '<div style="width:190px;min-width:190px;flex-shrink:0;background:url(' + item.img + ') center/cover;min-height:220px;"></div>' : '')
