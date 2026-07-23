@@ -2291,7 +2291,7 @@ function buildEmailHTML(forRender) {
   + '@media only screen and (max-width:620px){'
   + '.outer{width:100%!important;}'
   + '.inner{padding:20px 16px!important;}'
-  + '.feat-td{display:block!important;width:100%!important;padding-right:0!important;padding-bottom:20px!important;}'
+  + '.feat-td{display:block!important;width:100%!important;padding-right:0!important;padding-left:0!important;padding-bottom:20px!important;}'
   + '.feat-img-td{display:block!important;width:100%!important;}'
   + '.feat-img-td img{width:100%!important;height:auto!important;min-height:0!important;max-height:260px;object-fit:cover;}'
   + '.grid-td{display:block!important;width:100%!important;}'
@@ -2356,16 +2356,16 @@ function buildEmailHTML(forRender) {
   /* SPOTLIGHT */
   + (function() {
       if (!spotlights.length) return '';
-      var sectionHeader = '<tr><td style="padding:0 40px;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
-        + '<tr><td style="padding:28px 40px 0;">'
+      var sectionHeader = '<tr><td style="padding:0 40px;font-size:0;line-height:0;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
+        + '<tr><td style="padding:28px 40px 20px;">'
         +   '<p style="margin:0;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">' + (isShelborne ? 'Shelborne Spotlight' : 'In The Press') + '</p>'
         + '</td></tr>';
       var items = spotlights.map(function(item) {
         var headline = item.headline, copy = item.copy, url = item.url, cta = item.cta;
-        return '<tr><td style="padding:0 40px;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
-          + '<tr><td style="padding:20px 40px 40px;">'
-          +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">'
-          +     '<tr style="height:100%;">'
+        return '<tr><td style="padding:0 40px;font-size:0;line-height:0;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
+          + '<tr><td style="padding:20px 40px 28px;">'
+          +   '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
+          +     '<tr>'
           +       (item.img ? '<td class="feat-img-td" width="190" valign="top" style="width:190px;min-width:190px;background-color:' + T.phColor + ';background-image:url(' + item.img + ');background-size:cover;background-position:center;"><a href="' + (url || '#') + '" style="display:block;width:190px;height:100%;min-height:220px;text-decoration:none;">&nbsp;</a></td>' : '')
           +       '<td class="feat-td" valign="top" style="padding-left:' + (item.img ? '28px' : '0') + ';">'
           +         '<h2 style="margin:0 0 14px;font-size:' + T.headSize + ';font-weight:' + T.headWeight + ';color:#000000;line-height:' + T.headLH + ';letter-spacing:' + T.headLS + ';font-family:' + T.headFont + ';text-transform:uppercase;">' + headline + '</h2>'
@@ -2387,7 +2387,6 @@ function buildEmailHTML(forRender) {
     ? '<tr><td style="padding:0;font-size:0;line-height:0;">'
       + '<a href="https://www.properhotel.com/" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;">'
       + '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/' + (isShelborne ? 'shelborne-insider-slice.png' : 'proper-insider-slice.png') + '" width="600" alt="Proper Insider" style="display:block;width:100%;height:auto;" />'
-
       + '</a>'
       + '</td></tr>'
     : '')
