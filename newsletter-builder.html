@@ -2059,8 +2059,8 @@ function renderPreview() {
   + shelborneLogoStrip
   +   '<div class="email-banner"><a href="' + (prop ? (prop.homeUrl || prop.url) : '#') + '" target="_blank" style="display:block;text-decoration:none;">' + getBannerHtml(false) + '</a></div>'
   +   (document.getElementById("introCopy").value.trim()
-      ? '<div class="feat-desc" style="padding:28px 40px;background:' + propTheme().bg + ';text-align:center;color:#000000;line-height:1.6;">' + document.getElementById("introCopy").value.trim() + '</div>'
-        + '<div style="margin:0 40px;height:1px;background:' + propTheme().borderColor + ';font-size:0;line-height:0;"></div>'
+      ? '<div class="feat-desc" style="padding:28px 40px 8px;background:' + propTheme().bg + ';text-align:center;color:#000000;line-height:1.6;margin-bottom:0;">' + document.getElementById("introCopy").value.trim() + '</div>'
+        + '<div style="margin:0 40px 0;height:1px;background:' + propTheme().borderColor + ';font-size:0;line-height:0;"></div>'
       : '')
   +   '<div class="email-body">'
   +     '<div class="feat-sec">'
