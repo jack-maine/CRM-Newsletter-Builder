@@ -2119,7 +2119,9 @@ function renderPreview() {
   +     buildWhatsNewHtml(false, false)
   +   '</div>'
   +   ((prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA'))
-      ? '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/spotify-slice.png" style="display:block;width:100%;height:auto;" alt="Spotify" />'
+      ? '<a href="https://open.spotify.com/user/affdh314gvpzi7w10ufd8cx6o?si=22df0e9e446145d1" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;">'
+        + '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/spotify-slice.png" style="display:block;width:100%;height:auto;" alt="Spotify" />'
+        + '</a>'
       : '')
   +   ((prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA' || prop.short === 'Shelborne'))
       ? '<a href="https://www.properhotel.com/" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;margin-top:-40px;">'
@@ -2389,7 +2391,9 @@ function buildEmailHTML(forRender) {
   /* SPOTIFY slice — Proper Hotels only, above Proper Insider */
   + (isProper
     ? '<tr><td style="padding:0;font-size:0;line-height:0;">'
+      + '<a href="https://open.spotify.com/user/affdh314gvpzi7w10ufd8cx6o?si=22df0e9e446145d1" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;">'
       + '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/spotify-slice.png" width="600" alt="Spotify" style="display:block;width:100%;height:auto;" />'
+      + '</a>'
       + '</td></tr>'
     : '')
 
