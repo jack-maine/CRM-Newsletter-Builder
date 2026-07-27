@@ -838,7 +838,7 @@ header h1 {
       <div id="lpForm" style="display:none;padding:0 16px 14px;flex-direction:column;gap:7px;">
         <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-family:'Montserrat',sans-serif;margin-bottom:2px;">New Living Proper Item</div>
         <input id="lp_title" type="text" placeholder="Title *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="lp_meta"  type="text" placeholder="Meta (e.g. MON–WED | LA PISCINA | 2PM–4PM)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <input id="lp_copy"  type="text" placeholder="Supporting copy (optional)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
         <input id="lp_img"   type="text" required placeholder="Image URL *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
         <select id="lp_imgpos" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;background:#fff;color:var(--ink);">
           <option value="center">Image crop: Center (default)</option>
@@ -1702,14 +1702,14 @@ function addLivingProperItem() {
   document.getElementById("lp_url").style.borderColor = "";
   livingProper.push({
     title:  title,
-    meta:   document.getElementById("lp_meta").value.trim(),
+    copy:   document.getElementById("lp_copy").value.trim(),
     img:    img,
     imgpos: document.getElementById("lp_imgpos").value || "center",
     url:    url,
     cta:    document.getElementById("lp_cta").value.trim() || "Details"
   });
   document.getElementById("lp_imgpos").value = "center";
-  ["lp_title","lp_meta","lp_img","lp_url","lp_cta"].forEach(function(id) {
+  ["lp_title","lp_copy","lp_img","lp_url","lp_cta"].forEach(function(id) {
     document.getElementById(id).value = "";
   });
   renderLpList();
@@ -1731,7 +1731,7 @@ function removeLivingProper(i) {
 function editLivingProper(i) {
   var ev = livingProper[i];
   document.getElementById("lp_title").value  = ev.title  || "";
-  document.getElementById("lp_meta").value   = ev.meta   || "";
+  document.getElementById("lp_copy").value   = ev.copy   || "";
   document.getElementById("lp_img").value    = ev.img    || "";
   document.getElementById("lp_imgpos").value = ev.imgpos || "center";
   document.getElementById("lp_url").value    = ev.url    || "";
@@ -1753,7 +1753,7 @@ function renderLpList() {
     return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);">'
       + (ev.img ? '<img src="' + ev.img + '" style="width:36px;height:28px;object-fit:cover;flex-shrink:0;" />' : '<div style="width:36px;height:28px;background:#eee;flex-shrink:0;"></div>')
       + '<div style="flex:1;min-width:0;">'
-      +   '<div style="font-size:9px;color:var(--mid);font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (ev.meta || '') + '</div>'
+      +   '<div style="font-size:9px;color:var(--mid);font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (ev.copy || '') + '</div>'
       +   '<div style="font-size:11px;font-weight:600;font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + ev.title + '</div>'
       + '</div>'
       + '<button onclick="editLivingProper(' + i + ')" style="background:none;border:none;cursor:pointer;color:#888;font-size:13px;flex-shrink:0;padding:2px 4px;" title="Edit">✎</button>'
@@ -2226,7 +2226,7 @@ function renderPreview() {
               + '<div class="grid-img-box">' + (ev.img ? '<img src="' + ev.img + '" />' : 'img') + '</div>'
               + '<div class="grid-ev-info">'
               + '<div class="grid-title">' + ev.title + '</div>'
-              + (ev.meta ? '<div class="grid-meta">' + ev.meta + '</div>' : '')
+              + (ev.copy ? '<p class="feat-desc" style="margin:0 0 14px;font-size:13px;">' + ev.copy + '</p>' : '')
               + '<a href="' + ev.url + '" class="grid-cta">' + ev.cta + '</a>'
               + '</div></div>';
           }).join('');
@@ -2514,7 +2514,23 @@ function buildEmailHTML(forRender) {
       var rows = pairs.map(function(pair) {
         return '<tr>'
           + pair.map(function(ev) {
-              return buildGridCell({title: ev.title, date: ev.meta, cat: '', img: ev.img, url: ev.url, cta: ev.cta, imgpos: ev.imgpos}, 248, false, _forRender, null);
+              var imgSrc = _forRender ? proxyImg(ev.img, true) : ev.img;
+              var T2 = T;
+              var tdStyle = 'padding:0;border:1px solid ' + T2.borderColor + ';vertical-align:top;';
+              var cell = '<td class="grid-td" width="248" valign="top" style="' + tdStyle + '">';
+              if (imgSrc) {
+                cell += '<a href="' + ev.url + '" style="display:block;text-decoration:none;font-size:0;line-height:0;">'
+                     +  '<img src="' + imgSrc + '" width="248" style="display:block;width:100%;height:200px;object-fit:cover;object-position:' + (ev.imgpos || 'center') + ';" alt="' + ev.title + '" />'
+                     +  '</a>';
+              } else {
+                cell += '<div style="width:100%;height:200px;background:' + T2.phColor + ';"></div>';
+              }
+              cell += '<div style="padding:18px 20px 22px;">';
+              cell += '<p style="margin:0 0 10px;font-size:' + T2.gridTitleSize + ';font-weight:700;letter-spacing:' + T2.gridTitleLS + ';line-height:' + T2.gridTitleLH + ';color:#201E1E;font-family:' + T2.gridTitleFont + ';text-transform:uppercase;">' + ev.title + '</p>';
+              if (ev.copy) cell += '<p style="margin:0 0 16px;font-family:\'PlantinMTPro\',Georgia,serif;font-size:13px;font-weight:400;font-style:normal;line-height:1.6;color:#201E1E;">' + ev.copy + '</p>';
+              cell += '<a href="' + ev.url + '" style="display:inline-block;padding:9px 20px;background:' + T2.ctaBg + ';border:1.5px solid ' + T2.ctaBorder + ';font-size:' + T2.ctaSize + ';font-weight:700;letter-spacing:.15em;line-height:1.3;text-transform:uppercase;color:' + T2.ctaColor + ';text-decoration:none;font-family:' + T2.ctaFont + ';">' + ev.cta + '</a>';
+              cell += '</div></td>';
+              return cell;
             }).join('')
           + '</tr>';
       }).join('');
