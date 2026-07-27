@@ -2118,6 +2118,9 @@ function renderPreview() {
         })()
   +     buildWhatsNewHtml(false, false)
   +   '</div>'
+  +   ((prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA'))
+      ? '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/spotify-slice.png" style="display:block;width:100%;height:auto;" alt="Spotify" />'
+      : '')
   +   ((prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA' || prop.short === 'Shelborne'))
       ? '<a href="https://www.properhotel.com/" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;margin-top:-40px;">'
         + '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/' + (prop.short === 'Shelborne' ? 'shelborne-insider-slice.png' : 'proper-insider-slice.png') + '" style="display:block;width:100%;height:auto;" alt="Proper Insider" />'
@@ -2382,6 +2385,13 @@ function buildEmailHTML(forRender) {
 
   /* WHAT'S NEW */
   + buildWhatsNewHtml(true, _forRender)
+
+  /* SPOTIFY slice — Proper Hotels only, above Proper Insider */
+  + (isProper
+    ? '<tr><td style="padding:0;font-size:0;line-height:0;">'
+      + '<img src="https://cdn.jsdelivr.net/gh/jack-maine/CRM-Newsletter-Builder@main/spotify-slice.png" width="600" alt="Spotify" style="display:block;width:100%;height:auto;" />'
+      + '</td></tr>'
+    : '')
 
   /* PROPER INSIDER image — Proper Hotels + Shelborne */
   + ((isProper || isShelborne)
