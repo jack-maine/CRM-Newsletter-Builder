@@ -2221,26 +2221,19 @@ function renderPreview() {
   +     (function() {
           if (!livingProper.length || !prop || !(prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA')) return '';
           var T2 = propTheme();
-          var pairs = [];
-          for (var i = 0; i < livingProper.length; i += 2) pairs.push(livingProper.slice(i, i + 2));
-          var gridHtml = pairs.map(function(pair) {
-            return '<div style="display:flex;gap:8px;margin-bottom:8px;">'
-              + pair.map(function(ev) {
-                  return '<div class="grid-ev" style="flex:1;border:1px solid var(--border);">'
-                    + '<div class="grid-img-box" style="height:200px;background-size:cover;background-position:' + (ev.imgpos || 'center') + ';background-image:url(' + ev.img + ');"></div>'
-                    + '<div style="padding:18px 20px 22px;">'
-                    + '<p class="grid-title" style="margin:0 0 6px;">' + ev.title + '</p>'
-                    + (ev.meta ? '<p class="grid-meta" style="margin:0 0 14px;">' + ev.meta + '</p>' : '')
-                    + '<a href="' + ev.url + '" class="grid-cta feat-cta" style="display:inline-block;">' + ev.cta + '</a>'
-                    + '</div>'
-                    + '</div>';
-                }).join('')
-              + '</div>';
+          var gridHtml = livingProper.map(function(ev) {
+            return '<div class="grid-ev">'
+              + '<div class="grid-img-box">' + (ev.img ? '<img src="' + ev.img + '" />' : 'img') + '</div>'
+              + '<div class="grid-ev-info">'
+              + '<div class="grid-title">' + ev.title + '</div>'
+              + (ev.meta ? '<div class="grid-meta">' + ev.meta + '</div>' : '')
+              + '<a href="' + ev.url + '" class="grid-cta">' + ev.cta + '</a>'
+              + '</div></div>';
           }).join('');
           return '<div style="border-top:1px solid var(--border);padding:28px 0 20px;">'
             + '<span class="feat-lbl">Living Proper</span>'
             + '</div>'
-            + '<div class="ev-grid" style="padding:0 0 32px;">' + gridHtml + '</div>';
+            + '<div class="ev-grid" style="margin-bottom:32px;">' + gridHtml + '</div>';
         })()
   +   '</div>'
   +   ((prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA'))
