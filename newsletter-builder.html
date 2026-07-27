@@ -2099,7 +2099,7 @@ function renderPreview() {
           if (!spotlights.length) return '';
           var T2 = propTheme();
           var sectionLabel = '<div style="border-top:1px solid var(--border);padding:28px 0 20px;">'
-            + '<span class="feat-lbl">' + (prop && prop.short === 'Shelborne' ? 'Shelborne Spotlight' : 'In The Press') + '</span>'
+            + '<span class="feat-lbl">' + (prop && prop.short === 'Shelborne' ? 'Shelborne Spotlight' : (prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA')) ? 'Proper Spotlight' : 'In The Press') + '</span>'
             + '</div>';
           var items = spotlights.map(function(item) {
             var headline = item.headline, copy = item.copy, url = item.url, cta = item.cta;
@@ -2364,7 +2364,7 @@ function buildEmailHTML(forRender) {
       if (!spotlights.length) return '';
       var sectionHeader = '<tr><td style="padding:0 40px;font-size:0;line-height:0;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
         + '<tr><td style="padding:28px 40px 20px;">'
-        +   '<p style="margin:0;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">' + (isShelborne ? 'Shelborne Spotlight' : 'In The Press') + '</p>'
+        +   '<p style="margin:0;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">' + (isShelborne ? 'Shelborne Spotlight' : isProper ? 'Proper Spotlight' : 'In The Press') + '</p>'
         + '</td></tr>';
       var items = spotlights.map(function(item) {
         var headline = item.headline, copy = item.copy, url = item.url, cta = item.cta;
