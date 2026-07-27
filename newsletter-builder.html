@@ -725,6 +725,78 @@ header h1 {
 .modal-input:focus { border-color: var(--tan); }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
+/* Section accordion toggles */
+.section-toggle {
+  width: 100%;
+  padding: 11px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background .12s;
+}
+.section-toggle:hover { background: var(--tan-soft); }
+.section-toggle-icon {
+  font-size: 11px;
+  line-height: 1;
+  color: var(--tan-d);
+  transition: transform .15s;
+  flex-shrink: 0;
+}
+.section-toggle-icon.open { transform: rotate(90deg); }
+.section-form {
+  padding: 0 16px 16px;
+  flex-direction: column;
+  gap: 7px;
+  background: var(--tan-soft);
+}
+.section-form-label {
+  font-size: 8px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 4px;
+}
+.section-form input,
+.section-form select,
+.section-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  outline: none;
+  background: #fff;
+  color: var(--ink);
+}
+.section-form input:focus,
+.section-form select:focus,
+.section-form textarea:focus { border-color: var(--tan); }
+.section-form-btn {
+  padding: 9px 14px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  transition: background .12s;
+}
+.section-form-btn:hover { background: var(--tan-d); }
+.section-list { padding: 0 16px 4px; display: flex; flex-direction: column; gap: 6px; }
+
 </style>
 </head>
 <body>
@@ -783,74 +855,81 @@ header h1 {
       <div class="hint">Select a property above</div>
     </div>
 
+    <!-- Bottom scrollable zone -->
+    <div style="overflow-y:auto;flex-shrink:0;max-height:calc(100vh - 320px);">
+
     <!-- Shelborne intro copy -->
-    <div id="introCopyWrap" style="display:none;border-top:1px solid var(--border);padding:12px 16px;flex-shrink:0;">
+    <div id="introCopyWrap" style="display:none;border-top:1px solid var(--border);padding:12px 16px;">
       <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-family:'Montserrat',sans-serif;margin-bottom:6px;">Intro Copy (below hero)</div>
       <textarea id="introCopy" placeholder="Optional intro copy beneath the banner…" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;resize:vertical;min-height:72px;line-height:1.5;" oninput="renderPreview()"></textarea>
     </div>
 
     <!-- Spotlight Section -->
     <div id="spotlightWrap" style="display:none;border-top:1px solid var(--border);flex-shrink:0;">
-      <button onclick="toggleSpotlight()" id="spotlightToggle" style="width:100%;padding:10px 20px;background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-align:left;display:flex;align-items:center;gap:8px;">
-        <span id="spotlightToggleIcon" style="font-size:14px;line-height:1;">+</span> Add Spotlight
+      <button onclick="toggleSpotlight()" id="spotlightToggle" class="section-toggle">
+        Spotlight
+        <span id="spotlightToggleIcon" class="section-toggle-icon">&#8250;</span>
       </button>
-      <div id="slList" style="padding:0 16px 4px;display:flex;flex-direction:column;gap:6px;"></div>
-      <div id="spotlightForm" style="display:none;padding:0 16px 12px;flex-direction:column;gap:6px;">
-        <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-family:'Montserrat',sans-serif;margin-bottom:2px;">New Spotlight Item</div>
-        <input id="sl_headline" type="text" placeholder="Headline (e.g. Best Hotel in Austin) *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <textarea id="sl_copy" placeholder="Optional supporting copy…" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;resize:vertical;min-height:54px;line-height:1.5;"></textarea>
-        <input id="sl_img" type="text" placeholder="Optional image URL" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="sl_url" type="text" placeholder="Optional link URL" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="sl_cta" type="text" placeholder="Optional CTA label (e.g. Read More)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <button onclick="addSpotlightItem()" style="padding:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to Spotlight</button>
+      <div id="slList" class="section-list"></div>
+      <div id="spotlightForm" style="display:none;" class="section-form">
+        <div class="section-form-label">New spotlight item</div>
+        <input id="sl_headline" type="text" placeholder="Headline (e.g. Best Hotel in Austin) *" />
+        <textarea id="sl_copy" placeholder="Optional supporting copy…" style="resize:vertical;min-height:54px;line-height:1.5;"></textarea>
+        <input id="sl_img" type="text" placeholder="Optional image URL" />
+        <input id="sl_url" type="text" placeholder="Optional link URL" />
+        <input id="sl_cta" type="text" placeholder="Optional CTA label (e.g. Read More)" />
+        <button onclick="addSpotlightItem()" class="section-form-btn">Add to Spotlight</button>
       </div>
     </div>
 
     <!-- What's New Section -->
     <div style="border-top:1px solid var(--border);flex-shrink:0;">
-      <button onclick="toggleCustomForm()" id="customToggle" style="width:100%;padding:10px 20px;background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-align:left;display:flex;align-items:center;gap:8px;">
-        <span id="customToggleIcon" style="font-size:14px;line-height:1;">+</span> Add to What's New
+      <button onclick="toggleCustomForm()" id="customToggle" class="section-toggle">
+        What's New
+        <span id="customToggleIcon" class="section-toggle-icon">&#8250;</span>
       </button>
       <!-- What's New event list -->
-      <div id="wnList" style="padding:0 16px 4px;display:flex;flex-direction:column;gap:6px;"></div>
+      <div id="wnList" class="section-list"></div>
       <!-- Add form -->
-      <div id="customForm" style="display:none;padding:0 16px 14px;flex-direction:column;gap:7px;">
-        <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-family:'Montserrat',sans-serif;margin-bottom:2px;">New What's New Item</div>
-        <input id="cf_title" type="text" placeholder="Event title *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="cf_date"  type="text" placeholder="Date · Category (e.g. JUN 12 · WELLNESS)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="cf_copy"  type="text" placeholder="One line of copy" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="cf_img"   type="text" required placeholder="Image URL *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <select id="cf_imgpos" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;background:#fff;color:var(--ink);">
+      <div id="customForm" style="display:none;" class="section-form">
+        <div class="section-form-label">New item</div>
+        <input id="cf_title" type="text" placeholder="Event title *" />
+        <input id="cf_date"  type="text" placeholder="Date · Category (e.g. JUN 12 · WELLNESS)" />
+        <input id="cf_copy"  type="text" placeholder="One line of copy" />
+        <input id="cf_img"   type="text" required placeholder="Image URL *" />
+        <select id="cf_imgpos">
           <option value="center">Image crop: Center (default)</option>
           <option value="top">Image crop: Top</option>
           <option value="bottom">Image crop: Bottom</option>
         </select>
-        <input id="cf_url"   type="text" required placeholder="Link URL * (https://…)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="cf_cta"   type="text" placeholder="CTA label (e.g. BOOK, DETAILS, SAVE SEAT)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <button onclick="addWhatsNewEvent()" style="padding:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to What's New</button>
+        <input id="cf_url"   type="text" required placeholder="Link URL * (https://…)" />
+        <input id="cf_cta"   type="text" placeholder="CTA label (e.g. BOOK, DETAILS, SAVE SEAT)" />
+        <button onclick="addWhatsNewEvent()" class="section-form-btn">Add to What's New</button>
       </div>
     <!-- Living Proper Section -->
     <div style="border-top:1px solid var(--border);flex-shrink:0;">
-      <button onclick="toggleLpForm()" id="lpToggle" style="width:100%;padding:10px 20px;background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-align:left;display:flex;align-items:center;gap:8px;">
-        <span id="lpToggleIcon" style="font-size:14px;line-height:1;">+</span> Add to Living Proper
+      <button onclick="toggleLpForm()" id="lpToggle" class="section-toggle">
+        Living Proper
+        <span id="lpToggleIcon" class="section-toggle-icon">&#8250;</span>
       </button>
-      <div id="lpList" style="padding:0 16px 4px;display:flex;flex-direction:column;gap:6px;"></div>
-      <div id="lpForm" style="display:none;padding:0 16px 14px;flex-direction:column;gap:7px;">
-        <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-family:'Montserrat',sans-serif;margin-bottom:2px;">New Living Proper Item</div>
-        <input id="lp_title" type="text" placeholder="Title *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="lp_copy"  type="text" placeholder="Supporting copy (optional)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="lp_img"   type="text" required placeholder="Image URL *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <select id="lp_imgpos" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;background:#fff;color:var(--ink);">
+      <div id="lpList" class="section-list"></div>
+      <div id="lpForm" style="display:none;" class="section-form">
+        <div class="section-form-label">New item</div>
+        <input id="lp_title" type="text" placeholder="Title *" />
+        <input id="lp_copy"  type="text" placeholder="Supporting copy (optional)" />
+        <input id="lp_img"   type="text" required placeholder="Image URL *" />
+        <select id="lp_imgpos">
           <option value="center">Image crop: Center (default)</option>
           <option value="top">Image crop: Top</option>
           <option value="bottom">Image crop: Bottom</option>
         </select>
-        <input id="lp_url"   type="text" required placeholder="Link URL * (https://…)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <input id="lp_cta"   type="text" placeholder="CTA label (e.g. RESERVE NOW)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
-        <button onclick="addLivingProperItem()" style="padding:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to Living Proper</button>
+        <input id="lp_url"   type="text" required placeholder="Link URL * (https://…)" />
+        <input id="lp_cta"   type="text" placeholder="CTA label (e.g. RESERVE NOW)" />
+        <button onclick="addLivingProperItem()" class="section-form-btn">Add to Living Proper</button>
       </div>
     </div>
     </div>
+    </div><!-- /bottom scrollable zone -->
   </div>
 
   <!-- RIGHT: Preview -->
@@ -1024,7 +1103,7 @@ function propTheme() {
     ctaFont:'CenturyGothic,\'Century Gothic\',\'Helvetica Neue\',Arial,sans-serif', ctaSize:'10px', ctaBorder:'#222223', ctaColor:'#222223', ctaBg:'transparent',
     gridTitleSize:'16px', gridTitleFont:'Bellefair,\'Bellefair\',Georgia,serif', gridTitleLS:'.02em', gridTitleLH:'1.25'};
   return {bg:'#ffffff', accentBg:'#201E1E', accentText:'#ffffff', borderColor:'#D8D5D0', phColor:'#F4F2F0',
-    labelFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'12px', labelLS:'.15em', labelLH:'1.5',
+    labelFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'16px', labelLS:'.15em', labelLH:'1.5',
     headFont:'ABCArizonaMix,\'Arizona Mix\',Georgia,serif', headSize:'28px', headWeight:'300', headLS:'-.01em', headLH:'1.2',
     metaFont:'BentonSansRE,\'Benton Sans\',Arial,sans-serif', metaStyle:'normal', metaSize:'12px', metaColor:'#6B6560', metaLS:'.15em',
     bodyFont:'\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif', bodySize:'13px', bodyColor:'#6B6560',
@@ -1426,7 +1505,7 @@ function toggleSpotlight() {
   var icon = document.getElementById("spotlightToggleIcon");
   var open = form.style.display === "flex";
   form.style.display = open ? "none" : "flex";
-  icon.textContent   = open ? "+" : "–";
+  icon.classList.toggle("open", !open);
 }
 
 function addSpotlightItem() {
@@ -1469,7 +1548,7 @@ function editSpotlight(i) {
   renderPreview();
   var form = document.getElementById("spotlightForm");
   form.style.display = "flex";
-  document.getElementById("spotlightToggleIcon").textContent = "–";
+  document.getElementById("spotlightToggleIcon").classList.add("open");
   document.getElementById("sl_headline").focus();
   document.getElementById("sl_headline").scrollIntoView({behavior:"smooth", block:"center"});
 }
@@ -1495,7 +1574,7 @@ function toggleCustomForm() {
   var icon = document.getElementById("customToggleIcon");
   var open = form.style.display === "flex";
   form.style.display = open ? "none" : "flex";
-  icon.textContent   = open ? "+" : "–";
+  icon.classList.toggle("open", !open);
 }
 
 function addWhatsNewEvent() {
@@ -1557,7 +1636,7 @@ function editWhatsNew(i) {
   var form = document.getElementById("customForm");
   if (form) { form.style.display = "flex"; }
   var icon = document.getElementById("customToggleIcon");
-  if (icon) { icon.textContent = "–"; }
+  if (icon) { icon.classList.add("open"); }
   document.getElementById("cf_title").focus();
   document.getElementById("cf_title").scrollIntoView({behavior:"smooth", block:"center"});
 }
@@ -1688,7 +1767,7 @@ function toggleLpForm() {
   var icon = document.getElementById("lpToggleIcon");
   var open = form.style.display === "flex";
   form.style.display = open ? "none" : "flex";
-  icon.textContent = open ? "+" : "–";
+  icon.classList.toggle("open", !open);
 }
 
 function addLivingProperItem() {
@@ -1742,7 +1821,7 @@ function editLivingProper(i) {
   var form = document.getElementById("lpForm");
   if (form) { form.style.display = "flex"; }
   var icon = document.getElementById("lpToggleIcon");
-  if (icon) { icon.textContent = "–"; }
+  if (icon) { icon.classList.add("open"); }
   document.getElementById("lp_title").focus();
 }
 
@@ -2348,7 +2427,7 @@ function buildEmailHTML(forRender) {
       gridTitleSize:'16px', gridTitleFont:'Bellefair,\'Bellefair\',Georgia,serif', gridTitleLS:'.02em', gridTitleLH:'1.25'};
     /* Default (Proper Hotels) */
     return {bg:'#ffffff', accentBg:'#201E1E', accentText:'#ffffff', borderColor:'#D8D5D0', phColor:'#F4F2F0',
-      labelFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'12px', labelLS:'.15em', labelLH:'1.5',
+      labelFont:'BentonSansWide,\'Benton Sans Wide\',Arial,sans-serif', labelSize:'16px', labelLS:'.15em', labelLH:'1.5',
       headFont:'ABCArizonaMix,\'Arizona Mix\',Georgia,serif', headSize:'28px', headWeight:'300', headLS:'-.01em', headLH:'1.2',
       metaFont:'BentonSansRE,\'Benton Sans\',Arial,sans-serif', metaStyle:'normal', metaSize:'12px', metaColor:'#6B6560', metaLS:'.15em',
       bodyFont:'\'Arizona Mix\',\'Cormorant Garamond\',Georgia,serif', bodySize:'13px', bodyColor:'#6B6560',
