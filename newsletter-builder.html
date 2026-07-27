@@ -829,6 +829,27 @@ header h1 {
         <input id="cf_cta"   type="text" placeholder="CTA label (e.g. BOOK, DETAILS, SAVE SEAT)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
         <button onclick="addWhatsNewEvent()" style="padding:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to What's New</button>
       </div>
+    <!-- Living Proper Section -->
+    <div style="border-top:1px solid var(--border);flex-shrink:0;">
+      <button onclick="toggleLpForm()" id="lpToggle" style="width:100%;padding:10px 20px;background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-align:left;display:flex;align-items:center;gap:8px;">
+        <span id="lpToggleIcon" style="font-size:14px;line-height:1;">+</span> Add to Living Proper
+      </button>
+      <div id="lpList" style="padding:0 16px 4px;display:flex;flex-direction:column;gap:6px;"></div>
+      <div id="lpForm" style="display:none;padding:0 16px 14px;flex-direction:column;gap:7px;">
+        <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);font-family:'Montserrat',sans-serif;margin-bottom:2px;">New Living Proper Item</div>
+        <input id="lp_title" type="text" placeholder="Title *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <input id="lp_meta"  type="text" placeholder="Meta (e.g. MON–WED | LA PISCINA | 2PM–4PM)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <input id="lp_img"   type="text" required placeholder="Image URL *" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <select id="lp_imgpos" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;background:#fff;color:var(--ink);">
+          <option value="center">Image crop: Center (default)</option>
+          <option value="top">Image crop: Top</option>
+          <option value="bottom">Image crop: Bottom</option>
+        </select>
+        <input id="lp_url"   type="text" required placeholder="Link URL * (https://…)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <input id="lp_cta"   type="text" placeholder="CTA label (e.g. RESERVE NOW)" style="width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;" />
+        <button onclick="addLivingProperItem()" style="padding:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;">Add to Living Proper</button>
+      </div>
+    </div>
     </div>
   </div>
 
@@ -949,7 +970,7 @@ var SHELBORNE_EVENTS = [
   {"title":"The Art of Pour: Cocktail Masterclass","date":"MON JUN 29 | 6–7PM","cat":"Culinary","img":"https://shelborne.com/wp-content/uploads/2026/01/Copy-of-ShelborneWebsite-HeaderImageSizeTemplate-10.png","desc":"Learn professional bartending techniques from our expert team. Two complimentary cocktails included. Space is limited — RSVP required.","url":"https://shelborne.com/happenings/"}
 ];
 
-var evs = [], sel = [], whatsNew = [], spotlights = [], prop = null, viewMode = 'desktop';
+var evs = [], sel = [], whatsNew = [], spotlights = [], livingProper = [], prop = null, viewMode = 'desktop';
 
 function propTheme() {
   var s = prop ? prop.short : null;
@@ -1167,7 +1188,7 @@ window.onload = function() {
     var btn = document.getElementById("loadBtn");
     btn.className = "load-btn active";
     btn.textContent = "Load Events from " + prop.name;
-    evs = []; sel = []; whatsNew = []; spotlights = []; selectedMonth = null;
+    evs = []; sel = []; whatsNew = []; spotlights = []; livingProper = []; selectedMonth = null;
     document.getElementById("monthFilter").style.display = "none";
     document.getElementById("selCount").textContent = "0";
     document.getElementById("errMsg").style.display = "none";
@@ -1661,6 +1682,86 @@ function toggle(i) {
   document.getElementById("klBtn").disabled  = !has;
 }
 
+/* ── Living Proper ──────────────────────────────────────────────────────── */
+function toggleLpForm() {
+  var form = document.getElementById("lpForm");
+  var icon = document.getElementById("lpToggleIcon");
+  var open = form.style.display === "flex";
+  form.style.display = open ? "none" : "flex";
+  icon.textContent = open ? "+" : "–";
+}
+
+function addLivingProperItem() {
+  var title = document.getElementById("lp_title").value.trim();
+  var img   = normalizeImgUrl(document.getElementById("lp_img").value.trim());
+  var url   = document.getElementById("lp_url").value.trim();
+  if (!title) { alert("Please enter a title."); return; }
+  if (!img)   { document.getElementById("lp_img").style.borderColor = "#c0392b"; alert("Image URL is required."); return; }
+  if (!url)   { document.getElementById("lp_url").style.borderColor = "#c0392b"; alert("Link URL is required."); return; }
+  document.getElementById("lp_img").style.borderColor = "";
+  document.getElementById("lp_url").style.borderColor = "";
+  livingProper.push({
+    title:  title,
+    meta:   document.getElementById("lp_meta").value.trim(),
+    img:    img,
+    imgpos: document.getElementById("lp_imgpos").value || "center",
+    url:    url,
+    cta:    document.getElementById("lp_cta").value.trim() || "Details"
+  });
+  document.getElementById("lp_imgpos").value = "center";
+  ["lp_title","lp_meta","lp_img","lp_url","lp_cta"].forEach(function(id) {
+    document.getElementById(id).value = "";
+  });
+  renderLpList();
+  renderPreview();
+  var has = sel.length > 0 || whatsNew.length > 0 || livingProper.length > 0;
+  document.getElementById("dlBtn").disabled = !has;
+  document.getElementById("klBtn").disabled = !has;
+}
+
+function removeLivingProper(i) {
+  livingProper.splice(i, 1);
+  renderLpList();
+  renderPreview();
+  var has = sel.length > 0 || whatsNew.length > 0 || livingProper.length > 0;
+  document.getElementById("dlBtn").disabled = !has;
+  document.getElementById("klBtn").disabled = !has;
+}
+
+function editLivingProper(i) {
+  var ev = livingProper[i];
+  document.getElementById("lp_title").value  = ev.title  || "";
+  document.getElementById("lp_meta").value   = ev.meta   || "";
+  document.getElementById("lp_img").value    = ev.img    || "";
+  document.getElementById("lp_imgpos").value = ev.imgpos || "center";
+  document.getElementById("lp_url").value    = ev.url    || "";
+  document.getElementById("lp_cta").value    = ev.cta    || "";
+  livingProper.splice(i, 1);
+  renderLpList();
+  renderPreview();
+  var form = document.getElementById("lpForm");
+  if (form) { form.style.display = "flex"; }
+  var icon = document.getElementById("lpToggleIcon");
+  if (icon) { icon.textContent = "–"; }
+  document.getElementById("lp_title").focus();
+}
+
+function renderLpList() {
+  var el = document.getElementById("lpList");
+  if (!livingProper.length) { el.innerHTML = ""; return; }
+  el.innerHTML = livingProper.map(function(ev, i) {
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);">'
+      + (ev.img ? '<img src="' + ev.img + '" style="width:36px;height:28px;object-fit:cover;flex-shrink:0;" />' : '<div style="width:36px;height:28px;background:#eee;flex-shrink:0;"></div>')
+      + '<div style="flex:1;min-width:0;">'
+      +   '<div style="font-size:9px;color:var(--mid);font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (ev.meta || '') + '</div>'
+      +   '<div style="font-size:11px;font-weight:600;font-family:\'Montserrat\',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + ev.title + '</div>'
+      + '</div>'
+      + '<button onclick="editLivingProper(' + i + ')" style="background:none;border:none;cursor:pointer;color:#888;font-size:13px;flex-shrink:0;padding:2px 4px;" title="Edit">✎</button>'
+      + '<button onclick="removeLivingProper(' + i + ')" style="background:none;border:none;cursor:pointer;color:#aaa;font-size:14px;flex-shrink:0;" title="Remove">✕</button>'
+      + '</div>';
+  }).join("");
+}
+
 /* ── What's New section builder ─────────────────────────────────────────── */
 function buildWhatsNewHtml(forEmail, forRender) {
   if (!whatsNew.length) return "";
@@ -2117,6 +2218,31 @@ function renderPreview() {
           return sectionLabel + items;
         })()
   +     buildWhatsNewHtml(false, false)
+  +     (function() {
+          if (!livingProper.length || !prop || !(prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA')) return '';
+          var T2 = propTheme();
+          var pairs = [];
+          for (var i = 0; i < livingProper.length; i += 2) pairs.push(livingProper.slice(i, i + 2));
+          var gridHtml = pairs.map(function(pair) {
+            return '<div style="display:flex;gap:8px;">'
+              + pair.map(function(ev) {
+                  var imgSrc = proxyImg(ev.img, true);
+                  return '<div class="grid-ev" style="flex:1;border:1px solid var(--border);">'
+                    + '<div class="grid-img-box" style="height:200px;background-size:cover;background-position:' + (ev.imgpos || 'center') + ';background-image:url(' + imgSrc + ');"></div>'
+                    + '<div style="padding:18px 20px 22px;">'
+                    + '<p class="grid-title" style="margin:0 0 6px;">' + ev.title + '</p>'
+                    + (ev.meta ? '<p class="grid-meta" style="margin:0 0 14px;">' + ev.meta + '</p>' : '')
+                    + '<a href="' + ev.url + '" class="grid-cta feat-cta" style="display:inline-block;">' + ev.cta + '</a>'
+                    + '</div>'
+                    + '</div>';
+                }).join('')
+              + '</div>';
+          }).join('');
+          return '<div style="border-top:1px solid var(--border);padding:28px 0 20px;">'
+            + '<span class="feat-lbl">Living Proper</span>'
+            + '</div>'
+            + '<div class="ev-grid" style="padding:0;">' + gridHtml + '</div>';
+        })()
   +   '</div>'
   +   ((prop && (prop.short === 'Austin' || prop.short === 'SMP' || prop.short === 'SF' || prop.short === 'DTLA'))
       ? '<a href="https://open.spotify.com/user/affdh314gvpzi7w10ufd8cx6o?si=22df0e9e446145d1" target="_blank" style="display:block;text-decoration:none;line-height:0;font-size:0;margin-top:-40px;">'
@@ -2387,6 +2513,28 @@ function buildEmailHTML(forRender) {
 
   /* WHAT'S NEW */
   + buildWhatsNewHtml(true, _forRender)
+
+  /* LIVING PROPER — Proper Hotels only */
+  + (function() {
+      if (!livingProper.length || !isProper) return '';
+      var pairs = [];
+      for (var i = 0; i < livingProper.length; i += 2) pairs.push(livingProper.slice(i, i + 2));
+      var rows = pairs.map(function(pair) {
+        return '<tr>'
+          + pair.map(function(ev) {
+              var imgSrc = _forRender ? proxyImg(ev.img, true) : ev.img;
+              return buildGridCell({title: ev.title, date: ev.meta, cat: '', img: imgSrc, url: ev.url, cta: ev.cta, imgpos: ev.imgpos}, 248, false, _forRender, null);
+            }).join('')
+          + '</tr>';
+      }).join('');
+      return '<tr><td style="padding:0 40px;font-size:0;line-height:0;"><div style="height:1px;background:' + T.borderColor + ';font-size:0;line-height:0;">&nbsp;</div></td></tr>'
+        + '<tr><td style="padding:28px 40px 20px;">'
+        +   '<p style="margin:0;font-size:' + T.labelSize + ';font-weight:700;letter-spacing:' + T.labelLS + ';line-height:' + T.labelLH + ';text-transform:uppercase;color:#6B6560;font-family:' + T.labelFont + ';">Living Proper</p>'
+        + '</td></tr>'
+        + '<tr><td style="padding:8px 40px 32px;">'
+        +   '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:' + T.bg + ';border-collapse:separate!important;border-spacing:8px;">' + rows + '</table>'
+        + '</td></tr>';
+    })()
 
   /* SPOTIFY slice — Proper Hotels only, above Proper Insider */
   + (isProper
