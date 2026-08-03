@@ -3230,7 +3230,8 @@ function openModal() {
   var mo = monthName();
   var yr = new Date().getFullYear();
   document.getElementById("klName").value = (prop ? prop.name : "Proper") + " - " + mo + " " + yr + " Program";
-  var savedKey = localStorage.getItem("kl_api_key");
+  var builtInKey = "%%KLAVIYO_API_KEY%%";
+  var savedKey = (builtInKey.indexOf("%%") === -1 ? builtInKey : null) || localStorage.getItem("kl_api_key");
   if (savedKey) {
     document.getElementById("klKey").value = savedKey;
     document.getElementById("klSave").checked = true;
